@@ -3,10 +3,12 @@ TESTS := tests
 
 TEST_DATA_DIR := $(TESTS)/data
 
-PROCESS_MODELS_CLONE_DIR := ../../jbirddog/process-models
 PROCESS_MODELS_DIR := $(TEST_DATA_DIR)/process-models
-
 SPECS_JSON_DIR := $(TEST_DATA_DIR)/specs-json
+
+# Used to move back and forth between the process-models clone
+CDUP_TO_PROCESS_MODELS_CLONE_DIR := ../../jbirddog/process-models
+CDUP_BACK_TO_THIS_CLONE_DIR := ../../sartography/spiff-element-units
 
 DEV_SERVICE := dev
 
@@ -30,5 +32,5 @@ tests:
 copy-process-models:
 	rm -rf $(PROCESS_MODELS_DIR)
 	mkdir -p $(PROCESS_MODELS_DIR)
-	cd $(PROCESS_MODELS_CLONE_DIR) && \
-	find . -name "*.bpmn" -exec rsync -R {} ../../sartography/spiff-element-units/$(PROCESS_MODELS_DIR) \;
+	cd $(CDUP_TO_PROCESS_MODELS_CLONE_DIR) && \
+	find . -name "*.bpmn" -exec rsync -R {} $(CDUP_BACK_TO_THIS_CLONE_DIR)/$(PROCESS_MODELS_DIR) \;
