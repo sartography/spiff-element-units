@@ -2,4 +2,8 @@ services:
   dev:
     container_name: spiff-element-units-dev
     build:
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: dev/Dockerfile
+    volumes:
+      - ./spiff_element_units:/app/spiff_element_units
+      - ./tests:/app/tests
