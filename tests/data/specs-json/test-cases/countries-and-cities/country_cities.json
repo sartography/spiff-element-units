@@ -1,5 +1,5 @@
 {
-    "spec": {
+    "Process_sypm122": {
         "correlation_keys": {},
         "data_objects": {},
         "description": "Process_sypm122",
@@ -348,6 +348,5 @@
             }
         },
         "typename": "BpmnProcessSpec"
-    },
-    "sub_processes": {}
+    }
 }

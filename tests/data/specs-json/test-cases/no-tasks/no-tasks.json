@@ -1,5 +1,5 @@
 {
-    "spec": {
+    "no_tasks": {
         "correlation_keys": {},
         "data_objects": {},
         "description": "No Tasks",
@@ -110,6 +110,5 @@
             }
         },
         "typename": "BpmnProcessSpec"
-    },
-    "sub_processes": {}
+    }
 }

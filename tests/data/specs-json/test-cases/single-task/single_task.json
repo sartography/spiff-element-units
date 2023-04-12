@@ -1,5 +1,5 @@
 {
-    "spec": {
+    "SingleTask_Process": {
         "correlation_keys": {},
         "data_objects": {},
         "description": "SingleTask_Process",
@@ -138,6 +138,5 @@
             }
         },
         "typename": "BpmnProcessSpec"
-    },
-    "sub_processes": {}
+    }
 }
