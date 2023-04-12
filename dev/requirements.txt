@@ -1,1 +1,2 @@
+https://github.com/sartography/SpiffWorkflow/archive/f162aac43af3af18d1a55186aeccea154fb8b05d.tar.gz
 unittest-parallel == 1.5.3
