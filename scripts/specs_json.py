@@ -32,8 +32,7 @@ def _to_dict(bpmn_file):
     return {k: SPEC_CONVERTER.convert(v) for k, v in specs.items()}
 
 def _write_dict_as_json(bpmn_file, dct):
-    # correct, this is not very robust
-    json_filename = bpmn_file.replace("process-models", "specs-json").replace(".bpmn", ".json")
+    json_filename = bpmn_file.replace("/process-models/", "/specs-json/").replace(".bpmn", ".json")
     os.makedirs(os.path.dirname(json_filename), exist_ok=True)
     with open(json_filename, "w") as f:
         f.write(json.dumps(dct, indent=4, sort_keys=True))

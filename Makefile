@@ -26,7 +26,7 @@ dev-env:
 
 .PHONY: tests
 tests:
-	$(DEV_AS_ME) unittest-parallel -vs $(TESTS) -p test_*.py -t .
+	$(DEV_AS_ME) unittest-parallel -vs $(TESTS) -p test_\*.py -t .
 
 #
 # used to copy in/parse files from my process-models, probably will want to move these to
