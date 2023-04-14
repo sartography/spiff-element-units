@@ -9,4 +9,6 @@ name = "spiff_element_units"
 crate-type = ["cdylib"]
 
 [dependencies]
+spiff-element-units-rs = { path = "../spiff-element-units-rs" }
+
 pyo3 = "0.18.1"
