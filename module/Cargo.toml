@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+	"spiff-element-units-rs",
+	"spiff-element-units",
+]
