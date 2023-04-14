@@ -38,9 +38,6 @@ def _test(relname, process_id, executor, result):
 # TODO: test cases that need service tasks are not executed right now
 # TODO: add delegate to mock out responses to fix ^
 class ExecuteSpecJsonFilesTest(TestCase):
-    #
-    # these are kept as separate methods so unittest-parallel can rip them up
-    #
     
     def test_no_tasks_executes(self):
         _test("no-tasks/no-tasks.json", "no_tasks", _do_engine_steps, {})

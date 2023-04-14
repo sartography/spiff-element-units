@@ -10,17 +10,15 @@ RUN \
 RUN rustup component add rustfmt
 RUN python -m pip install --upgrade pip
 
+WORKDIR /module
+
 COPY dev/requirements.txt .
 
 RUN \
     --mount=type=cache,target=/var/cache/pip \
     pip install -r requirements.txt
 
-WORKDIR /module
-
 COPY module/ ./
-
-RUN python -m venv .env
 
 RUN \
     --mount=type=cache,target=/var/cache/cargo \
