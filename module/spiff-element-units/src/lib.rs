@@ -10,7 +10,11 @@ fn cache_element_units(
     cache_key: String,
     workflow_spec_json: String,
 ) -> Result<(), PyCacheElementUnitsError> {
-    Ok(lib_cache_element_units(cache_dir, cache_key, workflow_spec_json)?)
+    Ok(lib_cache_element_units(
+        &cache_dir,
+        &cache_key,
+        &workflow_spec_json,
+    )?)
 }
 
 #[pymodule]

@@ -15,7 +15,9 @@ The library currently assumes that:
 
 ## The api:
 
-import spiff_element_units
+Currently extremely simple to get started. Expect the public api to change as it matures.
+
+`import spiff_element_units`
 
 ### Forming element units
 
@@ -58,3 +60,19 @@ def get_element_unit_for_element(
 Returns the json representation of the element unit for the element with `element_id` in process `process_id` in the workflow spec associated with `cache_key`. This can be used to resume a process from previously cached element units using a known element id.
 
 TODO: exceptions raised.
+
+## Development
+
+`make dev-env` to set up the development environment.
+
+`make compile` compiles the code.
+
+`make tests` tests the code.
+
+`make fmt` formats the code.
+
+`make bindings` creates the shared library that can be loaded as a Python module.
+
+`make run-integration-tests` runs the integration tests with the latest result of `make bindings`.
+
+`make integration-tests` does the two steps above.

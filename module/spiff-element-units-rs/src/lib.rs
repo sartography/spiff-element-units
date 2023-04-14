@@ -1,11 +1,10 @@
 pub mod error;
 use error::CacheElementUnitsError;
 
-// TODO: make these not String
 pub fn cache_element_units(
-    _cache_dir: String,
-    _cache_key: String,
-    _workflow_spec_json: String,
+    _cache_dir: &str,
+    _cache_key: &str,
+    _workflow_spec_json: &str,
 ) -> Result<(), CacheElementUnitsError> {
     Ok(())
 }
@@ -16,8 +15,8 @@ mod tests {
 
     #[test]
     fn this_really_should_not_work() -> Result<(), CacheElementUnitsError> {
-        let result = cache_element_units("".to_string(), "".to_string(), "".to_string())?;
+        let result = cache_element_units("", "", "")?;
         assert_eq!(result, ());
-	Ok(())
+        Ok(())
     }
 }
