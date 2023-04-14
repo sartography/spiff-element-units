@@ -21,11 +21,11 @@ shell:
 
 .PHONY: compile
 compile:
-	$(DO) cargo build --color=never
+	$(DO) cargo build --color=never # --offline
 
 .PHONY: tests
 tests:
-	$(DO) cargo test --color=never
+	$(DO) cargo test --color=never # --offline
 
 .PHONY: fmt
 fmt:

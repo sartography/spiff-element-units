@@ -1,6 +1,6 @@
 use std::{error, fmt};
 
-// TODO: move to errors.rs/re-export from here
+// TODO: move to errors.rs and maybe re-export from here
 
 #[derive(Debug, Clone)]
 pub struct InvalidCacheDirError;
@@ -34,6 +34,7 @@ impl error::Error for CacheElementUnitsError {}
 
 impl fmt::Display for CacheElementUnitsError {
      fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+     	// TODO: this isn't correct, want to call the error struct's fmt
      	write!(f, "{:?}", self)
      }
 }
@@ -57,7 +58,8 @@ mod tests {
 
     #[test]
     fn this_really_should_not_work() -> Result<(), CacheElementUnitsError> {
-        let result = cache_element_units("", "", "")?;
+        let result = cache_element_units("".to_string(), "".to_string(), "".to_string())?;
         assert_eq!(result, ());
+	Ok(())
     }
 }
