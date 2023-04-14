@@ -1,55 +1,13 @@
-use std::{error, fmt};
+pub mod error;
+use error::CacheElementUnitsError;
 
-// TODO: move to errors.rs and maybe re-export from here
-
-#[derive(Debug, Clone)]
-pub struct InvalidCacheDirError;
-
-impl error::Error for InvalidCacheDirError {}
-
-impl fmt::Display for InvalidCacheDirError {
-     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-     	write!(f, "Invalid cache directory provided")
-     }
-}
-
-#[derive(Debug, Clone)]
-pub struct InvalidWorkflowSpecJSONError;
-
-impl error::Error for InvalidWorkflowSpecJSONError {}
-
-impl fmt::Display for InvalidWorkflowSpecJSONError {
-     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-     	write!(f, "Invalid workflow spec json provided")
-     }
-}
-
-#[derive(Debug, Clone)]
-pub enum CacheElementUnitsError {
-    InvalidCacheDirError,
-    InvalidWorkflowSpecJSONError,
-}
-
-impl error::Error for CacheElementUnitsError {}
-
-impl fmt::Display for CacheElementUnitsError {
-     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-     	// TODO: this isn't correct, want to call the error struct's fmt
-     	write!(f, "{:?}", self)
-     }
-}
-
+// TODO: make these not String
 pub fn cache_element_units(
     _cache_dir: String,
     _cache_key: String,
     _workflow_spec_json: String,
 ) -> Result<(), CacheElementUnitsError> {
     Ok(())
-}
-
-// TODO: remove
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
 }
 
 #[cfg(test)]

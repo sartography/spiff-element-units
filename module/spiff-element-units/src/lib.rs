@@ -1,25 +1,8 @@
 use pyo3::prelude::*;
-use pyo3::exceptions::PyValueError;
-use spiff_element_units_rs::{
-cache_element_units as lib_cache_element_units,
-CacheElementUnitsError,
-};
+use spiff_element_units_rs::cache_element_units as lib_cache_element_units;
 
-// TODO: move to errors.rs
-
-struct PyCacheElementUnitsError(CacheElementUnitsError);
-
-impl From<CacheElementUnitsError> for PyCacheElementUnitsError {
-     fn from(e: CacheElementUnitsError) -> Self {
-     	Self(e)
-     }
-}
-
-impl From<PyCacheElementUnitsError> for PyErr {
-     fn from(e: PyCacheElementUnitsError) -> Self {
-     	PyValueError::new_err(e.0.to_string())
-     }
-}
+mod error;
+use error::PyCacheElementUnitsError;
 
 #[pyfunction]
 fn cache_element_units(
