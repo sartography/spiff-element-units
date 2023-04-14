@@ -37,7 +37,7 @@ TODO: exceptions raised.
 ### Getting element units
 
 ```
-def get_first_element_unit_for_process(
+def get_element_unit_for_process(
     cache_dir: str,
     cache_key: str,
     process_id: str,
