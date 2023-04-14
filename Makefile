@@ -36,16 +36,16 @@ fmt:
 bindings:
 	$(DO) /$(MODULE)/bin/make_bindings
 
-#
-# TODO: re-integrate, use module in tests
-#
-
 .PHONY: run-integration-tests
 run-integration-tests:
 	$(DO_AS_ME) /integration/tests/bin/run_tests
 
 .PHONY: integration-tests
 integration-tests: bindings run-integration-tests
+
+.PHONY: wheel
+wheel:
+	$(DO) /$(MODULE)/bin/make_wheel
 
 #
 # until i figure out if its worth adding cargo everything to run as non root

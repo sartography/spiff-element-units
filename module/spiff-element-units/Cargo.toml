@@ -11,4 +11,4 @@ crate-type = ["cdylib"]
 [dependencies]
 spiff-element-units-rs = { path = "../spiff-element-units-rs" }
 
-pyo3 = "0.18.1"
+pyo3 = { version = "0.18.1", features = ["abi3-py39"] }
