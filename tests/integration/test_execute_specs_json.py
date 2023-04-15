@@ -1,4 +1,4 @@
-from .helper import workflow_from_specs_json
+from .helper import test_from_specs_json, workflow_from_specs_json
 from unittest import TestCase
 
 def _do_engine_steps(workflow):
@@ -16,6 +16,7 @@ def _test(relname, process_id, executor, result):
 class ExecuteSpecJsonFilesTest(TestCase):
     
     def test_no_tasks_executes(self):
+        test_from_specs_json("no-tasks")
         _test("no-tasks/no-tasks.json", "no_tasks", _do_engine_steps, {})
 
     def test_single_task_executes(self):

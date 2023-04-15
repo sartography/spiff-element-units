@@ -4,7 +4,7 @@ use std::io;
 use std::io::prelude::*;
 use std::path::{Path, PathBuf};
 
-const CACHE_VERSION: &str = "1";
+const CACHE_VERSION: &str = "v1";
 const WORKFLOW_SPEC_JSON_FILENAME: &str = "workflow_spec.json";
 
 pub fn write_workflow_spec(
