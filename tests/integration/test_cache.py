@@ -1,20 +1,50 @@
-from shutil import rmtree
-from spiff_element_units import create_element_units
-from unittest import TestCase
+import json
+import shutil
+import spiff_element_units
+import unittest
 
 from .helper import read_specs_json, TEST_CACHE_DIR, TEST_CASES
 
-class CacheTest(TestCase):
-
-    # these tests write to the cache dir that is committed so changes to
-    # how the cache is saved and element units are formed can be viewed
-    # and verified in the pr.
+class CacheTest(unittest.TestCase):
 
     def test_can_write_sample_specs_to_cache(self):
-        rmtree(TEST_CACHE_DIR)
+        # this test rewrites the cache dir that is committed so changes to
+        # how the cache is saved and element units are formed can be viewed
+        # and verified in the pr.
+        shutil.rmtree(TEST_CACHE_DIR)
         for key, data in TEST_CASES.items():
             specs = read_specs_json(data.relname)
-            create_element_units(
+            spiff_element_units.create_element_units(
                 TEST_CACHE_DIR,
                 key,
                 specs)
+
+    def test_can_get_element_unit_for_process_from_cache(self):
+        for key, data in TEST_CASES.items():
+            element_unit_str = spiff_element_units.element_unit_for_process(
+                TEST_CACHE_DIR,
+                key,
+                data.process_id)
+            
+            assert isinstance(element_unit_str, str)
+            element_unit_dict = json.loads(element_unit_str)
+            assert isinstance(element_unit_dict, dict)
+            assert data.process_id in element_unit_dict
+
+    def test_can_get_element_unit_for_element_from_cache(self):
+        # TODO: this method currently returns regardless of element id
+        # when that changes this test will fail and needs to be checked
+        # for each element id in the full workflow. right now we are just
+        # checking that this call doesn't bomb/return unusable results
+        for key, data in TEST_CASES.items():
+            element_unit_str = spiff_element_units.element_unit_for_element(
+                TEST_CACHE_DIR,
+                key,
+                data.process_id,
+                "")
+            
+            assert isinstance(element_unit_str, str)
+            element_unit_dict = json.loads(element_unit_str)
+            assert isinstance(element_unit_dict, dict)
+            assert data.process_id in element_unit_dict
+            # TODO: check the element id is there also when they are needed
