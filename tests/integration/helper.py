@@ -14,6 +14,7 @@ def _do_engine_steps(workflow):
     workflow.do_engine_steps()
 
 def _two_manual_tasks(workflow):
+    # TODO: when we bump SpiffWorkflow these become run
     workflow.do_engine_steps()
     workflow.get_ready_user_tasks()[0].complete()
     workflow.do_engine_steps()
