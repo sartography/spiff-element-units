@@ -1,4 +1,3 @@
-
 mod cache;
 
 // this is the public api. it is a thin waist on purpose to make other
@@ -13,10 +12,10 @@ pub fn create_element_units(
     cache_key: &str,
     workflow_spec_json: &str,
 ) -> std::io::Result<()> {
-  // TODO: eventually we will want to validate the workflow_spec_json
-  // before caching.
-  // TODO: right now we are not decomposing at all to get the integration
-  // started with the backend
+    // TODO: eventually we will want to validate the workflow_spec_json
+    // before caching.
+    // TODO: right now we are not decomposing at all to get the integration
+    // started with the backend
     cache::write_workflow_spec(cache_dir, cache_key, workflow_spec_json)
 }
 
@@ -28,10 +27,10 @@ pub fn element_unit_for_process(
     cache_key: &str,
     _process_id: &str,
 ) -> std::io::Result<String> {
-  // TODO: right now we are just returning back the whole workflow spec json to
-  // get the itegration ball rolling
-  // TODO: eventually we will want to validate the workflow_spec_json
-  // before returning.
+    // TODO: right now we are just returning back the whole workflow spec json to
+    // get the itegration ball rolling
+    // TODO: eventually we will want to validate the workflow_spec_json
+    // before returning.
     cache::read_workflow_spec(cache_dir, cache_key)
 }
 
@@ -44,10 +43,10 @@ pub fn element_unit_for_element(
     _process_id: &str,
     _element_id: &str,
 ) -> std::io::Result<String> {
-  // TODO: right now we are just returning back the whole workflow spec json to
-  // get the itegration ball rolling
-  // TODO: eventually we will want to validate the workflow_spec_json
-  // before returning.
+    // TODO: right now we are just returning back the whole workflow spec json to
+    // get the itegration ball rolling
+    // TODO: eventually we will want to validate the workflow_spec_json
+    // before returning.
     cache::read_workflow_spec(cache_dir, cache_key)
 }
 
