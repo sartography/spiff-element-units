@@ -8,7 +8,7 @@ from SpiffWorkflow.spiff.serializer.config import SPIFF_SPEC_CONFIG
 
 SPEC_CONVERTER = BpmnWorkflowSerializer.configure_workflow_spec_converter(SPIFF_SPEC_CONFIG)
 
-TEST_CACHE = "tests/cache"
+TEST_CACHE_DIR = "tests/cache"
 
 def _do_engine_steps(workflow):
     workflow.do_engine_steps()
