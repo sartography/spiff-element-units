@@ -17,20 +17,12 @@ class ExecuteSpecJsonFilesTest(TestCase):
     
     def test_no_tasks_executes(self):
         test_from_specs_json("no-tasks")
-        _test("no-tasks/no-tasks.json", "no_tasks", _do_engine_steps, {})
 
     def test_single_task_executes(self):
-        _test("single-task/single_task.json", "SingleTask_Process", _do_engine_steps, {"x": 1})
+        test_from_specs_json("single-task")
 
     def test_simple_call_activity_executes(self):
-        _test("simple-call-activity/simple_call_activity.json", "Process_p4pfxhq", _do_engine_steps, {"x": 1})
+        test_from_specs_json("simple-call-activity")
 
     def test_manual_tasks_executes(self):
-        def executor(workflow):
-            workflow.do_engine_steps()
-            workflow.get_ready_user_tasks()[0].complete()
-            workflow.do_engine_steps()
-            workflow.get_ready_user_tasks()[0].complete()
-            workflow.do_engine_steps()
-
-        _test("manual-tasks/manual_tasks.json", "Process_diu8ta2", executor, {})
+        test_from_specs_json("manual-tasks")

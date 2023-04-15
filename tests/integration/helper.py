@@ -13,16 +13,25 @@ TEST_CACHE = "tests/cache"
 def _do_engine_steps(workflow):
     workflow.do_engine_steps()
 
+def _two_manual_tasks(workflow):
+    workflow.do_engine_steps()
+    workflow.get_ready_user_tasks()[0].complete()
+    workflow.do_engine_steps()
+    workflow.get_ready_user_tasks()[0].complete()
+    workflow.do_engine_steps()
+
 @dataclass
 class TestCaseData:
     relname: str
     process_id: str
-    expected_result: dict
-    cache_key: str
     executor: any
+    expected_result: dict
 
 TEST_CASES = {
-    "no-tasks": TestCaseData("no-tasks/no-tasks.json", "no_tasks", {}, "no-tasks", _do_engine_steps),
+    "no-tasks": TestCaseData("no-tasks/no-tasks.json", "no_tasks", _do_engine_steps, {}),
+    "single-task": TestCaseData("single-task/single_task.json", "SingleTask_Process", _do_engine_steps, {"x": 1}),
+    "simple-call-activity": TestCaseData("simple-call-activity/simple_call_activity.json", "Process_p4pfxhq", _do_engine_steps, {"x": 1}),
+    "manual-tasks": TestCaseData("manual-tasks/manual_tasks.json", "Process_diu8ta2", _two_manual_tasks, {}),
 }
 
 def read_specs_json(relname):
