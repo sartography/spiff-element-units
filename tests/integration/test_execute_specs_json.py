@@ -1,35 +1,11 @@
-import json
-
-from SpiffWorkflow.bpmn.serializer.workflow import BpmnWorkflowSerializer
-from SpiffWorkflow.bpmn.workflow import BpmnWorkflow
-from SpiffWorkflow.spiff.parser.process import SpiffBpmnParser
-from SpiffWorkflow.spiff.serializer.config import SPIFF_SPEC_CONFIG
-
+from .helper import workflow_from_specs_json
 from unittest import TestCase
-
-# TODO: most likely will want these moves to a test helper file
-SPEC_CONVERTER = BpmnWorkflowSerializer.configure_workflow_spec_converter(SPIFF_SPEC_CONFIG)
-
-def _load_specs_json(relname):
-    with open(f"tests/data/specs-json/test-cases/{relname}") as f:
-        return json.load(f)
-
-def _converted_specs(specs, process_id):
-    converted_specs = {k: SPEC_CONVERTER.restore(v) for k, v in specs.items()}
-    top_level = converted_specs.pop(process_id)
-    subprocesses = converted_specs
-    return (top_level, subprocesses)
-    
-def _workflow_from_specs_json(relname, process_id):
-    specs = _load_specs_json(relname)
-    top_level, subprocesses = _converted_specs(specs, process_id)
-    return BpmnWorkflow(top_level, subprocesses)
 
 def _do_engine_steps(workflow):
     workflow.do_engine_steps()
 
 def _test(relname, process_id, executor, result):
-    workflow = _workflow_from_specs_json(relname, process_id)
+    workflow = workflow_from_specs_json(relname, process_id)
     executor(workflow)
         
     assert workflow.is_completed()

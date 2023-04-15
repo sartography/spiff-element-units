@@ -1,5 +1,6 @@
-pub mod error;
-use error::{CacheElementUnitsError, GetElementUnitForElementError, GetElementUnitForProcessError};
+
+mod cache;
+use cache::{read_workflow_spec, write_workflow_spec};
 
 // this is the public api. it is a thin waist on purpose to make other
 // language bindings simple. we don't want to be chatty or pass complicated
@@ -9,34 +10,46 @@ use error::{CacheElementUnitsError, GetElementUnitForElementError, GetElementUni
 // construct and cache element units for a given workflow spec in json format
 //
 pub fn cache_element_units(
-    _cache_dir: &str,
-    _cache_key: &str,
-    _workflow_spec_json: &str,
-) -> Result<(), CacheElementUnitsError> {
-    Ok(())
+    cache_dir: &str,
+    cache_key: &str,
+    workflow_spec_json: &str,
+) -> std::io::Result<()> {
+  // TODO: eventually we will want to validate the workflow_spec_json
+  // before caching.
+  // TODO: right now we are not decomposing at all to get the integration
+  // started with the backend
+    write_workflow_spec(cache_dir, cache_key, workflow_spec_json)
 }
 
 //
 // get the element unit required to start the process
 //
 pub fn get_element_unit_for_process(
-    _cache_dir: &str,
-    _cache_key: &str,
+    cache_dir: &str,
+    cache_key: &str,
     _process_id: &str,
-) -> Result<String, GetElementUnitForProcessError> {
-    Ok("".to_string())
+) -> std::io::Result<String> {
+  // TODO: right now we are just returning back the whole workflow spec json to
+  // get the itegration ball rolling
+  // TODO: eventually we will want to validate the workflow_spec_json
+  // before returning.
+    read_workflow_spec(cache_dir, cache_key)
 }
 
 //
 // get the element unit required to resume a process at a given element
 //
 pub fn get_element_unit_for_element(
-    _cache_dir: &str,
-    _cache_key: &str,
+    cache_dir: &str,
+    cache_key: &str,
     _process_id: &str,
     _element_id: &str,
-) -> Result<String, GetElementUnitForElementError> {
-    Ok("".to_string())
+) -> std::io::Result<String> {
+  // TODO: right now we are just returning back the whole workflow spec json to
+  // get the itegration ball rolling
+  // TODO: eventually we will want to validate the workflow_spec_json
+  // before returning.
+    read_workflow_spec(cache_dir, cache_key)
 }
 
 #[cfg(test)]
@@ -44,7 +57,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn this_really_should_not_work() -> Result<(), CacheElementUnitsError> {
+    fn this_really_should_not_work() -> std::io::Result<()> {
         let result = cache_element_units("", "", "")?;
         assert_eq!(result, ());
         Ok(())

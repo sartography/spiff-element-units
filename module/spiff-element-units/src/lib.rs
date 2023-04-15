@@ -5,19 +5,14 @@ use spiff_element_units_rs::{
     get_element_unit_for_process as lib_get_element_unit_for_process,
 };
 
-mod error;
-use error::{
-    PyCacheElementUnitsError, PyGetElementUnitForElementError, PyGetElementUnitForProcessError,
-};
-
-// TODO: String vs str in the interface
+// TODO: String vs str when moving between Python
 
 #[pyfunction]
 fn cache_element_units(
     cache_dir: String,
     cache_key: String,
     workflow_spec_json: String,
-) -> Result<(), PyCacheElementUnitsError> {
+) -> PyResult<()> {
     Ok(lib_cache_element_units(
         &cache_dir,
         &cache_key,
@@ -30,7 +25,7 @@ fn get_element_unit_for_process(
     cache_dir: String,
     cache_key: String,
     process_id: String,
-) -> Result<String, PyGetElementUnitForProcessError> {
+) -> PyResult<String> {
     Ok(lib_get_element_unit_for_process(
         &cache_dir,
         &cache_key,
@@ -44,7 +39,7 @@ fn get_element_unit_for_element(
     cache_key: String,
     process_id: String,
     element_id: String,
-) -> Result<String, PyGetElementUnitForElementError> {
+) -> PyResult<String> {
     Ok(lib_get_element_unit_for_element(
         &cache_dir,
         &cache_key,
