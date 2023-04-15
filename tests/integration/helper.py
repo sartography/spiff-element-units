@@ -47,16 +47,14 @@ def converted_specs(specs, process_id):
     top_level = converted_specs.pop(process_id)
     subprocesses = converted_specs
     return (top_level, subprocesses)
-    
-def workflow_from_specs_json(relname, process_id):
-    specs = load_specs_json(relname)
+
+def workflow_from_specs(specs, process_id):
     top_level, subprocesses = converted_specs(specs, process_id)
     return BpmnWorkflow(top_level, subprocesses)
 
-def test_from_specs_json(key):
-    test = TEST_CASES[key]
-    workflow = workflow_from_specs_json(test.relname, test.process_id)
+def test_workflow_from_specs(test, specs):
+    workflow = workflow_from_specs(specs, test.process_id)
     test.executor(workflow)
-
     assert workflow.is_completed()
     assert workflow.data == test.expected_result
+
