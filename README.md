@@ -5,8 +5,8 @@
 The library requires callers to provide:
 
 1. a serialized workflow spec from `find_all_specs` dumped to a json string
-1. an existing directory used to store the element unit cache
 1. a cache key that is used when refering to the above serialized workflow spec
+1. a directory used to store the element unit cache
 1. process and element ids
 
 The library currently assumes that:
@@ -22,7 +22,7 @@ Currently extremely simple to get started. Expect the public api to change as it
 ### Forming element units
 
 ```
-def cache_element_units(
+def create_element_units(
     cache_dir: str,
     cache_key: str,
     workflow_spec_json: str,
@@ -37,7 +37,7 @@ TODO: exceptions raised.
 ### Getting element units
 
 ```
-def get_element_unit_for_process(
+def element_unit_for_process(
     cache_dir: str,
     cache_key: str,
     process_id: str,
@@ -49,7 +49,7 @@ Returns the json representation of the first element unit available for the proc
 TODO: exceptions raised.
 
 ```
-def get_element_unit_for_element(
+def element_unit_for_element(
     cache_dir: str,
     cache_key: str,
     process_id: str,
@@ -76,3 +76,5 @@ TODO: exceptions raised.
 `make run-integration-tests` runs the integration tests with the latest result of `make bindings`.
 
 `make integration-tests` does the two steps above.
+
+`make wheel` makes a wheel for local testing in external applications.

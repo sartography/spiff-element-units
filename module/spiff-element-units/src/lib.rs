@@ -1,19 +1,15 @@
 use pyo3::prelude::*;
-use spiff_element_units_rs::{
-    cache_element_units as lib_cache_element_units,
-    get_element_unit_for_element as lib_get_element_unit_for_element,
-    get_element_unit_for_process as lib_get_element_unit_for_process,
-};
+use spiff_element_units_rs;
 
 // TODO: String vs str when moving between Python
 
 #[pyfunction]
-fn cache_element_units(
+fn create_element_units(
     cache_dir: String,
     cache_key: String,
     workflow_spec_json: String,
 ) -> PyResult<()> {
-    Ok(lib_cache_element_units(
+    Ok(spiff_element_units_rs::create_element_units(
         &cache_dir,
         &cache_key,
         &workflow_spec_json,
@@ -21,12 +17,12 @@ fn cache_element_units(
 }
 
 #[pyfunction]
-fn get_element_unit_for_process(
+fn element_unit_for_process(
     cache_dir: String,
     cache_key: String,
     process_id: String,
 ) -> PyResult<String> {
-    Ok(lib_get_element_unit_for_process(
+    Ok(spiff_element_units_rs::element_unit_for_process(
         &cache_dir,
         &cache_key,
         &process_id,
@@ -34,13 +30,13 @@ fn get_element_unit_for_process(
 }
 
 #[pyfunction]
-fn get_element_unit_for_element(
+fn element_unit_for_element(
     cache_dir: String,
     cache_key: String,
     process_id: String,
     element_id: String,
 ) -> PyResult<String> {
-    Ok(lib_get_element_unit_for_element(
+    Ok(spiff_element_units_rs::element_unit_for_element(
         &cache_dir,
         &cache_key,
         &process_id,
@@ -50,8 +46,8 @@ fn get_element_unit_for_element(
 
 #[pymodule]
 fn spiff_element_units(_py: Python, m: &PyModule) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(cache_element_units, m)?)?;
-    m.add_function(wrap_pyfunction!(get_element_unit_for_process, m)?)?;
-    m.add_function(wrap_pyfunction!(get_element_unit_for_element, m)?)?;
+    m.add_function(wrap_pyfunction!(create_element_units, m)?)?;
+    m.add_function(wrap_pyfunction!(element_unit_for_process, m)?)?;
+    m.add_function(wrap_pyfunction!(element_unit_for_element, m)?)?;
     Ok(())
 }
