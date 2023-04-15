@@ -21,7 +21,7 @@ class ExecuteTest(unittest.TestCase):
 
     def test_can_execute_specs_from_cache_for_process(self):
         for key, test in TEST_CASES.items():
-            specs_str = spiff_element_units.element_unit_for_process(
+            specs_str = spiff_element_units.cached_element_unit_for_process(
                 TEST_CACHE_DIR,
                 key,
                 test.process_id)
@@ -33,7 +33,7 @@ class ExecuteTest(unittest.TestCase):
             # TODO: this method currently does nothing with the element id
             # when it does this test will fail and need to provide valid
             # element ids via the test cases
-            specs_str = spiff_element_units.element_unit_for_element(
+            specs_str = spiff_element_units.cached_element_unit_for_element(
                 TEST_CACHE_DIR,
                 key,
                 test.process_id,

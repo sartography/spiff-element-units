@@ -20,13 +20,13 @@ class CacheTest(unittest.TestCase):
         shutil.rmtree(TEST_CACHE_DIR)
         for key, data in TEST_CASES.items():
             specs = read_specs_json(data.relname)
-            spiff_element_units.create_element_units(
+            spiff_element_units.cache_element_units(
                 TEST_CACHE_DIR,
                 key,
                 specs)
 
         for key, data in TEST_CASES.items():
-            element_unit_str = spiff_element_units.element_unit_for_process(
+            element_unit_str = spiff_element_units.cached_element_unit_for_process(
                 TEST_CACHE_DIR,
                 key,
                 data.process_id)
@@ -41,7 +41,7 @@ class CacheTest(unittest.TestCase):
         # for each element id in the full workflow. right now we are just
         # checking that this call doesn't bomb/return unusable results
         for key, data in TEST_CASES.items():
-            element_unit_str = spiff_element_units.element_unit_for_element(
+            element_unit_str = spiff_element_units.cached_element_unit_for_element(
                 TEST_CACHE_DIR,
                 key,
                 data.process_id,

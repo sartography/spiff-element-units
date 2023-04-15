@@ -25,8 +25,8 @@ compile:
 	$(DO) cargo build --color=never # --offline
 
 .PHONY: tests
-tests: run-integration-tests
-	#$(DO) cargo test --color=never # --offline
+tests:
+	$(DO) cargo test --color=never # --offline
 
 .PHONY: fmt
 fmt:

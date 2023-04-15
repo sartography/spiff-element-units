@@ -13,16 +13,16 @@ The library currently assumes that:
 
 1. A full workflow is loaded into `SpiffWorkflow` once to `find_all_specs`. This requirement may change in the future.
 
-## The api:
+## The Python API:
 
 Currently extremely simple to get started. Expect the public api to change as it matures.
 
 `import spiff_element_units`
 
-### Forming element units
+### Caching element units
 
 ```
-def create_element_units(
+def cache_element_units(
     cache_dir: str,
     cache_key: str,
     workflow_spec_json: str,
@@ -34,10 +34,10 @@ Forms element units for the workflow spec provided in json format and associates
 
 TODO: exceptions raised.
 
-### Getting element units
+### Getting cached element units
 
 ```
-def element_unit_for_process(
+def cached_element_unit_for_process(
     cache_dir: str,
     cache_key: str,
     process_id: str,
@@ -49,7 +49,7 @@ Returns the json representation of the first element unit available for the proc
 TODO: exceptions raised.
 
 ```
-def element_unit_for_element(
+def cached_element_unit_for_element(
     cache_dir: str,
     cache_key: str,
     process_id: str,
