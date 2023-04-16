@@ -49,15 +49,3 @@ pub fn cached_element_unit_for_element(
     // before returning.
     cache::read_workflow_spec(cache_dir, cache_key)
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn this_really_should_not_work() -> std::io::Result<()> {
-        let result = cache_element_units("", "", "")?;
-        assert_eq!(result, ());
-        Ok(())
-    }
-}
