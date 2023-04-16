@@ -7,16 +7,23 @@ from SpiffWorkflow.spiff.parser.process import SpiffBpmnParser
 from SpiffWorkflow.spiff.serializer.config import SPIFF_SPEC_CONFIG
 
 SPEC_CONVERTER = BpmnWorkflowSerializer.configure_workflow_spec_converter(SPIFF_SPEC_CONFIG)
+SERIALIZER_VERSION = "spiff-element-units-integration"
 
 PROCESS_MODELS_DIR = "tests/data/process-models"
 
 def bpmn_test_case(suffix):
     return f"{PROCESS_MODELS_DIR}/test-cases/{suffix}"
 
+SIMPLE_CALL_ACTIVITY = bpmn_test_case("simple-call-activity/simple_call_activity.bpmn")
+
 SUPPORTING_FILES = {
-    bpmn_test_case("simple-call-activity/simple_call_activity.bpmn"): [
+    SIMPLE_CALL_ACTIVITY: [
         bpmn_test_case("single-task/single_task.bpmn"),
     ],
+}
+
+PROCESS_IDS = {
+    SIMPLE_CALL_ACTIVITY: "Process_p4pfxhq",
 }
 
 def _required_files(bpmn_file):
@@ -29,7 +36,21 @@ def _to_dict(bpmn_file):
     parser.add_bpmn_files(bpmn_files)
     
     specs = parser.find_all_specs()
-    return {k: SPEC_CONVERTER.convert(v) for k, v in specs.items()}
+    converted_specs = {k: SPEC_CONVERTER.convert(v) for k, v in specs.items()}
+
+    if len(converted_specs) == 1:
+        for k in converted_specs.keys():
+            process_spec = converted_specs[k]
+        subspecs = {}
+    else:
+        process_spec = converted_specs.pop(PROCESS_IDS[bpmn_file])
+        subspecs = converted_specs
+
+    return {
+        "spec": process_spec,
+        "subprocess_specs": subspecs,
+        "serializer_version": SERIALIZER_VERSION,
+    }
 
 def _write_dict_as_json(bpmn_file, dct):
     json_filename = bpmn_file.replace("/process-models/", "/specs-json/").replace(".bpmn", ".json")

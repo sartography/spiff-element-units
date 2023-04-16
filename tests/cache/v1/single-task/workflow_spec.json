@@ -1,5 +1,6 @@
 {
-    "SingleTask_Process": {
+    "serializer_version": "spiff-element-units-integration",
+    "spec": {
         "correlation_keys": {},
         "data_objects": {},
         "description": "SingleTask_Process",
@@ -138,5 +139,6 @@
             }
         },
         "typename": "BpmnProcessSpec"
-    }
+    },
+    "subprocess_specs": {}
 }

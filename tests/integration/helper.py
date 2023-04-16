@@ -15,6 +15,8 @@ def _do_engine_steps(workflow):
 
 def _two_manual_tasks(workflow):
     # TODO: when we bump SpiffWorkflow these become run
+    # TODO: can have just one executor that doesn't call do_engine_steps and just
+    # gets the next ready task and runs it
     workflow.do_engine_steps()
     workflow.get_ready_user_tasks()[0].complete()
     workflow.do_engine_steps()
@@ -44,9 +46,14 @@ def load_specs_json(relname):
         return json.load(f)
 
 def converted_specs(specs, process_id):
-    converted_specs = {k: SPEC_CONVERTER.restore(v) for k, v in specs.items()}
-    top_level = converted_specs.pop(process_id)
-    subprocesses = converted_specs
+    converted_specs = {
+        "spec": SPEC_CONVERTER.restore(specs["spec"]),
+        "subprocess_specs": {
+            k: SPEC_CONVERTER.restore(v) for k, v in specs["subprocess_specs"].items()
+        },
+    }
+    top_level = converted_specs["spec"]
+    subprocesses = converted_specs["subprocess_specs"]
     return (top_level, subprocesses)
 
 def workflow_from_specs(specs, process_id):

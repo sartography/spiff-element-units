@@ -34,7 +34,7 @@ class CacheTest(unittest.TestCase):
             assert isinstance(element_unit_str, str)
             element_unit_dict = json.loads(element_unit_str)
             assert isinstance(element_unit_dict, dict)
-            assert data.process_id in element_unit_dict
+            assert data.process_id == element_unit_dict["spec"]["name"]
 
         # TODO: this method currently returns regardless of element id
         # when that changes this test will fail and needs to be checked
@@ -50,5 +50,5 @@ class CacheTest(unittest.TestCase):
             assert isinstance(element_unit_str, str)
             element_unit_dict = json.loads(element_unit_str)
             assert isinstance(element_unit_dict, dict)
-            assert data.process_id in element_unit_dict
+            assert data.process_id == element_unit_dict["spec"]["name"]
             # TODO: check the element id is there also when they are needed

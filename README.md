@@ -4,14 +4,14 @@
 
 The library requires callers to provide:
 
-1. a serialized workflow spec from `find_all_specs` dumped to a json string
+1. a serialized workflow spec in the form of `{"spec":..., "subprocess_specs"...}`  dumped to a json string
 1. a cache key that is used when refering to the above serialized workflow spec
 1. a directory used to store the element unit cache
 1. process and element ids
 
 The library currently assumes that:
 
-1. A full workflow is loaded into `SpiffWorkflow` once to `find_all_specs`. This requirement may change in the future.
+1. A full workflow is loaded into `SpiffWorkflow` once to find all the specs. This requirement may change in the future.
 
 ## The Python API:
 

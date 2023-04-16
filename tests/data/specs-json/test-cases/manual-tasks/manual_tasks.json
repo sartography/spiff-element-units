@@ -1,5 +1,6 @@
 {
-    "Process_diu8ta2": {
+    "serializer_version": "spiff-element-units-integration",
+    "spec": {
         "correlation_keys": {},
         "data_objects": {},
         "description": "Process_diu8ta2",
@@ -164,5 +165,6 @@
             }
         },
         "typename": "BpmnProcessSpec"
-    }
+    },
+    "subprocess_specs": {}
 }
