@@ -1,4 +1,13 @@
 
+TEST_DATA_DIR := tests/data
+
+PROCESS_MODELS_DIR := $(TEST_DATA_DIR)/process-models
+SPECS_JSON_DIR := $(TEST_DATA_DIR)/specs-json
+
+# Used to move back and forth between the process-models clone
+CDUP_TO_PROCESS_MODELS_CLONE_DIR := ../../jbirddog/process-models
+CDUP_BACK_TO_THIS_CLONE_DIR := ../../sartography/spiff-element-units
+
 DEV_SERVICE := dev
 MODULE := module
 
@@ -11,6 +20,10 @@ DO_AS_ME := docker compose run -u $(ME) $(DEV_SERVICE)
 
 .PHONY: all
 all: dev-env
+
+#
+# local development
+#
 
 .PHONY: dev-env
 dev-env:
@@ -32,13 +45,22 @@ tests:
 fmt:
 	$(DO) cargo fmt
 
+#
+# integration between spiff-element-units and the outside SpiffWorkflow world.
+#
+
+,PHONY: script-specs-json
+script-specs-json:
+	rm -rf $(SPECS_JSON_DIR)
+	$(DO_AS_ME) /integration/bin/script_specs_json
+
 .PHONY: bindings
 bindings:
 	$(DO) /$(MODULE)/bin/make_bindings
 
 .PHONY: run-integration-tests
 run-integration-tests:
-	$(DO_AS_ME) /integration/tests/bin/run_tests
+	$(DO_AS_ME) /integration/bin/run_tests
 
 .PHONY: integration-tests
 integration-tests: bindings run-integration-tests
@@ -54,8 +76,21 @@ wheel:
 
 .PHONY: take-ownership
 take-ownership:
-	sudo chown -R $(ME) $(MODULE)
+	sudo chown -R $(ME) .
 
 .PHONY: check-ownership
 check-ownership:
 	find . ! -user $(MY_USER) ! -group $(MY_GROUP)
+
+#
+# used to copy in/parse files from my process-models, probably will want to move these to
+# their own repo at some point? thought about a submodule but I don't really love them.
+# TODO: untested since bringing back in
+#
+
+.PHONY: copy-process-models
+copy-process-models:
+	rm -rf $(PROCESS_MODELS_DIR)
+	mkdir -p $(PROCESS_MODELS_DIR)
+	cd $(CDUP_TO_PROCESS_MODELS_CLONE_DIR) && \
+	find . -name "*.bpmn" -exec rsync -R {} $(CDUP_BACK_TO_THIS_CLONE_DIR)/$(PROCESS_MODELS_DIR) \;
