@@ -1,0 +1,14 @@
+[package]
+name = "spiff-element-units"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "spiff_element_units"
+crate-type = ["cdylib"]
+
+[dependencies]
+spiff-element-units-rs = { path = "../spiff-element-units-rs" }
+
+pyo3 = { version = "0.18.1", features = ["abi3-py39"] }

@@ -5,6 +5,7 @@ services:
       context: .
       dockerfile: dev/Dockerfile
     volumes:
-      - ./scripts:/app/scripts
-      - ./spiff_element_units:/app/spiff_element_units
-      - ./tests:/app/tests
+      - ./module:/module
+      - ./dev/bin:/integration/bin
+      - ./scripts:/integration/scripts
+      - ./tests:/integration/tests

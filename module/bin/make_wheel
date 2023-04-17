@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /module/spiff-element-units
+maturin build

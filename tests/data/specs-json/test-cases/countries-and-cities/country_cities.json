@@ -1,5 +1,6 @@
 {
-    "Process_sypm122": {
+    "serializer_version": "spiff-element-units-integration",
+    "spec": {
         "correlation_keys": {},
         "data_objects": {},
         "description": "Process_sypm122",
@@ -348,5 +349,6 @@
             }
         },
         "typename": "BpmnProcessSpec"
-    }
+    },
+    "subprocess_specs": {}
 }

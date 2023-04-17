@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /integration
+python scripts/specs_json.py

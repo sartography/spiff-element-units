@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export PYTHONPATH="/module/spiff-element-units/.env/lib/python3.9/site-packages/"
+
+cd /integration
+python -m unittest discover -s tests -p test_\*.py -t .
+
+# with the current test setup using unittest-parallel is significantly slower
+# if tests start to slow down look into bringing it back
+#unittest-parallel -s tests -p test_\*.py -t .
