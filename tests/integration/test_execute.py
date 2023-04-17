@@ -19,24 +19,13 @@ class ExecuteTest(unittest.TestCase):
             specs = load_specs_json(test.relname)
             test_workflow_from_specs(test, specs)
 
-    def test_can_execute_specs_from_cache_for_process(self):
-        for key, test in TEST_CASES.items():
-            specs_str = spiff_element_units.cached_element_unit_for_process(
-                TEST_CACHE_DIR,
-                key,
-                test.process_id)
-            specs = json.loads(specs_str)
-            test_workflow_from_specs(test, specs)
-
     def test_can_execute_specs_from_cache_for_element(self):
         for key, test in TEST_CASES.items():
             # TODO: this method currently does nothing with the element id
-            # when it does this test will fail and need to provide valid
-            # element ids via the test cases
-            specs_str = spiff_element_units.cached_element_unit_for_element(
+            # when it does need to test invalid process ids and other elements ids
+            specs_str = spiff_element_units.workflow_from_cached_element_unit(
                 TEST_CACHE_DIR,
                 key,
-                test.process_id,
-                "")
+                test.process_id)
             specs = json.loads(specs_str)
             test_workflow_from_specs(test, specs)

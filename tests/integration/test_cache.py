@@ -20,13 +20,13 @@ class CacheTest(unittest.TestCase):
         shutil.rmtree(TEST_CACHE_DIR)
         for key, data in TEST_CASES.items():
             specs = read_specs_json(data.relname)
-            spiff_element_units.cache_element_units(
+            spiff_element_units.cache_element_units_for_workflow(
                 TEST_CACHE_DIR,
                 key,
                 specs)
 
         for key, data in TEST_CASES.items():
-            element_unit_str = spiff_element_units.cached_element_unit_for_process(
+            element_unit_str = spiff_element_units.workflow_from_cached_element_unit(
                 TEST_CACHE_DIR,
                 key,
                 data.process_id)
@@ -36,19 +36,4 @@ class CacheTest(unittest.TestCase):
             assert isinstance(element_unit_dict, dict)
             assert data.process_id == element_unit_dict["spec"]["name"]
 
-        # TODO: this method currently returns regardless of element id
-        # when that changes this test will fail and needs to be checked
-        # for each element id in the full workflow. right now we are just
-        # checking that this call doesn't bomb/return unusable results
-        for key, data in TEST_CASES.items():
-            element_unit_str = spiff_element_units.cached_element_unit_for_element(
-                TEST_CACHE_DIR,
-                key,
-                data.process_id,
-                "")
-            
-            assert isinstance(element_unit_str, str)
-            element_unit_dict = json.loads(element_unit_str)
-            assert isinstance(element_unit_dict, dict)
-            assert data.process_id == element_unit_dict["spec"]["name"]
-            # TODO: check the element id is there also when they are needed
+        # TODO: when supported, need to test passing in element ids

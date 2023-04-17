@@ -22,7 +22,7 @@ Currently extremely simple to get started. Expect the public api to change as it
 ### Caching element units
 
 ```
-def cache_element_units(
+def cache_element_units_for_workflow(
     cache_dir: str,
     cache_key: str,
     workflow_spec_json: str,
@@ -30,34 +30,21 @@ def cache_element_units(
     
 ```
 
-Forms element units for the workflow spec provided in json format and associates them with `cache_key`.
+Forms element units for the workflow specs provided in json format and associates them with `cache_key`.
 
 TODO: exceptions raised.
 
 ### Getting cached element units
 
 ```
-def cached_element_unit_for_process(
+def workflow_from_cached_element_unit(
     cache_dir: str,
     cache_key: str,
-    process_id: str,
-) -> str:
-```
-
-Returns the json representation of the first element unit available for the process with `process_id` in the workflow spec associated with `cache_key`. This can be used to start a process from previously cached element units without knowing the first element id.
-
-TODO: exceptions raised.
-
-```
-def cached_element_unit_for_element(
-    cache_dir: str,
-    cache_key: str,
-    process_id: str,
     element_id: str,
 ) -> str:
 ```
 
-Returns the json representation of the element unit for the element with `element_id` in process `process_id` in the workflow spec associated with `cache_key`. This can be used to resume a process from previously cached element units using a known element id.
+Returns the json representation of a workflow capable of executing the first element unit available for the `element_id` associated with `cache_key`. This can be used to start or resume a process from previously cached element units.
 
 TODO: exceptions raised.
 

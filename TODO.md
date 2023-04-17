@@ -5,3 +5,4 @@
 1. separate the cache from the creation of element units
    1. at some point spiff-element-units-cache is its own lib
 1. add type hints - https://pyo3.rs/v0.18.3/python_typing_hints
+1. make sure top level keys are preserved, like serializer_version
