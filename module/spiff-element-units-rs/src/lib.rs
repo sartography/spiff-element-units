@@ -1,4 +1,6 @@
 mod cache;
+mod domain;
+mod parser;
 
 // this is the public api. it is a thin waist on purpose to make other
 // language bindings and caller interactions simple. we don't want to be

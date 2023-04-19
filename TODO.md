@@ -6,3 +6,6 @@
    1. at some point spiff-element-units-cache is its own lib
 1. make sure type hints work for the host application
 1. make sure top level keys are preserved, like serializer_version
+1. start to parse the specs json files
+   1. read specs-json files from rust unit tests
+   1. no-tasks as first milestone
