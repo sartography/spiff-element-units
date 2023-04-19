@@ -16,6 +16,8 @@ pub fn cache_element_units_for_workflow(
 ) -> std::io::Result<()> {
     // TODO: eventually we will want to validate the workflow_specs_json
     // before caching.
+    let _workflow_spec = parser::parse_str(workflow_specs_json);
+
     // TODO: right now we are not decomposing at all to get the integration
     // started with the backend
     cache::write_workflow_specs(cache_dir, cache_key, workflow_specs_json)
@@ -32,7 +34,5 @@ pub fn workflow_from_cached_element_unit(
 ) -> std::io::Result<String> {
     // TODO: right now we are just returning back the whole workflow specs json to
     // get the itegration ball rolling
-    // TODO: eventually we will want to validate the workflow_specs_json
-    // before returning.
     cache::read_workflow_specs(cache_dir, cache_key)
 }
