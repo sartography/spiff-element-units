@@ -1,11 +1,10 @@
 use serde_json;
-use std::error::Error;
 
 use crate::domain::WorkflowSpec;
 
 // TODO: generic parse result types
 
-pub fn parse_str(str: &str) -> Result<WorkflowSpec, Box<dyn Error>> {
+pub fn parse_str(str: &str) -> serde_json::Result<WorkflowSpec> { //, Box<dyn Error>> {
     let workflow_spec: WorkflowSpec = serde_json::from_str(str)?;
 
     Ok(workflow_spec)
@@ -41,9 +40,10 @@ mod tests {
             "spiff-element-units-integration"
         );
         assert_eq!(workflow_spec.subprocess_specs.len(), 0);
+	assert_eq!(workflow_spec.unrecognized_fields.len(), 0);
 
         let spec = workflow_spec.spec;
-
+	
         assert_eq!(spec.name, "no_tasks");
         assert_eq!(spec.typename, "BpmnProcessSpec");
         assert_eq!(
