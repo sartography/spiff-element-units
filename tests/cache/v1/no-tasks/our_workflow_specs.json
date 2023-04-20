@@ -107,9 +107,9 @@
     },
     "data_objects": {},
     "correlation_keys": {},
+    "io_specification": null,
     "description": "No Tasks",
-    "file": "tests/data/process-models/test-cases/no-tasks/no-tasks.bpmn",
-    "io_specification": null
+    "file": "tests/data/process-models/test-cases/no-tasks/no-tasks.bpmn"
   },
   "subprocess_specs": {},
   "serializer_version": "spiff-element-units-integration"

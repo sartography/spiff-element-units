@@ -22,7 +22,7 @@ pub fn cache_element_units_for_workflow(
     // TODO: eventually we will want to validate the workflow_specs_json
     // before forming element units. for now we are just writing our
     // version to disk for comparison.
-    // TODO: factor this out
+    // TODO: factor this out - see reader/writer/cache entry TODOs
     let _ = parser::parse_str::<WorkflowSpec>(workflow_specs_json)
         .and_then(|wfs| serde_json::to_string_pretty(&wfs))
         .as_ref()
@@ -35,8 +35,9 @@ pub fn cache_element_units_for_workflow(
             ))
         });
 
-    // TODO: right now we are not decomposing at all to get the integration
-    // started with the backend.
+    // for now we are writing the original workflow specs json to the cache
+    // even though we only return ours. this is to help keep an eye on things
+    // and potientially help debug issues. it is not expected to be required forever.
     cache::write(
         cache_dir,
         cache_key,

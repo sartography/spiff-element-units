@@ -135,9 +135,9 @@
     },
     "data_objects": {},
     "correlation_keys": {},
+    "io_specification": null,
     "description": "SingleTask_Process",
-    "file": "tests/data/process-models/test-cases/single-task/single_task.bpmn",
-    "io_specification": null
+    "file": "tests/data/process-models/test-cases/single-task/single_task.bpmn"
   },
   "subprocess_specs": {},
   "serializer_version": "spiff-element-units-integration"

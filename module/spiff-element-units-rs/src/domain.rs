@@ -24,11 +24,15 @@ pub struct ProcessSpec {
     pub name: String,
     pub typename: String,
     pub task_specs: Map<TaskSpec>,
+
+    // for now at least we don't care about the actual value of thsese
+    // fields, just that they have a value when determining if/how we
+    // build element units for this process
+    
     pub data_objects: Map<serde_json::Value>,
-    /*
-    "correlation_keys": {},
-    "io_specification": null,
-    */
+    pub correlation_keys: serde_json::Value,
+    pub io_specification: serde_json::Value,
+    
     #[serde(flatten)]
     rest: Map<serde_json::Value>,
 }

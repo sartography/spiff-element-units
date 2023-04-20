@@ -135,9 +135,9 @@
     },
     "data_objects": {},
     "correlation_keys": {},
+    "io_specification": null,
     "description": "Process_p4pfxhq",
-    "file": "tests/data/process-models/test-cases/simple-call-activity/simple_call_activity.bpmn",
-    "io_specification": null
+    "file": "tests/data/process-models/test-cases/simple-call-activity/simple_call_activity.bpmn"
   },
   "subprocess_specs": {
     "SingleTask_Process": {
@@ -276,9 +276,9 @@
       },
       "data_objects": {},
       "correlation_keys": {},
+      "io_specification": null,
       "description": "SingleTask_Process",
-      "file": "tests/data/process-models/test-cases/single-task/single_task.bpmn",
-      "io_specification": null
+      "file": "tests/data/process-models/test-cases/single-task/single_task.bpmn"
     }
   },
   "serializer_version": "spiff-element-units-integration"
