@@ -1,10 +1,7 @@
 {
-  "serializer_version": "spiff-element-units-integration",
   "spec": {
     "name": "no_tasks",
-    "description": "No Tasks",
     "typename": "BpmnProcessSpec",
-    "file": "tests/data/process-models/test-cases/no-tasks/no-tasks.bpmn",
     "task_specs": {
       "End": {
         "name": "End",
@@ -110,7 +107,10 @@
     },
     "data_objects": {},
     "correlation_keys": {},
+    "description": "No Tasks",
+    "file": "tests/data/process-models/test-cases/no-tasks/no-tasks.bpmn",
     "io_specification": null
   },
-  "subprocess_specs": {}
+  "subprocess_specs": {},
+  "serializer_version": "spiff-element-units-integration"
 }

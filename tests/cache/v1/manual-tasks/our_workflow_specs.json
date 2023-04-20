@@ -1,10 +1,7 @@
 {
-  "serializer_version": "spiff-element-units-integration",
   "spec": {
     "name": "Process_diu8ta2",
-    "description": "Process_diu8ta2",
     "typename": "BpmnProcessSpec",
-    "file": "tests/data/process-models/test-cases/manual-tasks/manual_tasks.bpmn",
     "task_specs": {
       "Activity_1h7gm30": {
         "name": "Activity_1h7gm30",
@@ -164,7 +161,10 @@
     },
     "data_objects": {},
     "correlation_keys": {},
+    "description": "Process_diu8ta2",
+    "file": "tests/data/process-models/test-cases/manual-tasks/manual_tasks.bpmn",
     "io_specification": null
   },
-  "subprocess_specs": {}
+  "subprocess_specs": {},
+  "serializer_version": "spiff-element-units-integration"
 }

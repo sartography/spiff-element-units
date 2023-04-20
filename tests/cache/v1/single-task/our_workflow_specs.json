@@ -1,10 +1,7 @@
 {
-  "serializer_version": "spiff-element-units-integration",
   "spec": {
     "name": "SingleTask_Process",
-    "description": "SingleTask_Process",
     "typename": "BpmnProcessSpec",
-    "file": "tests/data/process-models/test-cases/single-task/single_task.bpmn",
     "task_specs": {
       "Activity_1mwbqi4": {
         "name": "Activity_1mwbqi4",
@@ -138,7 +135,10 @@
     },
     "data_objects": {},
     "correlation_keys": {},
+    "description": "SingleTask_Process",
+    "file": "tests/data/process-models/test-cases/single-task/single_task.bpmn",
     "io_specification": null
   },
-  "subprocess_specs": {}
+  "subprocess_specs": {},
+  "serializer_version": "spiff-element-units-integration"
 }

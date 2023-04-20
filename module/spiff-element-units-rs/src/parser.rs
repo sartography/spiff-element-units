@@ -36,20 +36,12 @@ mod tests {
         let contents = test_case_contents("no-tasks/no-tasks.json")?;
         let workflow_spec: WorkflowSpec = parse_str(contents.as_str())?;
 
-        assert_eq!(
-            workflow_spec.serializer_version,
-            "spiff-element-units-integration"
-        );
         assert_eq!(workflow_spec.subprocess_specs.len(), 0);
 
         let spec = workflow_spec.spec;
 
         assert_eq!(spec.name, "no_tasks");
         assert_eq!(spec.typename, "BpmnProcessSpec");
-        assert_eq!(
-            spec.file,
-            "tests/data/process-models/test-cases/no-tasks/no-tasks.bpmn"
-        );
         assert_eq!(spec.task_specs.len(), 5);
         assert!(spec.task_specs.contains_key("Start"));
         assert!(spec.task_specs.contains_key("StartEvent_1"));

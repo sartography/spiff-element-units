@@ -1,10 +1,7 @@
 {
-  "serializer_version": "spiff-element-units-integration",
   "spec": {
     "name": "Process_p4pfxhq",
-    "description": "Process_p4pfxhq",
     "typename": "BpmnProcessSpec",
-    "file": "tests/data/process-models/test-cases/simple-call-activity/simple_call_activity.bpmn",
     "task_specs": {
       "Activity_0q1z4d4": {
         "name": "Activity_0q1z4d4",
@@ -138,14 +135,14 @@
     },
     "data_objects": {},
     "correlation_keys": {},
+    "description": "Process_p4pfxhq",
+    "file": "tests/data/process-models/test-cases/simple-call-activity/simple_call_activity.bpmn",
     "io_specification": null
   },
   "subprocess_specs": {
     "SingleTask_Process": {
       "name": "SingleTask_Process",
-      "description": "SingleTask_Process",
       "typename": "BpmnProcessSpec",
-      "file": "tests/data/process-models/test-cases/single-task/single_task.bpmn",
       "task_specs": {
         "Activity_1mwbqi4": {
           "name": "Activity_1mwbqi4",
@@ -279,7 +276,10 @@
       },
       "data_objects": {},
       "correlation_keys": {},
+      "description": "SingleTask_Process",
+      "file": "tests/data/process-models/test-cases/single-task/single_task.bpmn",
       "io_specification": null
     }
-  }
+  },
+  "serializer_version": "spiff-element-units-integration"
 }
