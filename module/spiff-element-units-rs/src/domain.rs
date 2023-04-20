@@ -37,15 +37,47 @@ pub struct ProcessSpec {
     rest: Map<serde_json::Value>,
 }
 
-// TODO: enum of different task spec flavors
-// TODO: can serde flatten be used along with struct composition?
-// TODO: or a macro to include the common fields?
+//
+// for the breakdown of how the different specs are serialized in SpiffWorkflow:
+//
+// https://github.com/sartography/SpiffWorkflow/blob/main/SpiffWorkflow/bpmn/serializer/helpers/spec.py
+//
+
 #[derive(Debug, Deserialize, Serialize)]
-pub struct TaskSpec {
+pub struct BaseTaskSpec {
     pub name: String,
     pub typename: String,
     pub inputs: Vec<String>,
     pub outputs: Vec<String>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct BpmnTaskSpecMixin {
+    // for now at least we don't care about the actual value of thsese
+    // fields, just that they have a value when determining if/how we
+    // build element units for this process
+
+    pub data_input_associations: serde_json::Value,
+    pub data_output_associations: serde_json::Value,
+    pub io_specification: serde_json::Value,
+    pub lane: serde_json::Value,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct SubprocessTaskSpecMixin {
+    pub spec: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct TaskSpec {
+    #[serde(flatten)]
+    pub base: BaseTaskSpec,
+
+    #[serde(flatten)]
+    pub bpmn: Option<BpmnTaskSpecMixin>,
+
+    #[serde(flatten)]
+    pub subprocess: Option<SubprocessTaskSpecMixin>,
 
     #[serde(flatten)]
     rest: Map<serde_json::Value>,

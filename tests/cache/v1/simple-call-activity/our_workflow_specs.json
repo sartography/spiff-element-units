@@ -14,13 +14,14 @@
         ],
         "data_input_associations": [],
         "data_output_associations": [],
+        "io_specification": null,
+        "lane": null,
+        "spec": "SingleTask_Process",
         "description": null,
         "documentation": null,
         "extensions": {},
         "id": "Process_p4pfxhq_5",
         "internal": false,
-        "io_specification": null,
-        "lane": null,
         "lookahead": 2,
         "manual": false,
         "position": {
@@ -28,8 +29,7 @@
           "y": 137.0
         },
         "postscript": null,
-        "prescript": null,
-        "spec": "SingleTask_Process"
+        "prescript": null
       },
       "End": {
         "name": "End",
@@ -55,6 +55,8 @@
         ],
         "data_input_associations": [],
         "data_output_associations": [],
+        "io_specification": null,
+        "lane": null,
         "description": null,
         "documentation": null,
         "event_definition": {
@@ -65,8 +67,6 @@
         "extensions": {},
         "id": "Process_p4pfxhq_6",
         "internal": false,
-        "io_specification": null,
-        "lane": null,
         "lookahead": 2,
         "manual": false,
         "position": {
@@ -113,6 +113,8 @@
         ],
         "data_input_associations": [],
         "data_output_associations": [],
+        "io_specification": null,
+        "lane": null,
         "description": null,
         "documentation": null,
         "event_definition": {
@@ -123,8 +125,6 @@
         "extensions": {},
         "id": "Process_p4pfxhq_4",
         "internal": false,
-        "io_specification": null,
-        "lane": null,
         "lookahead": 2,
         "manual": false,
         "position": {
@@ -155,13 +155,13 @@
           ],
           "data_input_associations": [],
           "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
           "description": "x=1",
           "documentation": null,
           "extensions": {},
           "id": "SingleTask_Process_5",
           "internal": false,
-          "io_specification": null,
-          "lane": null,
           "lookahead": 2,
           "manual": false,
           "position": {
@@ -196,6 +196,8 @@
           ],
           "data_input_associations": [],
           "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
           "description": null,
           "documentation": null,
           "event_definition": {
@@ -206,8 +208,6 @@
           "extensions": {},
           "id": "SingleTask_Process_6",
           "internal": false,
-          "io_specification": null,
-          "lane": null,
           "lookahead": 2,
           "manual": false,
           "position": {
@@ -254,6 +254,8 @@
           ],
           "data_input_associations": [],
           "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
           "description": null,
           "documentation": null,
           "event_definition": {
@@ -264,8 +266,6 @@
           "extensions": {},
           "id": "SingleTask_Process_4",
           "internal": false,
-          "io_specification": null,
-          "lane": null,
           "lookahead": 2,
           "manual": false,
           "position": {
