@@ -8,4 +8,6 @@
 1. make sure type hints work for the host application
 1. start to parse the specs json files
    1. read specs-json files from rust unit tests
-   1. no-tasks with no unrecognized_fields as first milestone
+   1. no-tasks that executes after serialization
+1. add integration tests to compare our specs vs original specs
+1. add integration tests to execute our specs

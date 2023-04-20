@@ -1,0 +1,144 @@
+{
+  "serializer_version": "spiff-element-units-integration",
+  "spec": {
+    "name": "SingleTask_Process",
+    "description": "SingleTask_Process",
+    "typename": "BpmnProcessSpec",
+    "file": "tests/data/process-models/test-cases/single-task/single_task.bpmn",
+    "task_specs": {
+      "StartEvent_1": {
+        "name": "StartEvent_1",
+        "typename": "StartEvent",
+        "inputs": [
+          "Start"
+        ],
+        "outputs": [
+          "Activity_1mwbqi4"
+        ],
+        "io_specification": null,
+        "position": {
+          "x": 179.0,
+          "y": 159.0
+        },
+        "event_definition": {
+          "external": false,
+          "internal": false,
+          "typename": "NoneEventDefinition"
+        },
+        "lookahead": 2,
+        "description": null,
+        "lane": null,
+        "documentation": null,
+        "extensions": {},
+        "data_output_associations": [],
+        "data_input_associations": [],
+        "manual": false,
+        "id": "SingleTask_Process_4",
+        "internal": false
+      },
+      "Activity_1mwbqi4": {
+        "name": "Activity_1mwbqi4",
+        "typename": "ScriptTask",
+        "inputs": [
+          "StartEvent_1"
+        ],
+        "outputs": [
+          "Event_1gsb2u0"
+        ],
+        "documentation": null,
+        "extensions": {},
+        "io_specification": null,
+        "postscript": null,
+        "data_output_associations": [],
+        "id": "SingleTask_Process_5",
+        "data_input_associations": [],
+        "lane": null,
+        "internal": false,
+        "position": {
+          "x": 270.0,
+          "y": 137.0
+        },
+        "script": "x=1",
+        "manual": false,
+        "description": "x=1",
+        "lookahead": 2,
+        "prescript": null
+      },
+      "Event_1gsb2u0": {
+        "name": "Event_1gsb2u0",
+        "typename": "EndEvent",
+        "inputs": [
+          "Activity_1mwbqi4"
+        ],
+        "outputs": [
+          "SingleTask_Process.EndJoin"
+        ],
+        "internal": false,
+        "io_specification": null,
+        "id": "SingleTask_Process_6",
+        "description": null,
+        "data_output_associations": [],
+        "manual": false,
+        "position": {
+          "x": 432.0,
+          "y": 159.0
+        },
+        "lookahead": 2,
+        "extensions": {},
+        "event_definition": {
+          "external": false,
+          "internal": false,
+          "typename": "NoneEventDefinition"
+        },
+        "lane": null,
+        "data_input_associations": [],
+        "documentation": null
+      },
+      "SingleTask_Process.EndJoin": {
+        "name": "SingleTask_Process.EndJoin",
+        "typename": "_EndJoin",
+        "inputs": [
+          "Event_1gsb2u0"
+        ],
+        "outputs": [
+          "End"
+        ],
+        "id": "SingleTask_Process_2",
+        "description": "",
+        "lookahead": 2,
+        "internal": false,
+        "manual": false
+      },
+      "Start": {
+        "name": "Start",
+        "typename": "StartTask",
+        "inputs": [],
+        "outputs": [
+          "StartEvent_1"
+        ],
+        "description": "",
+        "lookahead": 2,
+        "manual": false,
+        "internal": false,
+        "id": "SingleTask_Process_1"
+      },
+      "End": {
+        "name": "End",
+        "typename": "Simple",
+        "inputs": [
+          "SingleTask_Process.EndJoin"
+        ],
+        "outputs": [],
+        "manual": false,
+        "description": "",
+        "id": "SingleTask_Process_3",
+        "internal": false,
+        "lookahead": 2
+      }
+    },
+    "data_objects": {},
+    "correlation_keys": {},
+    "io_specification": null
+  },
+  "subprocess_specs": {}
+}

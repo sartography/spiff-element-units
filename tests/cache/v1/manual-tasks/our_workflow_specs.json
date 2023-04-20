@@ -1,0 +1,170 @@
+{
+  "serializer_version": "spiff-element-units-integration",
+  "spec": {
+    "name": "Process_diu8ta2",
+    "description": "Process_diu8ta2",
+    "typename": "BpmnProcessSpec",
+    "file": "tests/data/process-models/test-cases/manual-tasks/manual_tasks.bpmn",
+    "task_specs": {
+      "StartEvent_1": {
+        "name": "StartEvent_1",
+        "typename": "StartEvent",
+        "inputs": [
+          "Start"
+        ],
+        "outputs": [
+          "Activity_1h7gm30"
+        ],
+        "lookahead": 2,
+        "manual": false,
+        "position": {
+          "x": 179.0,
+          "y": 159.0
+        },
+        "lane": null,
+        "documentation": null,
+        "data_output_associations": [],
+        "internal": false,
+        "io_specification": null,
+        "description": null,
+        "id": "Process_diu8ta2_4",
+        "data_input_associations": [],
+        "event_definition": {
+          "external": false,
+          "internal": false,
+          "typename": "NoneEventDefinition"
+        },
+        "extensions": {}
+      },
+      "Activity_1n7p3m4": {
+        "name": "Activity_1n7p3m4",
+        "typename": "ManualTask",
+        "inputs": [
+          "Activity_1h7gm30"
+        ],
+        "outputs": [
+          "Event_0iozjmo"
+        ],
+        "data_input_associations": [],
+        "lookahead": 2,
+        "documentation": null,
+        "id": "Process_diu8ta2_6",
+        "data_output_associations": [],
+        "lane": null,
+        "manual": false,
+        "extensions": {},
+        "position": {
+          "x": 430.0,
+          "y": 137.0
+        },
+        "postscript": null,
+        "prescript": null,
+        "internal": false,
+        "description": null,
+        "io_specification": null
+      },
+      "Event_0iozjmo": {
+        "name": "Event_0iozjmo",
+        "typename": "EndEvent",
+        "inputs": [
+          "Activity_1n7p3m4"
+        ],
+        "outputs": [
+          "Process_diu8ta2.EndJoin"
+        ],
+        "documentation": null,
+        "manual": false,
+        "position": {
+          "x": 592.0,
+          "y": 159.0
+        },
+        "internal": false,
+        "extensions": {},
+        "id": "Process_diu8ta2_7",
+        "lookahead": 2,
+        "event_definition": {
+          "external": false,
+          "internal": false,
+          "typename": "NoneEventDefinition"
+        },
+        "data_output_associations": [],
+        "description": null,
+        "data_input_associations": [],
+        "io_specification": null,
+        "lane": null
+      },
+      "Activity_1h7gm30": {
+        "name": "Activity_1h7gm30",
+        "typename": "ManualTask",
+        "inputs": [
+          "StartEvent_1"
+        ],
+        "outputs": [
+          "Activity_1n7p3m4"
+        ],
+        "manual": false,
+        "postscript": null,
+        "data_input_associations": [],
+        "documentation": null,
+        "prescript": null,
+        "description": null,
+        "position": {
+          "x": 270.0,
+          "y": 137.0
+        },
+        "data_output_associations": [],
+        "id": "Process_diu8ta2_5",
+        "lane": null,
+        "io_specification": null,
+        "lookahead": 2,
+        "extensions": {},
+        "internal": false
+      },
+      "End": {
+        "name": "End",
+        "typename": "Simple",
+        "inputs": [
+          "Process_diu8ta2.EndJoin"
+        ],
+        "outputs": [],
+        "id": "Process_diu8ta2_3",
+        "internal": false,
+        "manual": false,
+        "lookahead": 2,
+        "description": ""
+      },
+      "Start": {
+        "name": "Start",
+        "typename": "StartTask",
+        "inputs": [],
+        "outputs": [
+          "StartEvent_1"
+        ],
+        "manual": false,
+        "internal": false,
+        "description": "",
+        "lookahead": 2,
+        "id": "Process_diu8ta2_1"
+      },
+      "Process_diu8ta2.EndJoin": {
+        "name": "Process_diu8ta2.EndJoin",
+        "typename": "_EndJoin",
+        "inputs": [
+          "Event_0iozjmo"
+        ],
+        "outputs": [
+          "End"
+        ],
+        "description": "",
+        "lookahead": 2,
+        "id": "Process_diu8ta2_2",
+        "manual": false,
+        "internal": false
+      }
+    },
+    "data_objects": {},
+    "correlation_keys": {},
+    "io_specification": null
+  },
+  "subprocess_specs": {}
+}

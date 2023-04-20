@@ -4,23 +4,39 @@ use std::io;
 use std::io::prelude::*;
 use std::path::{Path, PathBuf};
 
-const CACHE_VERSION: &str = "v1";
-const WORKFLOW_SPECS_JSON_FILENAME: &str = "workflow_specs.json";
+pub mod entry {
+    pub enum Type {
+        OriginalWorkflowSpecsJSON,
+        OurWorkflowSpecsJSON,
+    }
 
-pub fn write_workflow_specs(
+    impl Type {
+        pub fn filename(&self) -> &str {
+            match self {
+                Type::OriginalWorkflowSpecsJSON => "workflow_specs.json",
+                Type::OurWorkflowSpecsJSON => "our_workflow_specs.json",
+            }
+        }
+    }
+}
+
+const CACHE_VERSION: &str = "v1";
+
+pub fn write(
     cache_dir: &str,
     cache_key: &str,
-    workflow_specs_json: &str,
+    entry_type: entry::Type,
+    content: &str,
 ) -> io::Result<()> {
-    let path = created_cache_path(cache_dir, cache_key)?.join(WORKFLOW_SPECS_JSON_FILENAME);
+    let path = created_cache_path(cache_dir, cache_key)?.join(entry_type.filename());
     let mut file = File::create(path)?;
-    file.write_all(workflow_specs_json.as_bytes())?;
+    file.write_all(content.as_bytes())?;
 
     Ok(())
 }
 
-pub fn read_workflow_specs(cache_dir: &str, cache_key: &str) -> io::Result<String> {
-    std::fs::read_to_string(workflow_specs_cache_path(cache_dir, cache_key))
+pub fn read(cache_dir: &str, cache_key: &str, entry_type: entry::Type) -> io::Result<String> {
+    std::fs::read_to_string(cache_path(cache_dir, cache_key).join(entry_type.filename()))
 }
 
 fn cache_path(cache_dir: &str, cache_key: &str) -> PathBuf {
@@ -31,8 +47,4 @@ fn created_cache_path(cache_dir: &str, cache_key: &str) -> io::Result<PathBuf> {
     let cache_path = cache_path(cache_dir, cache_key);
     fs::create_dir_all(&cache_path)?;
     Ok(cache_path)
-}
-
-fn workflow_specs_cache_path(cache_dir: &str, cache_key: &str) -> PathBuf {
-    cache_path(cache_dir, cache_key).join(WORKFLOW_SPECS_JSON_FILENAME)
 }
