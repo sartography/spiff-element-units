@@ -10,6 +10,8 @@
           "no_tasks.EndJoin"
         ],
         "outputs": [],
+        "prescript": null,
+        "postscript": null,
         "description": "",
         "id": "no_tasks_3",
         "internal": false,
@@ -29,6 +31,8 @@
         "data_output_associations": [],
         "io_specification": null,
         "lane": null,
+        "prescript": null,
+        "postscript": null,
         "description": null,
         "documentation": null,
         "event_definition": {
@@ -53,6 +57,8 @@
         "outputs": [
           "StartEvent_1"
         ],
+        "prescript": null,
+        "postscript": null,
         "description": "",
         "id": "no_tasks_1",
         "internal": false,
@@ -72,6 +78,8 @@
         "data_output_associations": [],
         "io_specification": null,
         "lane": null,
+        "prescript": null,
+        "postscript": null,
         "description": null,
         "documentation": null,
         "event_definition": {
@@ -98,6 +106,8 @@
         "outputs": [
           "End"
         ],
+        "prescript": null,
+        "postscript": null,
         "description": "",
         "id": "no_tasks_2",
         "internal": false,

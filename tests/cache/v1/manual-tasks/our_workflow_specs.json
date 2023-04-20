@@ -16,6 +16,8 @@
         "data_output_associations": [],
         "io_specification": null,
         "lane": null,
+        "prescript": null,
+        "postscript": null,
         "description": null,
         "documentation": null,
         "extensions": {},
@@ -26,9 +28,7 @@
         "position": {
           "x": 270.0,
           "y": 137.0
-        },
-        "postscript": null,
-        "prescript": null
+        }
       },
       "Activity_1n7p3m4": {
         "name": "Activity_1n7p3m4",
@@ -43,6 +43,8 @@
         "data_output_associations": [],
         "io_specification": null,
         "lane": null,
+        "prescript": null,
+        "postscript": null,
         "description": null,
         "documentation": null,
         "extensions": {},
@@ -53,9 +55,7 @@
         "position": {
           "x": 430.0,
           "y": 137.0
-        },
-        "postscript": null,
-        "prescript": null
+        }
       },
       "End": {
         "name": "End",
@@ -64,6 +64,8 @@
           "Process_diu8ta2.EndJoin"
         ],
         "outputs": [],
+        "prescript": null,
+        "postscript": null,
         "description": "",
         "id": "Process_diu8ta2_3",
         "internal": false,
@@ -83,6 +85,8 @@
         "data_output_associations": [],
         "io_specification": null,
         "lane": null,
+        "prescript": null,
+        "postscript": null,
         "description": null,
         "documentation": null,
         "event_definition": {
@@ -109,6 +113,8 @@
         "outputs": [
           "End"
         ],
+        "prescript": null,
+        "postscript": null,
         "description": "",
         "id": "Process_diu8ta2_2",
         "internal": false,
@@ -122,6 +128,8 @@
         "outputs": [
           "StartEvent_1"
         ],
+        "prescript": null,
+        "postscript": null,
         "description": "",
         "id": "Process_diu8ta2_1",
         "internal": false,
@@ -141,6 +149,8 @@
         "data_output_associations": [],
         "io_specification": null,
         "lane": null,
+        "prescript": null,
+        "postscript": null,
         "description": null,
         "documentation": null,
         "event_definition": {

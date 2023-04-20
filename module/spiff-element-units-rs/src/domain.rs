@@ -28,11 +28,10 @@ pub struct ProcessSpec {
     // for now at least we don't care about the actual value of thsese
     // fields, just that they have a value when determining if/how we
     // build element units for this process
-    
     pub data_objects: Map<serde_json::Value>,
     pub correlation_keys: serde_json::Value,
     pub io_specification: serde_json::Value,
-    
+
     #[serde(flatten)]
     rest: Map<serde_json::Value>,
 }
@@ -40,7 +39,12 @@ pub struct ProcessSpec {
 //
 // for the breakdown of how the different specs are serialized in SpiffWorkflow:
 //
+// https://github.com/sartography/SpiffWorkflow/blob/main/SpiffWorkflow/bpmn/serializer/task_spec.py
 // https://github.com/sartography/SpiffWorkflow/blob/main/SpiffWorkflow/bpmn/serializer/helpers/spec.py
+// https://github.com/sartography/SpiffWorkflow/blob/main/SpiffWorkflow/spiff/serializer/task_spec.py
+//
+// these may not be entirely correct per the links above but are close enough for what we
+// need in this lib. any discrepencies should be thought of under that lens.
 //
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -56,7 +60,6 @@ pub struct BpmnTaskSpecMixin {
     // for now at least we don't care about the actual value of thsese
     // fields, just that they have a value when determining if/how we
     // build element units for this process
-
     pub data_input_associations: serde_json::Value,
     pub data_output_associations: serde_json::Value,
     pub io_specification: serde_json::Value,
@@ -64,9 +67,18 @@ pub struct BpmnTaskSpecMixin {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
+pub struct SpiffTaskSpecMixin {
+    pub prescript: Option<String>,
+    pub postscript: Option<String>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
 pub struct SubprocessTaskSpecMixin {
     pub spec: String,
 }
+
+// TODO: am open to how these flattened fields are named, really just
+// winging it right now to see what fits.
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct TaskSpec {
@@ -75,6 +87,9 @@ pub struct TaskSpec {
 
     #[serde(flatten)]
     pub bpmn: Option<BpmnTaskSpecMixin>,
+
+    #[serde(flatten)]
+    pub spiff: Option<SpiffTaskSpecMixin>,
 
     #[serde(flatten)]
     pub subprocess: Option<SubprocessTaskSpecMixin>,
