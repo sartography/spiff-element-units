@@ -6,18 +6,16 @@
     "typename": "BpmnProcessSpec",
     "file": "tests/data/process-models/test-cases/no-tasks/no-tasks.bpmn",
     "task_specs": {
-      "no_tasks.EndJoin": {
-        "name": "no_tasks.EndJoin",
-        "typename": "_EndJoin",
+      "End": {
+        "name": "End",
+        "typename": "Simple",
         "inputs": [
-          "Event_0qq9il3"
+          "no_tasks.EndJoin"
         ],
-        "outputs": [
-          "End"
-        ],
-        "internal": false,
+        "outputs": [],
         "description": "",
-        "id": "no_tasks_2",
+        "id": "no_tasks_3",
+        "internal": false,
         "lookahead": 2,
         "manual": false
       },
@@ -30,26 +28,26 @@
         "outputs": [
           "no_tasks.EndJoin"
         ],
+        "data_input_associations": [],
         "data_output_associations": [],
+        "description": null,
+        "documentation": null,
         "event_definition": {
           "external": false,
           "internal": false,
           "typename": "NoneEventDefinition"
         },
+        "extensions": {},
+        "id": "no_tasks_5",
         "internal": false,
         "io_specification": null,
-        "manual": false,
-        "id": "no_tasks_5",
-        "extensions": {},
         "lane": null,
-        "data_input_associations": [],
+        "lookahead": 2,
+        "manual": false,
         "position": {
           "x": 272.0,
           "y": 159.0
-        },
-        "description": null,
-        "lookahead": 2,
-        "documentation": null
+        }
       },
       "Start": {
         "name": "Start",
@@ -60,8 +58,8 @@
         ],
         "description": "",
         "id": "no_tasks_1",
-        "lookahead": 2,
         "internal": false,
+        "lookahead": 2,
         "manual": false
       },
       "StartEvent_1": {
@@ -73,44 +71,46 @@
         "outputs": [
           "Event_0qq9il3"
         ],
+        "data_input_associations": [],
+        "data_output_associations": [],
+        "description": null,
         "documentation": null,
-        "internal": false,
         "event_definition": {
           "external": false,
           "internal": false,
           "typename": "NoneEventDefinition"
         },
         "extensions": {},
-        "data_output_associations": [],
-        "description": null,
         "id": "no_tasks_4",
-        "manual": false,
+        "internal": false,
         "io_specification": null,
-        "lookahead": 2,
         "lane": null,
+        "lookahead": 2,
+        "manual": false,
         "position": {
           "x": 179.0,
           "y": 159.0
-        },
-        "data_input_associations": []
+        }
       },
-      "End": {
-        "name": "End",
-        "typename": "Simple",
+      "no_tasks.EndJoin": {
+        "name": "no_tasks.EndJoin",
+        "typename": "_EndJoin",
         "inputs": [
-          "no_tasks.EndJoin"
+          "Event_0qq9il3"
         ],
-        "outputs": [],
-        "id": "no_tasks_3",
-        "lookahead": 2,
-        "manual": false,
+        "outputs": [
+          "End"
+        ],
         "description": "",
-        "internal": false
+        "id": "no_tasks_2",
+        "internal": false,
+        "lookahead": 2,
+        "manual": false
       }
     },
     "data_objects": {},
-    "io_specification": null,
-    "correlation_keys": {}
+    "correlation_keys": {},
+    "io_specification": null
   },
   "subprocess_specs": {}
 }

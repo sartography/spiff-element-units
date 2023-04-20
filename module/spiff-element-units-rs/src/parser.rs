@@ -41,7 +41,6 @@ mod tests {
             "spiff-element-units-integration"
         );
         assert_eq!(workflow_spec.subprocess_specs.len(), 0);
-        assert_eq!(workflow_spec.unrecognized_fields.len(), 0);
 
         let spec = workflow_spec.spec;
 

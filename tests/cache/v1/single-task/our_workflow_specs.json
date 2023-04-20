@@ -17,22 +17,35 @@
         ],
         "data_input_associations": [],
         "data_output_associations": [],
-        "extensions": {},
-        "documentation": null,
-        "manual": false,
         "description": "x=1",
-        "prescript": null,
-        "postscript": null,
+        "documentation": null,
+        "extensions": {},
+        "id": "SingleTask_Process_5",
+        "internal": false,
+        "io_specification": null,
+        "lane": null,
+        "lookahead": 2,
+        "manual": false,
         "position": {
           "x": 270.0,
           "y": 137.0
         },
-        "script": "x=1",
+        "postscript": null,
+        "prescript": null,
+        "script": "x=1"
+      },
+      "End": {
+        "name": "End",
+        "typename": "Simple",
+        "inputs": [
+          "SingleTask_Process.EndJoin"
+        ],
+        "outputs": [],
+        "description": "",
+        "id": "SingleTask_Process_3",
         "internal": false,
-        "io_specification": null,
         "lookahead": 2,
-        "lane": null,
-        "id": "SingleTask_Process_5"
+        "manual": false
       },
       "Event_1gsb2u0": {
         "name": "Event_1gsb2u0",
@@ -43,37 +56,39 @@
         "outputs": [
           "SingleTask_Process.EndJoin"
         ],
-        "internal": false,
+        "data_input_associations": [],
+        "data_output_associations": [],
         "description": null,
+        "documentation": null,
         "event_definition": {
           "external": false,
           "internal": false,
           "typename": "NoneEventDefinition"
         },
-        "io_specification": null,
-        "manual": false,
-        "data_output_associations": [],
-        "lane": null,
         "extensions": {},
-        "data_input_associations": [],
+        "id": "SingleTask_Process_6",
+        "internal": false,
+        "io_specification": null,
+        "lane": null,
+        "lookahead": 2,
+        "manual": false,
         "position": {
           "x": 432.0,
           "y": 159.0
-        },
-        "documentation": null,
-        "id": "SingleTask_Process_6",
-        "lookahead": 2
+        }
       },
-      "End": {
-        "name": "End",
-        "typename": "Simple",
+      "SingleTask_Process.EndJoin": {
+        "name": "SingleTask_Process.EndJoin",
+        "typename": "_EndJoin",
         "inputs": [
-          "SingleTask_Process.EndJoin"
+          "Event_1gsb2u0"
         ],
-        "outputs": [],
-        "internal": false,
+        "outputs": [
+          "End"
+        ],
         "description": "",
-        "id": "SingleTask_Process_3",
+        "id": "SingleTask_Process_2",
+        "internal": false,
         "lookahead": 2,
         "manual": false
       },
@@ -84,11 +99,11 @@
         "outputs": [
           "StartEvent_1"
         ],
-        "internal": false,
         "description": "",
         "id": "SingleTask_Process_1",
-        "manual": false,
-        "lookahead": 2
+        "internal": false,
+        "lookahead": 2,
+        "manual": false
       },
       "StartEvent_1": {
         "name": "StartEvent_1",
@@ -100,45 +115,30 @@
           "Activity_1mwbqi4"
         ],
         "data_input_associations": [],
-        "manual": false,
+        "data_output_associations": [],
+        "description": null,
         "documentation": null,
         "event_definition": {
           "external": false,
           "internal": false,
           "typename": "NoneEventDefinition"
         },
-        "id": "SingleTask_Process_4",
-        "io_specification": null,
         "extensions": {},
-        "data_output_associations": [],
+        "id": "SingleTask_Process_4",
         "internal": false,
+        "io_specification": null,
+        "lane": null,
+        "lookahead": 2,
+        "manual": false,
         "position": {
           "x": 179.0,
           "y": 159.0
-        },
-        "lane": null,
-        "description": null,
-        "lookahead": 2
-      },
-      "SingleTask_Process.EndJoin": {
-        "name": "SingleTask_Process.EndJoin",
-        "typename": "_EndJoin",
-        "inputs": [
-          "Event_1gsb2u0"
-        ],
-        "outputs": [
-          "End"
-        ],
-        "id": "SingleTask_Process_2",
-        "description": "",
-        "internal": false,
-        "manual": false,
-        "lookahead": 2
+        }
       }
     },
     "data_objects": {},
-    "io_specification": null,
-    "correlation_keys": {}
+    "correlation_keys": {},
+    "io_specification": null
   },
   "subprocess_specs": {}
 }

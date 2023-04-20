@@ -55,6 +55,6 @@ pub fn workflow_from_cached_element_unit(
     _element_id: &str,
 ) -> std::io::Result<String> {
     // TODO: right now we are just returning back the whole workflow specs json to
-    // get the itegration ball rolling
-    cache::read(cache_dir, cache_key, OriginalWorkflowSpecsJSON)
+    // get the itegration ball rolling.
+    cache::read(cache_dir, cache_key, OurWorkflowSpecsJSON)
 }
