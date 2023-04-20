@@ -15,11 +15,11 @@
         "outputs": [
           "End"
         ],
-        "id": "no_tasks_2",
-        "description": "",
-        "manual": false,
         "internal": false,
-        "lookahead": 2
+        "description": "",
+        "id": "no_tasks_2",
+        "lookahead": 2,
+        "manual": false
       },
       "Event_0qq9il3": {
         "name": "Event_0qq9il3",
@@ -30,39 +30,39 @@
         "outputs": [
           "no_tasks.EndJoin"
         ],
-        "id": "no_tasks_5",
-        "documentation": null,
-        "manual": false,
-        "lane": null,
         "data_output_associations": [],
-        "data_input_associations": [],
-        "io_specification": null,
-        "internal": false,
-        "description": null,
-        "extensions": {},
-        "position": {
-          "x": 272.0,
-          "y": 159.0
-        },
         "event_definition": {
           "external": false,
           "internal": false,
           "typename": "NoneEventDefinition"
         },
-        "lookahead": 2
-      },
-      "End": {
-        "name": "End",
-        "typename": "Simple",
-        "inputs": [
-          "no_tasks.EndJoin"
-        ],
-        "outputs": [],
-        "manual": false,
-        "id": "no_tasks_3",
-        "description": "",
         "internal": false,
-        "lookahead": 2
+        "io_specification": null,
+        "manual": false,
+        "id": "no_tasks_5",
+        "extensions": {},
+        "lane": null,
+        "data_input_associations": [],
+        "position": {
+          "x": 272.0,
+          "y": 159.0
+        },
+        "description": null,
+        "lookahead": 2,
+        "documentation": null
+      },
+      "Start": {
+        "name": "Start",
+        "typename": "StartTask",
+        "inputs": [],
+        "outputs": [
+          "StartEvent_1"
+        ],
+        "description": "",
+        "id": "no_tasks_1",
+        "lookahead": 2,
+        "internal": false,
+        "manual": false
       },
       "StartEvent_1": {
         "name": "StartEvent_1",
@@ -73,44 +73,44 @@
         "outputs": [
           "Event_0qq9il3"
         ],
-        "internal": false,
-        "extensions": {},
         "documentation": null,
-        "id": "no_tasks_4",
-        "data_output_associations": [],
-        "lane": null,
-        "io_specification": null,
-        "lookahead": 2,
-        "description": null,
+        "internal": false,
         "event_definition": {
           "external": false,
           "internal": false,
           "typename": "NoneEventDefinition"
         },
+        "extensions": {},
+        "data_output_associations": [],
+        "description": null,
+        "id": "no_tasks_4",
+        "manual": false,
+        "io_specification": null,
+        "lookahead": 2,
+        "lane": null,
         "position": {
           "x": 179.0,
           "y": 159.0
         },
-        "data_input_associations": [],
-        "manual": false
+        "data_input_associations": []
       },
-      "Start": {
-        "name": "Start",
-        "typename": "StartTask",
-        "inputs": [],
-        "outputs": [
-          "StartEvent_1"
+      "End": {
+        "name": "End",
+        "typename": "Simple",
+        "inputs": [
+          "no_tasks.EndJoin"
         ],
-        "manual": false,
+        "outputs": [],
+        "id": "no_tasks_3",
         "lookahead": 2,
-        "internal": false,
+        "manual": false,
         "description": "",
-        "id": "no_tasks_1"
+        "internal": false
       }
     },
     "data_objects": {},
-    "correlation_keys": {},
-    "io_specification": null
+    "io_specification": null,
+    "correlation_keys": {}
   },
   "subprocess_specs": {}
 }
