@@ -169,6 +169,7 @@
           "lane": null,
           "prescript": null,
           "postscript": null,
+          "script": "x=1",
           "description": "x=1",
           "documentation": null,
           "extensions": {},
@@ -179,8 +180,7 @@
           "position": {
             "x": 270.0,
             "y": 137.0
-          },
-          "script": "x=1"
+          }
         },
         "End": {
           "name": "End",

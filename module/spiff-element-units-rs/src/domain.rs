@@ -77,6 +77,11 @@ pub struct SubprocessTaskSpecMixin {
     pub spec: String,
 }
 
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ScriptTaskSpecMixin {
+    pub script: String,
+}
+
 // TODO: am open to how these flattened fields are named, really just
 // winging it right now to see what fits.
 
@@ -93,6 +98,9 @@ pub struct TaskSpec {
 
     #[serde(flatten)]
     pub subprocess: Option<SubprocessTaskSpecMixin>,
+
+    #[serde(flatten)]
+    pub script: Option<ScriptTaskSpecMixin>,
 
     #[serde(flatten)]
     rest: Map<serde_json::Value>,
