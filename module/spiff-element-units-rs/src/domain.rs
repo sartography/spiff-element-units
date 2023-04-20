@@ -36,72 +36,68 @@ pub struct ProcessSpec {
     rest: Map<serde_json::Value>,
 }
 
-//
-// for the breakdown of how the different specs are serialized in SpiffWorkflow:
-//
-// https://github.com/sartography/SpiffWorkflow/blob/main/SpiffWorkflow/bpmn/serializer/task_spec.py
-// https://github.com/sartography/SpiffWorkflow/blob/main/SpiffWorkflow/bpmn/serializer/helpers/spec.py
-// https://github.com/sartography/SpiffWorkflow/blob/main/SpiffWorkflow/spiff/serializer/task_spec.py
-//
-// these may not be entirely correct per the links above but are close enough for what we
-// need in this lib. any discrepencies should be thought of under that lens.
-//
-
 #[derive(Debug, Deserialize, Serialize)]
-pub struct BaseTaskSpec {
+pub struct TaskSpec {
     pub name: String,
     pub typename: String,
     pub inputs: Vec<String>,
     pub outputs: Vec<String>,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct BpmnTaskSpecMixin {
-    // for now at least we don't care about the actual value of thsese
-    // fields, just that they have a value when determining if/how we
-    // build element units for this process
-    pub data_input_associations: serde_json::Value,
-    pub data_output_associations: serde_json::Value,
-    pub io_specification: serde_json::Value,
-    pub lane: serde_json::Value,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct SpiffTaskSpecMixin {
-    pub prescript: Option<String>,
-    pub postscript: Option<String>,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct SubprocessTaskSpecMixin {
-    pub spec: String,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct ScriptTaskSpecMixin {
-    pub script: String,
-}
-
-// TODO: am open to how these flattened fields are named, really just
-// winging it right now to see what fits.
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct TaskSpec {
-    #[serde(flatten)]
-    pub base: BaseTaskSpec,
 
     #[serde(flatten)]
-    pub bpmn: Option<BpmnTaskSpecMixin>,
+    pub bpmn: Option<task_spec_mixin::Bpmn>,
 
     #[serde(flatten)]
-    pub spiff: Option<SpiffTaskSpecMixin>,
+    pub spiff: Option<task_spec_mixin::Spiff>,
 
     #[serde(flatten)]
-    pub subprocess: Option<SubprocessTaskSpecMixin>,
+    pub subprocess: Option<task_spec_mixin::Subprocess>,
 
     #[serde(flatten)]
-    pub script: Option<ScriptTaskSpecMixin>,
+    pub script: Option<task_spec_mixin::Script>,
 
     #[serde(flatten)]
     rest: Map<serde_json::Value>,
+}
+
+pub mod task_spec_mixin {
+    use serde::{Deserialize, Serialize};
+    use serde_json;
+
+    //
+    // for the breakdown of how the different specs are serialized in SpiffWorkflow:
+    //
+    // https://github.com/sartography/SpiffWorkflow/blob/main/SpiffWorkflow/bpmn/serializer/task_spec.py
+    // https://github.com/sartography/SpiffWorkflow/blob/main/SpiffWorkflow/bpmn/serializer/helpers/spec.py
+    // https://github.com/sartography/SpiffWorkflow/blob/main/SpiffWorkflow/spiff/serializer/task_spec.py
+    //
+    // these may not be entirely correct per the links above but are close enough for what we
+    // need in this lib. any discrepencies should be thought of under that lens.
+    //
+
+    #[derive(Debug, Deserialize, Serialize)]
+    pub struct Bpmn {
+        // for now at least we don't care about the actual value of thsese
+        // fields, just that they have a value when determining if/how we
+        // build element units for this process
+        pub data_input_associations: serde_json::Value,
+        pub data_output_associations: serde_json::Value,
+        pub io_specification: serde_json::Value,
+        pub lane: serde_json::Value,
+    }
+
+    #[derive(Debug, Deserialize, Serialize)]
+    pub struct Spiff {
+        pub prescript: Option<String>,
+        pub postscript: Option<String>,
+    }
+
+    #[derive(Debug, Deserialize, Serialize)]
+    pub struct Subprocess {
+        pub spec: String,
+    }
+
+    #[derive(Debug, Deserialize, Serialize)]
+    pub struct Script {
+        pub script: String,
+    }
 }
