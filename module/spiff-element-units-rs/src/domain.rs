@@ -1,7 +1,18 @@
 use serde::{Deserialize, Serialize};
 use serde_json;
+use std::collections::BTreeMap;
 
-type Map<V> = std::collections::BTreeMap<String, V>;
+type Map<V> = BTreeMap<String, V>;
+
+//
+// right now the only `ElementUnit` we support is a full workflow.
+//
+
+pub enum ElementUnit<'a> {
+    Workflow(&'a WorkflowSpec),
+}
+
+pub type ElementUnitsByID<'a> = BTreeMap<&'a str, ElementUnit<'a>>;
 
 //
 // these structs define the subset of fields in each json structure

@@ -1,6 +1,7 @@
 use std::error::Error;
 
 mod cache;
+mod decomposer;
 mod domain;
 mod reader;
 mod writer;
@@ -43,6 +44,8 @@ pub fn cache_element_units_for_workflow(
     let our_workflow_spec = reader::read_string::<WorkflowSpec>(workflow_specs_json)?;
     let entry_path = cache::created_path_for_entry(cache_dir, cache_key, OurWorkflowSpecsJSON)?;
     writer::write(&entry_path, &our_workflow_spec)?;
+
+    let _element_unit_map = decomposer::decompose(&our_workflow_spec);
 
     Ok(())
 }
