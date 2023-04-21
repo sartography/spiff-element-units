@@ -47,7 +47,7 @@ class CacheTest(unittest.TestCase):
                     "somekey",
                     "someid")
                 
-            self.assertRaises(FileNotFoundError, read)
+            self.assertRaises(ValueError, read)
             
     def test_reading_unknown_key_throws_expected_exception(self):
         def read():
@@ -56,5 +56,5 @@ class CacheTest(unittest.TestCase):
                 "__akeyimadeupforthistest",
                 "wontmatter")
                 
-        self.assertRaises(FileNotFoundError, read)
+        self.assertRaises(ValueError, read)
             

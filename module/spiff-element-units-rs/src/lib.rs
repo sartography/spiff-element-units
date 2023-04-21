@@ -1,4 +1,5 @@
 use serde_json;
+use std::error::Error;
 
 mod cache;
 mod domain;
@@ -12,6 +13,8 @@ use domain::WorkflowSpec;
 // language bindings and caller interactions simple. we don't want to be
 // chatty or pass complicated structures across boundaries.
 
+type ApiResult<T> = Result<T, Box<dyn Error>>;
+
 //
 // construct and cache element units for a given workflow spec in json format
 //
@@ -20,8 +23,7 @@ pub fn cache_element_units_for_workflow(
     cache_key: &str,
     workflow_specs_json: &str,
 ) -> std::io::Result<()> {
-    // TODO: eventually we will want to validate the workflow_specs_json
-    // before forming element units. for now we are just writing our
+    // TODO: want to decompose element units, for now we are just writing our
     // version to disk for comparison.
     // TODO: factor this out - see reader/writer/cache entry TODOs
     let _ = parser::parse_str::<WorkflowSpec>(workflow_specs_json)
@@ -55,8 +57,9 @@ pub fn workflow_from_cached_element_unit(
     cache_dir: &str,
     cache_key: &str,
     _element_id: &str,
-) -> std::io::Result<String> {
-    // TODO: right now we are just returning back the whole workflow specs json to
-    // get the itegration ball rolling.
-    cache::read(cache_dir, cache_key, OurWorkflowSpecsJSON)
+) -> ApiResult<String> {
+    let path = cache::path_for_entry(cache_dir, cache_key, OurWorkflowSpecsJSON);
+    let contents = reader::read_file_to_string(&path)?;
+
+    Ok(contents)
 }

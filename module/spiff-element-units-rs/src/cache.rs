@@ -35,8 +35,8 @@ pub fn write(
     Ok(())
 }
 
-pub fn read(cache_dir: &str, cache_key: &str, entry_type: entry::Type) -> io::Result<String> {
-    std::fs::read_to_string(cache_path(cache_dir, cache_key).join(entry_type.filename()))
+pub fn path_for_entry(cache_dir: &str, cache_key: &str, entry_type: entry::Type) -> PathBuf {
+    cache_path(cache_dir, cache_key).join(entry_type.filename())
 }
 
 fn cache_path(cache_dir: &str, cache_key: &str) -> PathBuf {
