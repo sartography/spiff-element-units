@@ -1,6 +1,3 @@
-1. move away from parser to reader/writer
-   1. cache.rs just provides entries which include path to write to
-   1. guess need to think this one out a little more, first pass was awkward
 1. run integration tests as part of CI
 1. run cargo tests as part of CI
 1. maybe not run full build matrix on pr?

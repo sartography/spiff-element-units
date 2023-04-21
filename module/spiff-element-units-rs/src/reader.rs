@@ -8,14 +8,14 @@ use std::path::PathBuf;
 //
 // read a file at `path` and return its contents
 //
-pub fn read_file_to_string(path: &PathBuf) -> io::Result<String> {
+pub fn read_to_string(path: &PathBuf) -> io::Result<String> {
     fs::read_to_string(path)
 }
 
 //
 // read a json file at `path` and deserialize as `T`
 //
-pub fn read_json_file<T>(path: &PathBuf) -> Result<T, Box<dyn Error>>
+pub fn read<T>(path: &PathBuf) -> Result<T, Box<dyn Error>>
 where
     T: serde::de::DeserializeOwned,
 {
@@ -29,7 +29,7 @@ where
 //
 // read a json `str` and deserialize as `T`
 //
-pub fn read_json_str<'a, T>(str: &'a str) -> serde_json::Result<T>
+pub fn read_string<'a, T>(str: &'a str) -> serde_json::Result<T>
 where
     T: serde::Deserialize<'a>,
 {
@@ -42,6 +42,8 @@ mod tests {
     use std::path::Path;
 
     use crate::domain::WorkflowSpec;
+
+    type ReadResult<T> = Result<T, Box<dyn Error>>;
 
     // don't need to fully test serde just that our structs line up against the json
 
@@ -75,7 +77,7 @@ mod tests {
         task_spec_names: &[&str],
     ) -> ReadResult<()> {
         let path = test_case_path(test_case_file);
-        let workflow_spec: WorkflowSpec = read_json_file(&path)?;
+        let workflow_spec: WorkflowSpec = read(&path)?;
 
         assert_eq!(
             workflow_spec.subprocess_specs.len(),
