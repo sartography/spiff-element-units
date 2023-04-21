@@ -3,6 +3,7 @@ use serde_json;
 mod cache;
 mod domain;
 mod parser;
+mod reader;
 
 use cache::entry::Type::{OriginalWorkflowSpecsJSON, OurWorkflowSpecsJSON};
 use domain::WorkflowSpec;
