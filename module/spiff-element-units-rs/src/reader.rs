@@ -49,8 +49,6 @@ mod tests {
 
     #[test]
     fn test_can_read_no_tasks() -> ReadResult<()> {
-        // don't need to fully test serde just that our structs line up against the json
-
         let subprocess_spec_names: [&str; 0] = [];
         let task_spec_names: [&str; 5] = [
             "Start",

@@ -27,7 +27,7 @@ pub fn created_path_for_entry(
 ) -> io::Result<PathBuf> {
     let cache_path = cache_path(cache_dir, cache_key);
     fs::create_dir_all(&cache_path)?;
-    
+
     Ok(cache_path.join(entry_type.filename()))
 }
 

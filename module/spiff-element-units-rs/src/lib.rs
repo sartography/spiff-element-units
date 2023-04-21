@@ -34,7 +34,8 @@ pub fn cache_element_units_for_workflow(
     // for now we are writing the original workflow specs json to the cache
     // even though we only return ours. this is to help keep an eye on things
     // and potientially help debug issues. it is not expected to be required forever.
-    let entry_path = cache::created_path_for_entry(cache_dir, cache_key, OriginalWorkflowSpecsJSON)?;
+    let entry_path =
+        cache::created_path_for_entry(cache_dir, cache_key, OriginalWorkflowSpecsJSON)?;
     writer::write_string(&entry_path, workflow_specs_json)?;
 
     // TODO: want to decompose element units. for now we are just writing our
