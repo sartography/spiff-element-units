@@ -7,7 +7,7 @@ mod manifest;
 mod reader;
 mod writer;
 
-use cache::entry::Type::{OriginalWorkflowSpecsJSON, OurWorkflowSpecsJSON};
+use cache::entry::Type::*;
 
 //
 // this is the public api. it is a thin waist on purpose to make other
@@ -49,12 +49,9 @@ pub fn cache_element_units_for_workflow(
     let manifest = manifest::from_element_units(&el_units);
 
     // TODO: cache the element unit that corresponds to each manifest entry
-    // TODO: write the manifeset to cache
 
-    /*
-    let entry_path = cache::created_path_for_entry(cache_dir, cache_key, ElementUnitMap)?;
-    writer::write(&entry_path, &element_unit_map)?;
-    */
+    let entry_path = cache::created_path_for_entry(cache_dir, cache_key, Manifest)?;
+    writer::write(&entry_path, &manifest)?;
 
     Ok(())
 }

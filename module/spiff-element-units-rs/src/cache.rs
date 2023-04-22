@@ -5,14 +5,18 @@ use std::path::{Path, PathBuf};
 pub mod entry {
     pub enum Type {
         OriginalWorkflowSpecsJSON,
+	Manifest,
         OurWorkflowSpecsJSON,
     }
 
     impl Type {
         pub fn filename(&self) -> &str {
+	    use Type::*;
+	    
             match self {
-                Type::OriginalWorkflowSpecsJSON => "workflow_specs.json",
-                Type::OurWorkflowSpecsJSON => "our_workflow_specs.json",
+                OriginalWorkflowSpecsJSON => "workflow_specs.json",
+		Manifest => "manifest.json",
+                OurWorkflowSpecsJSON => "our_workflow_specs.json",
             }
         }
     }
