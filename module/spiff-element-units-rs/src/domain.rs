@@ -19,7 +19,7 @@ type Map<V> = BTreeMap<String, V>;
 // data for each key, we maintain indexes into a `vec` per key.
 //
 
-#[derive(Default)]
+#[derive(Debug, Default, Deserialize, Serialize)]
 pub struct IndexedVec<T> {
     pub items: Vec<T>,
     pub index_map: Map<Vec<usize>>,
@@ -41,8 +41,6 @@ pub enum ElementUnit {
 
 pub type ElementUnits = IndexedVec<ElementUnit>;
 
-pub type ElementUnitsByID = Map<ElementUnit>;
-
 //
 // element units are tracked in a manifest which maps an element id to
 // a vector of element unit types and cache path locations.
@@ -54,7 +52,7 @@ pub struct ManifestEntry {
     pub path: String,
 }
 
-pub type Manifest = Map<Vec<ManifestEntry>>;
+pub type Manifest = IndexedVec<ManifestEntry>;
 
 //
 // these structs define the subset of fields in each json structure
