@@ -162,7 +162,8 @@ pub trait ElementIDs {
 }
 
 impl ElementIDs for ElementUnit {
-    fn push_element_ids(&self, ids: &mut Vec<String>) {
+fn push_element_ids(&self, ids: &mut Vec<String>)
+    {
         match self {
             ElementUnit::FullWorkflow(w) => w.push_element_ids(ids),
         }
@@ -170,13 +171,15 @@ impl ElementIDs for ElementUnit {
 }
 
 impl ElementIDs for WorkflowSpec {
-    fn push_element_ids(&self, ids: &mut Vec<String>) {
+fn push_element_ids(&self, ids: &mut Vec<String>)
+    {
         self.spec.push_element_ids(ids);
     }
 }
 
 impl ElementIDs for ProcessSpec {
-    fn push_element_ids(&self, ids: &mut Vec<String>) {
+fn push_element_ids(&self, ids: &mut Vec<String>)
+    {
         ids.push(self.name.to_string());
 
         for (_, task_spec) in &self.task_specs {
@@ -186,7 +189,8 @@ impl ElementIDs for ProcessSpec {
 }
 
 impl ElementIDs for TaskSpec {
-    fn push_element_ids(&self, ids: &mut Vec<String>) {
+fn push_element_ids(&self, ids: &mut Vec<String>)
+    {
         ids.push(self.name.to_string());
     }
 }
@@ -194,6 +198,30 @@ impl ElementIDs for TaskSpec {
 //
 //
 //
+
+impl ElementUnit {
+    pub fn element_ids(&self) -> Vec<String> {
+        // TODO: with_capacity
+        let mut vec: Vec<String> = Vec::new();
+        self.push_element_ids(&mut vec);
+        vec
+    }
+}
+
+//
+//
+//
+
+use std::hash::{Hash, Hasher};
+
+impl Hash for ElementUnit {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        // TODO: add some other things in here
+        for element_id in self.element_ids() {
+            element_id.hash(state);
+        }
+    }
+}
 
 //
 //
