@@ -157,6 +157,48 @@ pub mod task_spec_mixin {
 //
 //
 
+pub trait ElementIDs {
+    fn push_element_ids(&self, ids: &mut Vec<String>);
+}
+
+impl ElementIDs for ElementUnit {
+    fn push_element_ids(&self, ids: &mut Vec<String>) {
+        match self {
+            ElementUnit::FullWorkflow(w) => w.push_element_ids(ids),
+        }
+    }
+}
+
+impl ElementIDs for WorkflowSpec {
+    fn push_element_ids(&self, ids: &mut Vec<String>) {
+        self.spec.push_element_ids(ids);
+    }
+}
+
+impl ElementIDs for ProcessSpec {
+    fn push_element_ids(&self, ids: &mut Vec<String>) {
+        ids.push(self.name.to_string());
+
+        for (_, task_spec) in &self.task_specs {
+            task_spec.push_element_ids(ids);
+        }
+    }
+}
+
+impl ElementIDs for TaskSpec {
+    fn push_element_ids(&self, ids: &mut Vec<String>) {
+        ids.push(self.name.to_string());
+    }
+}
+
+//
+//
+//
+
+//
+//
+//
+
 impl<T> IndexedVec<T> {
     pub fn push_for_keys(&mut self, item: T, keys: &[String]) {
         let index = self.items.len();
