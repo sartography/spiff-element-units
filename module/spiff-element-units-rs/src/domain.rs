@@ -2,17 +2,59 @@ use serde::{Deserialize, Serialize};
 use serde_json;
 use std::collections::BTreeMap;
 
+// TODO: look at breaking this file out into sub modules (name?) and re-exporting?
+// TODO: rename to basis?
+
+//
+// for domain objects we stick with this map structure to support
+// stable ordering when serializing. this may not always be desired
+// but is good for the integration tests which commit the cache.
+//
+
 type Map<V> = BTreeMap<String, V>;
 
 //
-// right now the only `ElementUnit` we support is a full workflow.
+// when dealing with element units we often have several keys that
+// point to the same deserialized structure. instead of repeating the
+// data for each key, we maintain indexes into a `vec` per key.
 //
 
-pub enum ElementUnit<'a> {
-    Workflow(&'a WorkflowSpec),
+#[derive(Default)]
+pub struct IndexedVec<T> {
+    pub items: Vec<T>,
+    pub index_map: Map<Vec<usize>>,
 }
 
-pub type ElementUnitsByID<'a> = BTreeMap<&'a str, ElementUnit<'a>>;
+//
+// element units that are supported within the lib.
+//
+
+#[derive(Debug, Deserialize, Serialize)]
+pub enum ElementUnitType {
+    FullWorkflow,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub enum ElementUnit {
+    FullWorkflow(WorkflowSpec),
+}
+
+pub type ElementUnits = IndexedVec<ElementUnit>;
+
+pub type ElementUnitsByID = Map<ElementUnit>;
+
+//
+// element units are tracked in a manifest which maps an element id to
+// a vector of element unit types and cache path locations.
+//
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ManifestEntry {
+    pub element_unit_type: ElementUnitType,
+    pub path: String,
+}
+
+pub type Manifest = Map<Vec<ManifestEntry>>;
 
 //
 // these structs define the subset of fields in each json structure
@@ -110,5 +152,43 @@ pub mod task_spec_mixin {
     #[derive(Debug, Deserialize, Serialize)]
     pub struct Script {
         pub script: String,
+    }
+}
+
+//
+//
+//
+
+impl<T> IndexedVec<T> {
+    pub fn push_for_keys(&mut self, item: T, keys: &[String]) {
+        let index = self.items.len();
+        self.items.push(item);
+
+        for key in keys {
+            self.index_map
+                .entry(key.to_string())
+                .and_modify(|value| value.push(index))
+                .or_insert(vec![index]);
+        }
+    }
+}
+
+#[cfg(test)]
+mod indexed_vec_tests {
+    use super::IndexedVec;
+
+    #[test]
+    fn test_can_push_for_keys() {
+        let mut iv: IndexedVec<String> = Default::default();
+
+        iv.push_for_keys("bob".to_string(), &["key1".to_string(), "key2".to_string()]);
+	iv.push_for_keys("joe".to_string(), &["key3".to_string()]);
+        iv.push_for_keys("sue".to_string(), &["key1".to_string(), "key3".to_string()]);
+	
+        assert_eq!(iv.items, vec!["bob", "joe", "sue"]);
+        assert_eq!(iv.index_map.len(), 3);
+        assert_eq!(iv.index_map["key1"], vec![0, 2]);
+        assert_eq!(iv.index_map["key2"], vec![0]);
+        assert_eq!(iv.index_map["key3"], vec![1, 2]);
     }
 }

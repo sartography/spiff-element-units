@@ -7,4 +7,4 @@
    1. at some point spiff-element-units-cache is its own lib in the workspace
 1. make sure type hints work for the host application
 1. write first element unit which is our workflow specs json
-   1. add element unit map to cache in json format which maps element ids -> json file(s)
+   1. add `manifest.json` to cache which maps element ids -> json file(s)

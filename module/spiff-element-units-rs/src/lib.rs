@@ -6,7 +6,7 @@ mod domain;
 mod reader;
 mod writer;
 
-use cache::entry::Type::{OriginalWorkflowSpecsJSON, OurWorkflowSpecsJSON};
+use cache::entry::Type::{ElementUnitMap, OriginalWorkflowSpecsJSON, OurWorkflowSpecsJSON};
 use domain::WorkflowSpec;
 
 //
@@ -39,13 +39,19 @@ pub fn cache_element_units_for_workflow(
         cache::created_path_for_entry(cache_dir, cache_key, OriginalWorkflowSpecsJSON)?;
     writer::write_string(&entry_path, workflow_specs_json)?;
 
-    // TODO: want to decompose element units. for now we are just writing our
-    // version to disk.
+    /*
     let our_workflow_spec = reader::read_string::<WorkflowSpec>(workflow_specs_json)?;
     let entry_path = cache::created_path_for_entry(cache_dir, cache_key, OurWorkflowSpecsJSON)?;
     writer::write(&entry_path, &our_workflow_spec)?;
+    */
 
-    let _element_unit_map = decomposer::decompose(&our_workflow_spec);
+    // TODO: cache each element unit, use path to build manifest.json
+    let element_unit_map = decomposer::decompose_json_string(&workflow_specs_json)?;
+
+    /*
+    let entry_path = cache::created_path_for_entry(cache_dir, cache_key, ElementUnitMap)?;
+    writer::write(&entry_path, &element_unit_map)?;
+    */
 
     Ok(())
 }

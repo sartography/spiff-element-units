@@ -4,6 +4,7 @@ use std::path::{Path, PathBuf};
 
 pub mod entry {
     pub enum Type {
+        ElementUnitMap,
         OriginalWorkflowSpecsJSON,
         OurWorkflowSpecsJSON,
     }
@@ -11,6 +12,7 @@ pub mod entry {
     impl Type {
         pub fn filename(&self) -> &str {
             match self {
+                Type::ElementUnitMap => "element_unit_map.json",
                 Type::OriginalWorkflowSpecsJSON => "workflow_specs.json",
                 Type::OurWorkflowSpecsJSON => "our_workflow_specs.json",
             }
