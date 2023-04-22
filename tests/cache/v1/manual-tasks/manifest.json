@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "element_unit_type": "FullWorkflow",
+      "id": "E1C3C0974EBA594E"
+    }
+  ],
+  "index_map": {
+    "Activity_1h7gm30": [
+      0
+    ],
+    "Activity_1n7p3m4": [
+      0
+    ],
+    "End": [
+      0
+    ],
+    "Event_0iozjmo": [
+      0
+    ],
+    "Process_diu8ta2": [
+      0
+    ],
+    "Process_diu8ta2.EndJoin": [
+      0
+    ],
+    "Start": [
+      0
+    ],
+    "StartEvent_1": [
+      0
+    ]
+  }
+}
