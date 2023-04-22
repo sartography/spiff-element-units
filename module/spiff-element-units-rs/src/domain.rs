@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
 use serde_json;
+use std::collections::hash_map::DefaultHasher;
 use std::collections::BTreeMap;
+use std::hash::{Hash, Hasher};
 
 // TODO: look at breaking this file out into sub modules (name?) and re-exporting?
 // TODO: rename to basis?
@@ -49,7 +51,7 @@ pub type ElementUnits = IndexedVec<ElementUnit>;
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ManifestEntry {
     pub element_unit_type: ElementUnitType,
-    pub path: String,
+    pub id: String,
 }
 
 pub type Manifest = IndexedVec<ManifestEntry>;
@@ -162,8 +164,7 @@ pub trait ElementIDs {
 }
 
 impl ElementIDs for ElementUnit {
-fn push_element_ids(&self, ids: &mut Vec<String>)
-    {
+    fn push_element_ids(&self, ids: &mut Vec<String>) {
         match self {
             ElementUnit::FullWorkflow(w) => w.push_element_ids(ids),
         }
@@ -171,15 +172,13 @@ fn push_element_ids(&self, ids: &mut Vec<String>)
 }
 
 impl ElementIDs for WorkflowSpec {
-fn push_element_ids(&self, ids: &mut Vec<String>)
-    {
+    fn push_element_ids(&self, ids: &mut Vec<String>) {
         self.spec.push_element_ids(ids);
     }
 }
 
 impl ElementIDs for ProcessSpec {
-fn push_element_ids(&self, ids: &mut Vec<String>)
-    {
+    fn push_element_ids(&self, ids: &mut Vec<String>) {
         ids.push(self.name.to_string());
 
         for (_, task_spec) in &self.task_specs {
@@ -189,8 +188,7 @@ fn push_element_ids(&self, ids: &mut Vec<String>)
 }
 
 impl ElementIDs for TaskSpec {
-fn push_element_ids(&self, ids: &mut Vec<String>)
-    {
+    fn push_element_ids(&self, ids: &mut Vec<String>) {
         ids.push(self.name.to_string());
     }
 }
@@ -206,13 +204,37 @@ impl ElementUnit {
         self.push_element_ids(&mut vec);
         vec
     }
+
+    pub fn id(&self) -> String {
+        let mut state = DefaultHasher::new();
+        self.hash(&mut state);
+        let hash = state.finish();
+        format!("{:X}", hash)
+    }
+
+    pub fn r#type(&self) -> ElementUnitType {
+        match self {
+            ElementUnit::FullWorkflow(_) => ElementUnitType::FullWorkflow,
+        }
+    }
 }
 
 //
 //
 //
 
-use std::hash::{Hash, Hasher};
+impl ManifestEntry {
+    pub fn from_element_unit(element_unit: &ElementUnit) -> Self {
+        ManifestEntry {
+            element_unit_type: element_unit.r#type(),
+            id: element_unit.id(),
+        }
+    }
+}
+
+//
+//
+//
 
 impl Hash for ElementUnit {
     fn hash<H: Hasher>(&self, state: &mut H) {

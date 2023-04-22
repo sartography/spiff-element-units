@@ -3,6 +3,7 @@ use std::error::Error;
 mod cache;
 mod domain;
 mod element_units;
+mod manifest;
 mod reader;
 mod writer;
 
@@ -44,8 +45,11 @@ pub fn cache_element_units_for_workflow(
     writer::write(&entry_path, &our_workflow_spec)?;
     */
 
-    // TODO: cache each element unit, use path to build manifest.json
     let el_units = element_units::from_json_string(&workflow_specs_json)?;
+    let manifest = manifest::from_element_units(&el_units);
+
+    // TODO: cache the element unit that corresponds to each manifest entry
+    // TODO: write the manifeset to cache
 
     /*
     let entry_path = cache::created_path_for_entry(cache_dir, cache_key, ElementUnitMap)?;
@@ -64,6 +68,8 @@ pub fn workflow_from_cached_element_unit(
     cache_key: &str,
     _element_id: &str,
 ) -> ApiResult<String> {
+    // TODO: once the write part is finished above this needs to read the manifest and find
+    // the entry that matches `element_id`. Then read from the path in the entry.
     let path = cache::path_for_entry(cache_dir, cache_key, OurWorkflowSpecsJSON);
     let contents = reader::read_to_string(&path)?;
 
