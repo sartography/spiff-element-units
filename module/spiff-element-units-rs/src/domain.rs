@@ -180,9 +180,9 @@ mod indexed_vec_tests {
         let mut iv: IndexedVec<String> = Default::default();
 
         iv.push_for_keys("bob".to_string(), &["key1".to_string(), "key2".to_string()]);
-	iv.push_for_keys("joe".to_string(), &["key3".to_string()]);
+        iv.push_for_keys("joe".to_string(), &["key3".to_string()]);
         iv.push_for_keys("sue".to_string(), &["key1".to_string(), "key3".to_string()]);
-	
+
         assert_eq!(iv.items, vec!["bob", "joe", "sue"]);
         assert_eq!(iv.index_map.len(), 3);
         assert_eq!(iv.index_map["key1"], vec![0, 2]);

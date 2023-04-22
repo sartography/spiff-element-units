@@ -1,13 +1,12 @@
 use std::error::Error;
 
 mod cache;
-mod decomposer;
 mod domain;
+mod element_units;
 mod reader;
 mod writer;
 
-use cache::entry::Type::{ElementUnitMap, OriginalWorkflowSpecsJSON, OurWorkflowSpecsJSON};
-use domain::WorkflowSpec;
+use cache::entry::Type::{OriginalWorkflowSpecsJSON, OurWorkflowSpecsJSON};
 
 //
 // this is the public api. it is a thin waist on purpose to make other
@@ -46,7 +45,7 @@ pub fn cache_element_units_for_workflow(
     */
 
     // TODO: cache each element unit, use path to build manifest.json
-    let element_unit_map = decomposer::decompose_json_string(&workflow_specs_json)?;
+    let el_units = element_units::from_json_string(&workflow_specs_json)?;
 
     /*
     let entry_path = cache::created_path_for_entry(cache_dir, cache_key, ElementUnitMap)?;
