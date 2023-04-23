@@ -4,26 +4,21 @@ use std::path::{Path, PathBuf};
 
 pub mod entry {
 
-    use crate::domain::ManifestEntry as DomainManifestEntry;
-
-    pub enum Type<'a> {
+    pub enum Type {
         OriginalWorkflowSpecsJSON,
         Manifest,
-        ManifestEntry(&'a DomainManifestEntry),
+        ManifestEntry(String),
         OurWorkflowSpecsJSON,
     }
 
-    impl<'a> Type<'a> {
+    impl Type {
         pub fn filename(&self) -> String {
             use Type::*;
 
             match self {
                 OriginalWorkflowSpecsJSON => "workflow_specs.json".to_string(),
                 Manifest => "manifest.json".to_string(),
-                ManifestEntry(DomainManifestEntry {
-                    element_unit_type: _,
-                    id,
-                }) => format!("{}.json", id),
+                ManifestEntry(id) => format!("{}.json", id),
                 OurWorkflowSpecsJSON => "our_workflow_specs.json".to_string(),
             }
         }

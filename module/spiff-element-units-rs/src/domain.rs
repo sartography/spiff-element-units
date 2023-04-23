@@ -5,6 +5,7 @@ use std::collections::BTreeMap;
 use std::hash::{Hash, Hasher};
 
 // TODO: look at breaking this file out into sub modules (name?) and re-exporting?
+//       - actually just move things to manifest, element_units, specs, etc
 // TODO: rename to basis?
 
 //
@@ -32,11 +33,6 @@ pub struct IndexedVec<T> {
 //
 
 #[derive(Debug, Deserialize, Serialize)]
-pub enum ElementUnitType {
-    FullWorkflow,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
 pub enum ElementUnit {
     FullWorkflow(WorkflowSpec),
 }
@@ -48,13 +44,7 @@ pub type ElementUnits = IndexedVec<ElementUnit>;
 // a vector of element unit types and cache path locations.
 //
 
-#[derive(Debug, Deserialize, Serialize)]
-pub struct ManifestEntry {
-    pub element_unit_type: ElementUnitType,
-    pub id: String,
-}
-
-pub type Manifest = IndexedVec<ManifestEntry>;
+pub type Manifest = IndexedVec<String>;
 
 //
 // these structs define the subset of fields in each json structure
@@ -210,25 +200,6 @@ impl ElementUnit {
         self.hash(&mut state);
         let hash = state.finish();
         format!("{:X}", hash)
-    }
-
-    pub fn r#type(&self) -> ElementUnitType {
-        match self {
-            ElementUnit::FullWorkflow(_) => ElementUnitType::FullWorkflow,
-        }
-    }
-}
-
-//
-//
-//
-
-impl ManifestEntry {
-    pub fn from_element_unit(element_unit: &ElementUnit) -> Self {
-        ManifestEntry {
-            element_unit_type: element_unit.r#type(),
-            id: element_unit.id(),
-        }
     }
 }
 

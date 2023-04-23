@@ -8,7 +8,8 @@ mod manifest;
 mod reader;
 mod writer;
 
-use cache::entry::Type::*;
+use cache::entry::Type as CacheEntryType;
+use domain::Manifest;
 
 //
 // this is the public api. it is a thin waist on purpose to make other
@@ -36,21 +37,27 @@ pub fn cache_element_units_for_workflow(
     // for now we are writing the original workflow specs json to the cache
     // even though we only return ours. this is to help keep an eye on things
     // and potientially help debug issues. it is not expected to be required forever.
-    let entry_path =
-        cache::created_path_for_entry(cache_dir, cache_key, OriginalWorkflowSpecsJSON)?;
+    let entry_path = cache::created_path_for_entry(
+        cache_dir,
+        cache_key,
+        CacheEntryType::OriginalWorkflowSpecsJSON,
+    )?;
     writer::write_string(&entry_path, workflow_specs_json)?;
 
     let el_units = element_units::from_json_string(&workflow_specs_json)?;
     let manifest = manifest::from_element_units(&el_units);
-    let el_units_and_manifest_entries = zip(&el_units.items, &manifest.items);
+    let el_units_and_manifest_ids = zip(&el_units.items, &manifest.items);
 
-    for (el_unit, manifest_entry) in el_units_and_manifest_entries {
-        let entry_path =
-            cache::created_path_for_entry(cache_dir, cache_key, ManifestEntry(manifest_entry))?;
+    for (el_unit, manifest_id) in el_units_and_manifest_ids {
+        let entry_path = cache::created_path_for_entry(
+            cache_dir,
+            cache_key,
+            CacheEntryType::ManifestEntry(manifest_id.to_string()),
+        )?;
         writer::write(&entry_path, el_unit)?;
     }
 
-    let entry_path = cache::created_path_for_entry(cache_dir, cache_key, Manifest)?;
+    let entry_path = cache::created_path_for_entry(cache_dir, cache_key, CacheEntryType::Manifest)?;
     writer::write(&entry_path, &manifest)?;
 
     Ok(())
@@ -63,11 +70,15 @@ pub fn cache_element_units_for_workflow(
 pub fn workflow_from_cached_element_unit(
     cache_dir: &str,
     cache_key: &str,
-    _element_id: &str,
+    element_id: &str,
 ) -> ApiResult<String> {
+    let entry_path = cache::path_for_entry(cache_dir, cache_key, CacheEntryType::Manifest);
+    let manifest = reader::read::<Manifest>(&entry_path)?;
+    let manifest_entry_indexes = manifest.index_map.get(element_id);
+
     // TODO: once the write part is finished above this needs to read the manifest and find
     // the entry that matches `element_id`. Then read from the path in the entry.
-    let path = cache::path_for_entry(cache_dir, cache_key, OurWorkflowSpecsJSON);
+    let path = cache::path_for_entry(cache_dir, cache_key, CacheEntryType::OurWorkflowSpecsJSON);
     let contents = reader::read_to_string(&path)?;
 
     Ok(contents)
