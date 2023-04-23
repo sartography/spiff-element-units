@@ -37,7 +37,7 @@ class CacheTest(unittest.TestCase):
             assert isinstance(element_unit_dict, dict)
             assert data.process_id == element_unit_dict["spec"]["name"]
 
-        # TODO: when supported, need to test passing in element ids
+        # TODO: need to test passing in element ids
 
     def test_reading_from_empty_cache_throws_expected_exception(self):
         with tempfile.TemporaryDirectory() as empty_cache_dir:
