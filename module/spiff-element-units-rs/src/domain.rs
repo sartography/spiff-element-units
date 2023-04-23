@@ -208,11 +208,11 @@ impl ElementUnit {
 //
 
 impl WorkflowSpec {
-     pub fn from_element_unit(element_unit: &ElementUnit) -> &WorkflowSpec {
-     match element_unit {
-     ElementUnit::FullWorkflow(ws) => ws,
-     }
-     }
+    pub fn from_element_unit(element_unit: &ElementUnit) -> &WorkflowSpec {
+        match element_unit {
+            ElementUnit::FullWorkflow(ws) => ws,
+        }
+    }
 }
 
 //
