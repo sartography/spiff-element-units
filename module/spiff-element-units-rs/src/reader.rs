@@ -1,16 +1,9 @@
 use serde;
 use serde_json;
 use std::error::Error;
-use std::fs::{self, File};
-use std::io::{self, BufReader};
+use std::fs::File;
+use std::io::BufReader;
 use std::path::PathBuf;
-
-//
-// read a file at `path` and return its contents
-//
-pub fn read_to_string(path: &PathBuf) -> io::Result<String> {
-    fs::read_to_string(path)
-}
 
 //
 // read a json file at `path` and deserialize as `T`

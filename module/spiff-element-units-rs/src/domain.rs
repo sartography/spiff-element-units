@@ -232,6 +232,13 @@ impl<T> IndexedVec<T> {
                 .or_insert(vec![index]);
         }
     }
+
+    pub fn last_item_for_key(&self, key: String) -> Option<&T> {
+        self.index_map
+            .get(&key)
+            .and_then(|v| v.last().copied())
+            .and_then(|i| self.items.get(i))
+    }
 }
 
 #[cfg(test)]
@@ -239,17 +246,31 @@ mod indexed_vec_tests {
     use super::IndexedVec;
 
     #[test]
-    fn test_can_push_for_keys() {
-        let mut iv: IndexedVec<String> = Default::default();
+    fn test_push_for_keys() {
+        let mut iv: IndexedVec<&str> = Default::default();
 
-        iv.push_for_keys("bob".to_string(), &["key1".to_string(), "key2".to_string()]);
-        iv.push_for_keys("joe".to_string(), &["key3".to_string()]);
-        iv.push_for_keys("sue".to_string(), &["key1".to_string(), "key3".to_string()]);
+        iv.push_for_keys("bob", &["key1".to_string(), "key2".to_string()]);
+        iv.push_for_keys("joe", &["key3".to_string()]);
+        iv.push_for_keys("sue", &["key1".to_string(), "key3".to_string()]);
 
         assert_eq!(iv.items, vec!["bob", "joe", "sue"]);
         assert_eq!(iv.index_map.len(), 3);
         assert_eq!(iv.index_map["key1"], vec![0, 2]);
         assert_eq!(iv.index_map["key2"], vec![0]);
         assert_eq!(iv.index_map["key3"], vec![1, 2]);
+    }
+
+    #[test]
+    fn test_last_item_for_key() {
+        let mut iv: IndexedVec<&str> = Default::default();
+
+        iv.push_for_keys("bob", &["key1".to_string(), "key2".to_string()]);
+        iv.push_for_keys("joe", &["key1".to_string(), "key3".to_string()]);
+        iv.push_for_keys("sue", &["key3".to_string()]);
+
+        assert_eq!(iv.last_item_for_key("key1".to_string()), Some(&"joe"));
+        assert_eq!(iv.last_item_for_key("key2".to_string()), Some(&"bob"));
+        assert_eq!(iv.last_item_for_key("key3".to_string()), Some(&"sue"));
+        assert_eq!(iv.last_item_for_key("hey".to_string()), None);
     }
 }

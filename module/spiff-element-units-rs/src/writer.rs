@@ -16,6 +16,16 @@ pub fn write_string(path: &PathBuf, contents: &str) -> io::Result<()> {
 }
 
 //
+// serialize `value` and write the results to a `String`.
+//
+pub fn write_to_string<T>(value: &T) -> serde_json::Result<String>
+where
+    T: ?Sized + serde::Serialize,
+{
+    serde_json::to_string(value)
+}
+
+//
 // serialize `value` and write the results to a file at `path`.
 //
 pub fn write<T>(path: &PathBuf, value: &T) -> Result<(), Box<dyn Error>>

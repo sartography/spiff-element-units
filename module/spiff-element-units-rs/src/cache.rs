@@ -8,7 +8,6 @@ pub mod entry {
         OriginalWorkflowSpecsJSON,
         Manifest,
         ManifestEntry(String),
-        OurWorkflowSpecsJSON,
     }
 
     impl Type {
@@ -19,7 +18,6 @@ pub mod entry {
                 OriginalWorkflowSpecsJSON => "workflow_specs.json".to_string(),
                 Manifest => "manifest.json".to_string(),
                 ManifestEntry(id) => format!("{}.json", id),
-                OurWorkflowSpecsJSON => "our_workflow_specs.json".to_string(),
             }
         }
     }

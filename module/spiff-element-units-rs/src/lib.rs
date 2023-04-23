@@ -9,7 +9,7 @@ mod reader;
 mod writer;
 
 use cache::entry::Type as CacheEntryType;
-use domain::Manifest;
+use domain::{ElementUnit, Manifest};
 
 //
 // this is the public api. it is a thin waist on purpose to make other
@@ -74,12 +74,20 @@ pub fn workflow_from_cached_element_unit(
 ) -> ApiResult<String> {
     let entry_path = cache::path_for_entry(cache_dir, cache_key, CacheEntryType::Manifest);
     let manifest = reader::read::<Manifest>(&entry_path)?;
-    let manifest_entry_indexes = manifest.index_map.get(element_id);
+    let manifest_id = manifest
+        .last_item_for_key(element_id.to_string())
+        .ok_or("Element unit not found.")?;
 
-    // TODO: once the write part is finished above this needs to read the manifest and find
-    // the entry that matches `element_id`. Then read from the path in the entry.
-    let path = cache::path_for_entry(cache_dir, cache_key, CacheEntryType::OurWorkflowSpecsJSON);
-    let contents = reader::read_to_string(&path)?;
+    let entry_path = cache::path_for_entry(
+        cache_dir,
+        cache_key,
+        CacheEntryType::ManifestEntry(manifest_id.to_string()),
+    );
+    let element_unit = reader::read::<ElementUnit>(&entry_path)?;
+
+    // TODO: convert element unit to workflow spec json, write that to string
+
+    let contents = writer::write_to_string(&element_unit)?;
 
     Ok(contents)
 }
