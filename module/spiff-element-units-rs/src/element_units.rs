@@ -1,4 +1,4 @@
-use crate::domain::{ElementUnit, ElementUnits, WorkflowSpec};
+use crate::domain::{ElementIDs, ElementUnit, ElementUnits, WorkflowSpec};
 use crate::reader;
 use std::error::Error;
 

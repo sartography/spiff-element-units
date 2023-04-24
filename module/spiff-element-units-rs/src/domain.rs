@@ -1,8 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_json;
-use std::collections::hash_map::DefaultHasher;
+use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
-use std::hash::{Hash, Hasher};
 
 // TODO: look at breaking this file out into sub modules (name?) and re-exporting?
 //       - actually just move things to manifest, element_units, specs, etc
@@ -163,6 +162,13 @@ pub mod task_spec_mixin {
 
 pub trait ElementIDs {
     fn push_element_ids(&self, ids: &mut Vec<String>);
+
+    fn element_ids(&self) -> Vec<String> {
+        // TODO: with_capacity
+        let mut vec: Vec<String> = Vec::new();
+        self.push_element_ids(&mut vec);
+        vec
+    }
 }
 
 impl ElementIDs for ElementUnit {
@@ -200,18 +206,16 @@ impl ElementIDs for TaskSpec {
 //
 
 impl ElementUnit {
-    pub fn element_ids(&self) -> Vec<String> {
-        // TODO: with_capacity
-        let mut vec: Vec<String> = Vec::new();
-        self.push_element_ids(&mut vec);
-        vec
-    }
-
     pub fn id(&self) -> String {
-        let mut state = DefaultHasher::new();
-        self.hash(&mut state);
-        let hash = state.finish();
-        format!("{:X}", hash)
+        let mut hasher = Sha256::new();
+        hasher.update(format!("{:?}", self.r#type()));
+
+        for element_id in self.element_ids() {
+            hasher.update(element_id);
+        }
+
+        let hash = hasher.finalize();
+        format!("{:x}", hash)
     }
 
     pub fn r#type(&self) -> ElementUnitType {
@@ -243,19 +247,6 @@ impl WorkflowSpec {
     pub fn from_element_unit(element_unit: &ElementUnit) -> &WorkflowSpec {
         match element_unit {
             ElementUnit::FullWorkflow(ws) => ws,
-        }
-    }
-}
-
-//
-//
-//
-
-impl Hash for ElementUnit {
-    fn hash<H: Hasher>(&self, state: &mut H) {
-        // TODO: add some other things in here
-        for element_id in self.element_ids() {
-            element_id.hash(state);
         }
     }
 }
