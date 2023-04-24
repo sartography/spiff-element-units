@@ -13,7 +13,7 @@ def workflow_from_cached_element_unit(
         cache_key: str,
         element_id: str) -> str:
     """
-    Returns a workflow describes in specs json format that is capable of 
+    Returns a workflow described in specs json format that is capable of 
     executing an element unit that contains element_id and is associated 
     with cache_key.
     """

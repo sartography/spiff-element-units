@@ -1,8 +1,31 @@
-1. add docker file for scripts
-1. set up the github CI
-1. bump SpiffWorkflow, move task.complete() to task.run()
-1. cleanup the auto generated descriptions
-1. separate the cache from the creation of element units
-   1. at some point spiff-element-units-cache is its own lib
-1. add type hints - https://pyo3.rs/v0.18.3/python_typing_hints
-1. make sure top level keys are preserved, like serializer_version
+# TODOs
+
+## v0.2.0
+
+1. Test in the backend, push release
+
+## v0.3.0
+
+1. break up domain.rs
+   1. move manifest to cache::manifest
+   1. move *Spec to spiffworkflow_specs
+   1. move ElementUnit* to element_units
+1. form element unit that is full workflow with call activity subprocesses removed
+   1. this element unit will have the first requirement flag (LAZY_CALL_ACTIVITIES)
+1. don't always take the last element unit, let callers provide capabilities mask
+1. env var to pretty print, off by default, set in tests for committed cache
+
+## v0.4.0
+
+1. new api to get element units without using the cache
+1. new api to write existing element units to the cache
+1. split cache into spiff-element-units-disk-cache
+1. split spiffworkflow-specs to own lib
+
+## rest
+
+1. run integration tests as part of CI
+1. run cargo tests as part of CI
+1. maybe not run full build matrix on pr?
+1. cleanup the auto generated descriptions (pypi page is blank)
+1. make sure type hints work for the host applidcation

@@ -1,6 +1,7 @@
 import json
 import shutil
 import spiff_element_units
+import tempfile
 import unittest
 
 from .helper import read_specs_json, TEST_CACHE_DIR, TEST_CASES
@@ -36,4 +37,24 @@ class CacheTest(unittest.TestCase):
             assert isinstance(element_unit_dict, dict)
             assert data.process_id == element_unit_dict["spec"]["name"]
 
-        # TODO: when supported, need to test passing in element ids
+        # TODO: need to test passing in element ids
+
+    def test_reading_from_empty_cache_throws_expected_exception(self):
+        with tempfile.TemporaryDirectory() as empty_cache_dir:
+            def read():
+                spiff_element_units.workflow_from_cached_element_unit(
+                    empty_cache_dir,
+                    "somekey",
+                    "someid")
+                
+            self.assertRaises(ValueError, read)
+            
+    def test_reading_unknown_key_throws_expected_exception(self):
+        def read():
+            spiff_element_units.workflow_from_cached_element_unit(
+                TEST_CACHE_DIR,
+                "__akeyimadeupforthistest",
+                "wontmatter")
+                
+        self.assertRaises(ValueError, read)
+            

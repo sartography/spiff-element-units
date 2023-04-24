@@ -1,16 +1,17 @@
-[build-system]
-requires = ["maturin>=0.14,<0.15"]
-build-backend = "maturin"
-
 [project]
 name = "spiff-element-units"
-requires-python = ">=3.7"
+repository = "https://github.com/sartography/spiff-element-units"
+requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
 
+[build-system]
+requires = ["maturin>=0.14,<0.15"]
+build-backend = "maturin"
 
 [tool.maturin]
 features = ["pyo3/extension-module"]
+sdist-include = ["LICENSE"]

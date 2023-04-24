@@ -10,17 +10,18 @@ SPEC_CONVERTER = BpmnWorkflowSerializer.configure_workflow_spec_converter(SPIFF_
 
 TEST_CACHE_DIR = "tests/cache"
 
+# TODO: have just one executor that doesn't call do_engine_steps and just
+# gets the next ready task and runs it
 def _do_engine_steps(workflow):
-    workflow.do_engine_steps()
+    while not workflow.is_completed():
+        workflow.do_engine_steps()
+        workflow.refresh_waiting_tasks()
 
 def _two_manual_tasks(workflow):
-    # TODO: when we bump SpiffWorkflow these become run
-    # TODO: can have just one executor that doesn't call do_engine_steps and just
-    # gets the next ready task and runs it
     workflow.do_engine_steps()
-    workflow.get_ready_user_tasks()[0].complete()
+    workflow.get_ready_user_tasks()[0].run()
     workflow.do_engine_steps()
-    workflow.get_ready_user_tasks()[0].complete()
+    workflow.get_ready_user_tasks()[0].run()
     workflow.do_engine_steps()
 
 @dataclass

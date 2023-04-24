@@ -1,0 +1,829 @@
+{
+    "serializer_version": "spiff-element-units-integration",
+    "spec": {
+        "correlation_keys": {},
+        "data_objects": {},
+        "description": "Process_90mmqlw",
+        "file": "tests/data/process-models/test-cases/mutliple-call-activities/multiple_call_activities.bpmn",
+        "io_specification": null,
+        "name": "Process_90mmqlw",
+        "task_specs": {
+            "Activity_0d5dido": {
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": null,
+                "documentation": null,
+                "extensions": {},
+                "id": "Process_90mmqlw_7",
+                "inputs": [
+                    "Activity_0rsppq2"
+                ],
+                "internal": false,
+                "io_specification": null,
+                "lane": null,
+                "lookahead": 2,
+                "manual": false,
+                "name": "Activity_0d5dido",
+                "outputs": [
+                    "Event_0yflyfj"
+                ],
+                "position": {
+                    "x": 590.0,
+                    "y": 137.0
+                },
+                "postscript": null,
+                "prescript": null,
+                "spec": "no_tasks",
+                "typename": "CallActivity"
+            },
+            "Activity_0rsppq2": {
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": null,
+                "documentation": null,
+                "extensions": {},
+                "id": "Process_90mmqlw_6",
+                "inputs": [
+                    "Activity_185dcnc"
+                ],
+                "internal": false,
+                "io_specification": null,
+                "lane": null,
+                "lookahead": 2,
+                "manual": false,
+                "name": "Activity_0rsppq2",
+                "outputs": [
+                    "Activity_0d5dido"
+                ],
+                "position": {
+                    "x": 430.0,
+                    "y": 137.0
+                },
+                "postscript": null,
+                "prescript": null,
+                "spec": "Process_diu8ta2",
+                "typename": "CallActivity"
+            },
+            "Activity_185dcnc": {
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": null,
+                "documentation": null,
+                "extensions": {},
+                "id": "Process_90mmqlw_5",
+                "inputs": [
+                    "StartEvent_1"
+                ],
+                "internal": false,
+                "io_specification": null,
+                "lane": null,
+                "lookahead": 2,
+                "manual": false,
+                "name": "Activity_185dcnc",
+                "outputs": [
+                    "Activity_0rsppq2"
+                ],
+                "position": {
+                    "x": 270.0,
+                    "y": 137.0
+                },
+                "postscript": null,
+                "prescript": null,
+                "spec": "Process_sypm122",
+                "typename": "CallActivity"
+            },
+            "End": {
+                "description": "",
+                "id": "Process_90mmqlw_3",
+                "inputs": [
+                    "Process_90mmqlw.EndJoin"
+                ],
+                "internal": false,
+                "lookahead": 2,
+                "manual": false,
+                "name": "End",
+                "outputs": [],
+                "typename": "Simple"
+            },
+            "Event_0yflyfj": {
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": null,
+                "documentation": null,
+                "event_definition": {
+                    "external": false,
+                    "internal": false,
+                    "typename": "NoneEventDefinition"
+                },
+                "extensions": {},
+                "id": "Process_90mmqlw_8",
+                "inputs": [
+                    "Activity_0d5dido"
+                ],
+                "internal": false,
+                "io_specification": null,
+                "lane": null,
+                "lookahead": 2,
+                "manual": false,
+                "name": "Event_0yflyfj",
+                "outputs": [
+                    "Process_90mmqlw.EndJoin"
+                ],
+                "position": {
+                    "x": 752.0,
+                    "y": 159.0
+                },
+                "typename": "EndEvent"
+            },
+            "Process_90mmqlw.EndJoin": {
+                "description": "",
+                "id": "Process_90mmqlw_2",
+                "inputs": [
+                    "Event_0yflyfj"
+                ],
+                "internal": false,
+                "lookahead": 2,
+                "manual": false,
+                "name": "Process_90mmqlw.EndJoin",
+                "outputs": [
+                    "End"
+                ],
+                "typename": "_EndJoin"
+            },
+            "Start": {
+                "description": "",
+                "id": "Process_90mmqlw_1",
+                "inputs": [],
+                "internal": false,
+                "lookahead": 2,
+                "manual": false,
+                "name": "Start",
+                "outputs": [
+                    "StartEvent_1"
+                ],
+                "typename": "StartTask"
+            },
+            "StartEvent_1": {
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": null,
+                "documentation": null,
+                "event_definition": {
+                    "external": false,
+                    "internal": false,
+                    "typename": "NoneEventDefinition"
+                },
+                "extensions": {},
+                "id": "Process_90mmqlw_4",
+                "inputs": [
+                    "Start"
+                ],
+                "internal": false,
+                "io_specification": null,
+                "lane": null,
+                "lookahead": 2,
+                "manual": false,
+                "name": "StartEvent_1",
+                "outputs": [
+                    "Activity_185dcnc"
+                ],
+                "position": {
+                    "x": 179.0,
+                    "y": 159.0
+                },
+                "typename": "StartEvent"
+            }
+        },
+        "typename": "BpmnProcessSpec"
+    },
+    "subprocess_specs": {
+        "Process_diu8ta2": {
+            "correlation_keys": {},
+            "data_objects": {},
+            "description": "Process_diu8ta2",
+            "file": "tests/data/process-models/test-cases/manual-tasks/manual_tasks.bpmn",
+            "io_specification": null,
+            "name": "Process_diu8ta2",
+            "task_specs": {
+                "Activity_1h7gm30": {
+                    "data_input_associations": [],
+                    "data_output_associations": [],
+                    "description": null,
+                    "documentation": null,
+                    "extensions": {},
+                    "id": "Process_diu8ta2_5",
+                    "inputs": [
+                        "StartEvent_1"
+                    ],
+                    "internal": false,
+                    "io_specification": null,
+                    "lane": null,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "Activity_1h7gm30",
+                    "outputs": [
+                        "Activity_1n7p3m4"
+                    ],
+                    "position": {
+                        "x": 270.0,
+                        "y": 137.0
+                    },
+                    "postscript": null,
+                    "prescript": null,
+                    "typename": "ManualTask"
+                },
+                "Activity_1n7p3m4": {
+                    "data_input_associations": [],
+                    "data_output_associations": [],
+                    "description": null,
+                    "documentation": null,
+                    "extensions": {},
+                    "id": "Process_diu8ta2_6",
+                    "inputs": [
+                        "Activity_1h7gm30"
+                    ],
+                    "internal": false,
+                    "io_specification": null,
+                    "lane": null,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "Activity_1n7p3m4",
+                    "outputs": [
+                        "Event_0iozjmo"
+                    ],
+                    "position": {
+                        "x": 430.0,
+                        "y": 137.0
+                    },
+                    "postscript": null,
+                    "prescript": null,
+                    "typename": "ManualTask"
+                },
+                "End": {
+                    "description": "",
+                    "id": "Process_diu8ta2_3",
+                    "inputs": [
+                        "Process_diu8ta2.EndJoin"
+                    ],
+                    "internal": false,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "End",
+                    "outputs": [],
+                    "typename": "Simple"
+                },
+                "Event_0iozjmo": {
+                    "data_input_associations": [],
+                    "data_output_associations": [],
+                    "description": null,
+                    "documentation": null,
+                    "event_definition": {
+                        "external": false,
+                        "internal": false,
+                        "typename": "NoneEventDefinition"
+                    },
+                    "extensions": {},
+                    "id": "Process_diu8ta2_7",
+                    "inputs": [
+                        "Activity_1n7p3m4"
+                    ],
+                    "internal": false,
+                    "io_specification": null,
+                    "lane": null,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "Event_0iozjmo",
+                    "outputs": [
+                        "Process_diu8ta2.EndJoin"
+                    ],
+                    "position": {
+                        "x": 592.0,
+                        "y": 159.0
+                    },
+                    "typename": "EndEvent"
+                },
+                "Process_diu8ta2.EndJoin": {
+                    "description": "",
+                    "id": "Process_diu8ta2_2",
+                    "inputs": [
+                        "Event_0iozjmo"
+                    ],
+                    "internal": false,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "Process_diu8ta2.EndJoin",
+                    "outputs": [
+                        "End"
+                    ],
+                    "typename": "_EndJoin"
+                },
+                "Start": {
+                    "description": "",
+                    "id": "Process_diu8ta2_1",
+                    "inputs": [],
+                    "internal": false,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "Start",
+                    "outputs": [
+                        "StartEvent_1"
+                    ],
+                    "typename": "StartTask"
+                },
+                "StartEvent_1": {
+                    "data_input_associations": [],
+                    "data_output_associations": [],
+                    "description": null,
+                    "documentation": null,
+                    "event_definition": {
+                        "external": false,
+                        "internal": false,
+                        "typename": "NoneEventDefinition"
+                    },
+                    "extensions": {},
+                    "id": "Process_diu8ta2_4",
+                    "inputs": [
+                        "Start"
+                    ],
+                    "internal": false,
+                    "io_specification": null,
+                    "lane": null,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "StartEvent_1",
+                    "outputs": [
+                        "Activity_1h7gm30"
+                    ],
+                    "position": {
+                        "x": 179.0,
+                        "y": 159.0
+                    },
+                    "typename": "StartEvent"
+                }
+            },
+            "typename": "BpmnProcessSpec"
+        },
+        "Process_sypm122": {
+            "correlation_keys": {},
+            "data_objects": {},
+            "description": "Process_sypm122",
+            "file": "tests/data/process-models/test-cases/countries-and-cities/country_cities.bpmn",
+            "io_specification": null,
+            "name": "Process_sypm122",
+            "task_specs": {
+                "Activity_09g2tjz": {
+                    "data_input_associations": [],
+                    "data_output_associations": [],
+                    "description": "Just City Names",
+                    "documentation": null,
+                    "extensions": {
+                        "unitTests": [
+                            {
+                                "expectedOutputJson": "{\n  \"cities_in_a_country\": {\n    \"data\": [\n      \"Aba\",\n      \"Abakaliki\",\n      \"Abeokuta\"\n    ]\n  },\n  \"cities\": [\n      \"Aba\",\n      \"Abakaliki\",\n      \"Abeokuta\"\n  ]\n}",
+                                "id": "ScriptUnitTest_0cvsc3s",
+                                "inputJson": "{\n  \"cities_in_a_country\": {\n    \"data\": [\n      \"Aba\",\n      \"Abakaliki\",\n      \"Abeokuta\"\n    ]\n  }\n}"
+                            },
+                            {
+                                "expectedOutputJson": "{}",
+                                "id": "ScriptUnitTest_1a2dg9d",
+                                "inputJson": "{}"
+                            }
+                        ]
+                    },
+                    "id": "Process_sypm122_8",
+                    "inputs": [
+                        "Activity_1tccbut"
+                    ],
+                    "internal": false,
+                    "io_specification": null,
+                    "lane": null,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "Activity_09g2tjz",
+                    "outputs": [
+                        "Event_1vdcski"
+                    ],
+                    "position": {
+                        "x": 640.0,
+                        "y": 137.0
+                    },
+                    "postscript": null,
+                    "prescript": null,
+                    "script": "# if the api returns an error we return an empty list\ncities = sorted(cities_in_a_country.get(\"data\", []))",
+                    "typename": "ScriptTask"
+                },
+                "Activity_0uyx9zu": {
+                    "data_input_associations": [],
+                    "data_output_associations": [],
+                    "description": "Get Countries",
+                    "documentation": null,
+                    "extensions": {
+                        "serviceTaskOperator": {
+                            "name": "http/GetRequest",
+                            "parameters": {
+                                "basic_auth_password": {
+                                    "type": "str",
+                                    "value": "None"
+                                },
+                                "basic_auth_username": {
+                                    "type": "str",
+                                    "value": "None"
+                                },
+                                "headers": {
+                                    "type": "any",
+                                    "value": "{}"
+                                },
+                                "params": {
+                                    "type": "any",
+                                    "value": "{}"
+                                },
+                                "url": {
+                                    "type": "str",
+                                    "value": "\"https://countriesnow.space/api/v0.1/countries/capital\""
+                                }
+                            },
+                            "resultVariable": "countries_list"
+                        }
+                    },
+                    "id": "Process_sypm122_5",
+                    "inputs": [
+                        "StartEvent_1"
+                    ],
+                    "internal": false,
+                    "io_specification": null,
+                    "lane": null,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "Activity_0uyx9zu",
+                    "operation_name": "http/GetRequest",
+                    "operation_params": {
+                        "basic_auth_password": {
+                            "type": "str",
+                            "value": "None"
+                        },
+                        "basic_auth_username": {
+                            "type": "str",
+                            "value": "None"
+                        },
+                        "headers": {
+                            "type": "any",
+                            "value": "{}"
+                        },
+                        "params": {
+                            "type": "any",
+                            "value": "{}"
+                        },
+                        "url": {
+                            "type": "str",
+                            "value": "\"https://countriesnow.space/api/v0.1/countries/capital\""
+                        }
+                    },
+                    "outputs": [
+                        "Activity_1nlj3tu"
+                    ],
+                    "position": {
+                        "x": 250.0,
+                        "y": 137.0
+                    },
+                    "postscript": null,
+                    "prescript": null,
+                    "result_variable": "countries_list",
+                    "typename": "ServiceTask"
+                },
+                "Activity_1nlj3tu": {
+                    "data_input_associations": [],
+                    "data_output_associations": [],
+                    "description": "Just Country Names",
+                    "documentation": null,
+                    "extensions": {
+                        "unitTests": [
+                            {
+                                "expectedOutputJson": "{\n  \"countries_list\": {\n    \"data\": [\n      {\n        \"dialCode\": \"880\",\n        \"name\": \"Bangladesh\",\n        \"unicodeFlag\": \"\ud83c\udde7\ud83c\udde9\"\n      },\n      {\n        \"dialCode\": \"32\",\n        \"name\": \"Belgium\",\n        \"unicodeFlag\": \"\ud83c\udde7\ud83c\uddea\"\n      },\n      {\n        \"dialCode\": \"226\",\n        \"name\": \"Burkina Faso\",\n        \"unicodeFlag\": \"\ud83c\udde7\ud83c\uddeb\"\n      }\n    ],\n    \"error\": false,\n    \"msg\": \"countries details: 'unicodeFlag,dialCode' have been retrieved\"\n  },\n  \"countries\": [\n      \"Bangladesh\",\n      \"Belgium\",\n      \"Burkina Faso\"\n  ]\n}",
+                                "id": "ScriptUnitTest_001d73t",
+                                "inputJson": "{\n  \"countries_list\": {\n    \"data\": [\n      {\n        \"dialCode\": \"880\",\n        \"name\": \"Bangladesh\",\n        \"unicodeFlag\": \"\ud83c\udde7\ud83c\udde9\"\n      },\n      {\n        \"dialCode\": \"32\",\n        \"name\": \"Belgium\",\n        \"unicodeFlag\": \"\ud83c\udde7\ud83c\uddea\"\n      },\n      {\n        \"dialCode\": \"226\",\n        \"name\": \"Burkina Faso\",\n        \"unicodeFlag\": \"\ud83c\udde7\ud83c\uddeb\"\n      }\n    ],\n    \"error\": false,\n    \"msg\": \"countries details: 'unicodeFlag,dialCode' have been retrieved\"\n  }\n}"
+                            },
+                            {
+                                "expectedOutputJson": "{\n  \"countries_list\": {\n    \"error\": true,\n    \"msg\": \"you must specify data to fetch e.g ?returns=unicodeFlag,currency,image\"\n  },\n  \"countries\": []\n}",
+                                "id": "ScriptUnitTest_0k12ysg",
+                                "inputJson": "{\n    \"countries_list\": {\n        \"error\": true,\n        \"msg\": \"you must specify data to fetch e.g ?returns=unicodeFlag,currency,image\"\n    }\n}"
+                            }
+                        ]
+                    },
+                    "id": "Process_sypm122_6",
+                    "inputs": [
+                        "Activity_0uyx9zu"
+                    ],
+                    "internal": false,
+                    "io_specification": null,
+                    "lane": null,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "Activity_1nlj3tu",
+                    "outputs": [
+                        "Activity_1tccbut"
+                    ],
+                    "position": {
+                        "x": 390.0,
+                        "y": 137.0
+                    },
+                    "postscript": null,
+                    "prescript": null,
+                    "script": "# if the api returns an error we return an empty list\ncountries_data = countries_list.get(\"data\", [])\nnumber_of_countries = len(countries_data)\ncountries = sorted([d[\"name\"] for d in countries_data])\ndel countries_data",
+                    "typename": "ScriptTask"
+                },
+                "Activity_1tccbut": {
+                    "data_input_associations": [],
+                    "data_output_associations": [],
+                    "description": "Cities in a Country",
+                    "documentation": null,
+                    "extensions": {
+                        "serviceTaskOperator": {
+                            "name": "http/PostRequest",
+                            "parameters": {
+                                "basic_auth_password": {
+                                    "type": "str",
+                                    "value": "None"
+                                },
+                                "basic_auth_username": {
+                                    "type": "str",
+                                    "value": "None"
+                                },
+                                "data": {
+                                    "type": "any",
+                                    "value": "{\"country\": \"United Arab Emirates\"}"
+                                },
+                                "headers": {
+                                    "type": "any",
+                                    "value": "{}"
+                                },
+                                "url": {
+                                    "type": "str",
+                                    "value": "\"https://countriesnow.space/api/v0.1/countries/cities\""
+                                }
+                            },
+                            "resultVariable": "cities_in_a_country"
+                        }
+                    },
+                    "id": "Process_sypm122_7",
+                    "inputs": [
+                        "Activity_1nlj3tu"
+                    ],
+                    "internal": false,
+                    "io_specification": null,
+                    "lane": null,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "Activity_1tccbut",
+                    "operation_name": "http/PostRequest",
+                    "operation_params": {
+                        "basic_auth_password": {
+                            "type": "str",
+                            "value": "None"
+                        },
+                        "basic_auth_username": {
+                            "type": "str",
+                            "value": "None"
+                        },
+                        "data": {
+                            "type": "any",
+                            "value": "{\"country\": \"United Arab Emirates\"}"
+                        },
+                        "headers": {
+                            "type": "any",
+                            "value": "{}"
+                        },
+                        "url": {
+                            "type": "str",
+                            "value": "\"https://countriesnow.space/api/v0.1/countries/cities\""
+                        }
+                    },
+                    "outputs": [
+                        "Activity_09g2tjz"
+                    ],
+                    "position": {
+                        "x": 520.0,
+                        "y": 137.0
+                    },
+                    "postscript": null,
+                    "prescript": null,
+                    "result_variable": "cities_in_a_country",
+                    "typename": "ServiceTask"
+                },
+                "End": {
+                    "description": "",
+                    "id": "Process_sypm122_3",
+                    "inputs": [
+                        "Process_sypm122.EndJoin"
+                    ],
+                    "internal": false,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "End",
+                    "outputs": [],
+                    "typename": "Simple"
+                },
+                "Event_1vdcski": {
+                    "data_input_associations": [],
+                    "data_output_associations": [],
+                    "description": null,
+                    "documentation": null,
+                    "event_definition": {
+                        "external": false,
+                        "internal": false,
+                        "typename": "NoneEventDefinition"
+                    },
+                    "extensions": {},
+                    "id": "Process_sypm122_9",
+                    "inputs": [
+                        "Activity_09g2tjz"
+                    ],
+                    "internal": false,
+                    "io_specification": null,
+                    "lane": null,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "Event_1vdcski",
+                    "outputs": [
+                        "Process_sypm122.EndJoin"
+                    ],
+                    "position": {
+                        "x": 882.0,
+                        "y": 159.0
+                    },
+                    "typename": "EndEvent"
+                },
+                "Process_sypm122.EndJoin": {
+                    "description": "",
+                    "id": "Process_sypm122_2",
+                    "inputs": [
+                        "Event_1vdcski"
+                    ],
+                    "internal": false,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "Process_sypm122.EndJoin",
+                    "outputs": [
+                        "End"
+                    ],
+                    "typename": "_EndJoin"
+                },
+                "Start": {
+                    "description": "",
+                    "id": "Process_sypm122_1",
+                    "inputs": [],
+                    "internal": false,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "Start",
+                    "outputs": [
+                        "StartEvent_1"
+                    ],
+                    "typename": "StartTask"
+                },
+                "StartEvent_1": {
+                    "data_input_associations": [],
+                    "data_output_associations": [],
+                    "description": null,
+                    "documentation": null,
+                    "event_definition": {
+                        "external": false,
+                        "internal": false,
+                        "typename": "NoneEventDefinition"
+                    },
+                    "extensions": {},
+                    "id": "Process_sypm122_4",
+                    "inputs": [
+                        "Start"
+                    ],
+                    "internal": false,
+                    "io_specification": null,
+                    "lane": null,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "StartEvent_1",
+                    "outputs": [
+                        "Activity_0uyx9zu"
+                    ],
+                    "position": {
+                        "x": 179.0,
+                        "y": 159.0
+                    },
+                    "typename": "StartEvent"
+                }
+            },
+            "typename": "BpmnProcessSpec"
+        },
+        "no_tasks": {
+            "correlation_keys": {},
+            "data_objects": {},
+            "description": "No Tasks",
+            "file": "tests/data/process-models/test-cases/no-tasks/no-tasks.bpmn",
+            "io_specification": null,
+            "name": "no_tasks",
+            "task_specs": {
+                "End": {
+                    "description": "",
+                    "id": "no_tasks_3",
+                    "inputs": [
+                        "no_tasks.EndJoin"
+                    ],
+                    "internal": false,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "End",
+                    "outputs": [],
+                    "typename": "Simple"
+                },
+                "Event_0qq9il3": {
+                    "data_input_associations": [],
+                    "data_output_associations": [],
+                    "description": null,
+                    "documentation": null,
+                    "event_definition": {
+                        "external": false,
+                        "internal": false,
+                        "typename": "NoneEventDefinition"
+                    },
+                    "extensions": {},
+                    "id": "no_tasks_5",
+                    "inputs": [
+                        "StartEvent_1"
+                    ],
+                    "internal": false,
+                    "io_specification": null,
+                    "lane": null,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "Event_0qq9il3",
+                    "outputs": [
+                        "no_tasks.EndJoin"
+                    ],
+                    "position": {
+                        "x": 272.0,
+                        "y": 159.0
+                    },
+                    "typename": "EndEvent"
+                },
+                "Start": {
+                    "description": "",
+                    "id": "no_tasks_1",
+                    "inputs": [],
+                    "internal": false,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "Start",
+                    "outputs": [
+                        "StartEvent_1"
+                    ],
+                    "typename": "StartTask"
+                },
+                "StartEvent_1": {
+                    "data_input_associations": [],
+                    "data_output_associations": [],
+                    "description": null,
+                    "documentation": null,
+                    "event_definition": {
+                        "external": false,
+                        "internal": false,
+                        "typename": "NoneEventDefinition"
+                    },
+                    "extensions": {},
+                    "id": "no_tasks_4",
+                    "inputs": [
+                        "Start"
+                    ],
+                    "internal": false,
+                    "io_specification": null,
+                    "lane": null,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "StartEvent_1",
+                    "outputs": [
+                        "Event_0qq9il3"
+                    ],
+                    "position": {
+                        "x": 179.0,
+                        "y": 159.0
+                    },
+                    "typename": "StartEvent"
+                },
+                "no_tasks.EndJoin": {
+                    "description": "",
+                    "id": "no_tasks_2",
+                    "inputs": [
+                        "Event_0qq9il3"
+                    ],
+                    "internal": false,
+                    "lookahead": 2,
+                    "manual": false,
+                    "name": "no_tasks.EndJoin",
+                    "outputs": [
+                        "End"
+                    ],
+                    "typename": "_EndJoin"
+                }
+            },
+            "typename": "BpmnProcessSpec"
+        }
+    }
+}
