@@ -52,7 +52,7 @@ pub fn cache_element_units_for_workflow(
         let entry_path = cache::created_path_for_entry(
             cache_dir,
             cache_key,
-            CacheEntryType::ManifestEntry(manifest_entry.id.to_string()),
+            CacheEntryType::ManifestEntry(manifest_entry.sha2.to_string()),
         )?;
         writer::write(&entry_path, el_unit)?;
     }
@@ -81,7 +81,7 @@ pub fn workflow_from_cached_element_unit(
     let entry_path = cache::path_for_entry(
         cache_dir,
         cache_key,
-        CacheEntryType::ManifestEntry(manifest_entry.id.to_string()),
+        CacheEntryType::ManifestEntry(manifest_entry.sha2.to_string()),
     );
     let element_unit = reader::read::<ElementUnit>(&entry_path)?;
     let workflow_spec = WorkflowSpec::from_element_unit(&element_unit);

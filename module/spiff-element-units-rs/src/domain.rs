@@ -50,7 +50,7 @@ pub type ElementUnits = IndexedVec<ElementUnit>;
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ManifestEntry {
-    pub id: String,
+    pub sha2: String,
     pub r#type: ElementUnitType,
     pub requirements: u64,
 }
@@ -206,11 +206,14 @@ impl ElementIDs for TaskSpec {
 //
 
 impl ElementUnit {
-    pub fn id(&self) -> String {
+    pub fn sha2_str(&self) -> String {
         let mut hasher = Sha256::new();
         hasher.update(format!("{:?}", self.r#type()));
-
-        for element_id in self.element_ids() {
+	
+	let mut element_ids = self.element_ids();
+	element_ids.sort();
+	
+        for element_id in element_ids {
             hasher.update(element_id);
         }
 
@@ -232,7 +235,7 @@ impl ElementUnit {
 impl ManifestEntry {
     pub fn from_element_unit(element_unit: &ElementUnit) -> Self {
         Self {
-            id: element_unit.id(),
+            sha2: element_unit.sha2_str(),
             r#type: element_unit.r#type(),
             requirements: 0,
         }

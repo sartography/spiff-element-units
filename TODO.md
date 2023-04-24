@@ -2,8 +2,7 @@
 
 ## v0.2.0
 
-1. the element unit id used to make the manifest entry identifier is not good enough
-   1. switch to sha2? - https://docs.rs/sha2/latest/sha2/
+1. Test in the backend, push release
 
 ## v0.3.0
 
