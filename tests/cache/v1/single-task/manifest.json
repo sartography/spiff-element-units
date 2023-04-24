@@ -1,6 +1,10 @@
 {
   "items": [
-    "76DE01CAA6C55C63"
+    {
+      "id": "76DE01CAA6C55C63",
+      "type": "FullWorkflow",
+      "requirements": 0
+    }
   ],
   "index_map": {
     "Activity_1mwbqi4": [

@@ -46,13 +46,13 @@ pub fn cache_element_units_for_workflow(
 
     let el_units = element_units::from_json_string(&workflow_specs_json)?;
     let manifest = manifest::from_element_units(&el_units);
-    let el_units_and_manifest_ids = zip(&el_units.items, &manifest.items);
+    let el_units_and_manifest_entries = zip(&el_units.items, &manifest.items);
 
-    for (el_unit, manifest_id) in el_units_and_manifest_ids {
+    for (el_unit, manifest_entry) in el_units_and_manifest_entries {
         let entry_path = cache::created_path_for_entry(
             cache_dir,
             cache_key,
-            CacheEntryType::ManifestEntry(manifest_id.to_string()),
+            CacheEntryType::ManifestEntry(manifest_entry.id.to_string()),
         )?;
         writer::write(&entry_path, el_unit)?;
     }
@@ -74,14 +74,14 @@ pub fn workflow_from_cached_element_unit(
 ) -> ApiResult<String> {
     let entry_path = cache::path_for_entry(cache_dir, cache_key, CacheEntryType::Manifest);
     let manifest = reader::read::<Manifest>(&entry_path)?;
-    let manifest_id = manifest
+    let manifest_entry = manifest
         .last_item_for_key(element_id.to_string())
         .ok_or("Element unit not found.")?;
 
     let entry_path = cache::path_for_entry(
         cache_dir,
         cache_key,
-        CacheEntryType::ManifestEntry(manifest_id.to_string()),
+        CacheEntryType::ManifestEntry(manifest_entry.id.to_string()),
     );
     let element_unit = reader::read::<ElementUnit>(&entry_path)?;
     let workflow_spec = WorkflowSpec::from_element_unit(&element_unit);

@@ -1,6 +1,10 @@
 {
   "items": [
-    "E1C3C0974EBA594E"
+    {
+      "id": "E1C3C0974EBA594E",
+      "type": "FullWorkflow",
+      "requirements": 0
+    }
   ],
   "index_map": {
     "Activity_1h7gm30": [

@@ -1,6 +1,10 @@
 {
   "items": [
-    "BC1F08E035E1BEB7"
+    {
+      "id": "BC1F08E035E1BEB7",
+      "type": "FullWorkflow",
+      "requirements": 0
+    }
   ],
   "index_map": {
     "End": [

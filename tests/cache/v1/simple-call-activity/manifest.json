@@ -1,6 +1,10 @@
 {
   "items": [
-    "6D02D2CFE543F3B5"
+    {
+      "id": "6D02D2CFE543F3B5",
+      "type": "FullWorkflow",
+      "requirements": 0
+    }
   ],
   "index_map": {
     "Activity_0q1z4d4": [

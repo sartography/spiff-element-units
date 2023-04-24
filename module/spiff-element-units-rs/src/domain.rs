@@ -37,14 +37,26 @@ pub enum ElementUnit {
     FullWorkflow(WorkflowSpec),
 }
 
+#[derive(Debug, Deserialize, Serialize)]
+pub enum ElementUnitType {
+    FullWorkflow,
+}
+
 pub type ElementUnits = IndexedVec<ElementUnit>;
 
 //
-// element units are tracked in a manifest which maps an element id to
-// a vector of element unit types and cache path locations.
+// cached element unit are tracked in a manifest that contains an entry
+// for each element unit associated with a given cache key.
 //
 
-pub type Manifest = IndexedVec<String>;
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ManifestEntry {
+    pub id: String,
+    pub r#type: ElementUnitType,
+    pub requirements: u64,
+}
+
+pub type Manifest = IndexedVec<ManifestEntry>;
 
 //
 // these structs define the subset of fields in each json structure
@@ -200,6 +212,26 @@ impl ElementUnit {
         self.hash(&mut state);
         let hash = state.finish();
         format!("{:X}", hash)
+    }
+
+    pub fn r#type(&self) -> ElementUnitType {
+        match self {
+            ElementUnit::FullWorkflow(_) => ElementUnitType::FullWorkflow,
+        }
+    }
+}
+
+//
+//
+//
+
+impl ManifestEntry {
+    pub fn from_element_unit(element_unit: &ElementUnit) -> Self {
+        Self {
+            id: element_unit.id(),
+            r#type: element_unit.r#type(),
+            requirements: 0,
+        }
     }
 }
 
