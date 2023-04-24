@@ -13,6 +13,7 @@
 1. form element unit that is full workflow with call activity subprocesses removed
    1. this element unit will have the first requirement flag (LAZY_CALL_ACTIVITIES)
 1. don't always take the last element unit, let callers provide capabilities mask
+1. env var to pretty print, off by default, set in tests for committed cache
 
 ## v0.4.0
 
