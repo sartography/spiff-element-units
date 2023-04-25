@@ -1,9 +1,5 @@
 # TODOs
 
-## v0.2.0
-
-1. Test in the backend, push release
-
 ## v0.3.0
 
 1. break up domain.rs
@@ -14,6 +10,10 @@
    1. this element unit will have the first requirement flag (LAZY_CALL_ACTIVITIES)
 1. don't always take the last element unit, let callers provide capabilities mask
 1. env var to pretty print, off by default, set in tests for committed cache
+1. don't parrot `serializer_version`, recognize it and return our own
+   1. embed version: https://stackoverflow.com/questions/27840394/how-can-a-rust-program-access-metadata-from-its-cargo-package
+1. add process_id back to the public api, original thinking was right there
+1. manifest needs to be by process id
 
 ## v0.4.0
 
