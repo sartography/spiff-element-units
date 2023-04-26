@@ -8,7 +8,7 @@ pub fn pretty_json() -> bool {
 
 fn env_is_true(key: &str) -> bool {
     match env::var(key) {
-        Ok(val) if &val == "true" => true,
+        Ok(val) => &val == "true",
         _ => false,
     }
 }

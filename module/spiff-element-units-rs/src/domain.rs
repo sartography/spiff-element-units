@@ -44,20 +44,6 @@ pub enum ElementUnitType {
 pub type ElementUnits = IndexedVec<ElementUnit>;
 
 //
-// cached element unit are tracked in a manifest that contains an entry
-// for each element unit associated with a given cache key.
-//
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct ManifestEntry {
-    pub sha2: String,
-    pub r#type: ElementUnitType,
-    pub requirements: u64,
-}
-
-pub type Manifest = IndexedVec<ManifestEntry>;
-
-//
 // these structs define the subset of fields in each json structure
 // that we need for processing. the other fields are lumped into
 // the `rest` field which is then serialized back in its original
@@ -222,20 +208,6 @@ impl ElementUnit {
     pub fn r#type(&self) -> ElementUnitType {
         match self {
             ElementUnit::FullWorkflow(_) => ElementUnitType::FullWorkflow,
-        }
-    }
-}
-
-//
-//
-//
-
-impl ManifestEntry {
-    pub fn from_element_unit(element_unit: &ElementUnit) -> Self {
-        Self {
-            sha2: element_unit.sha2_str(),
-            r#type: element_unit.r#type(),
-            requirements: 0,
         }
     }
 }

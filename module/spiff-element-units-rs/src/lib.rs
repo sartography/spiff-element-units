@@ -10,7 +10,8 @@ mod reader;
 mod writer;
 
 use cache::entry::Type as CacheEntryType;
-use domain::{ElementUnit, Manifest, WorkflowSpec};
+use cache::manifest::Manifest;
+use domain::{ElementUnit, WorkflowSpec};
 
 //
 // this is the public api. it is a thin waist on purpose to make other
