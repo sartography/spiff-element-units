@@ -36,6 +36,7 @@ TEST_CASES = {
     "no-tasks": TestCaseData("no-tasks/no-tasks.json", "no_tasks", _do_engine_steps, {}),
     "single-task": TestCaseData("single-task/single_task.json", "SingleTask_Process", _do_engine_steps, {"x": 1}),
     "simple-call-activity": TestCaseData("simple-call-activity/simple_call_activity.json", "Process_p4pfxhq", _do_engine_steps, {"x": 1}),
+    "simple-subprocess": TestCaseData("simple-subprocess/simple_subprocess.json", "Process_vv0fdgv", _do_engine_steps, {"x": 1}),
     "manual-tasks": TestCaseData("manual-tasks/manual_tasks.json", "Process_diu8ta2", _two_manual_tasks, {}),
 }
 
