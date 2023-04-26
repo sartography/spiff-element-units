@@ -27,7 +27,7 @@
                         }
                     ]
                 },
-                "id": "Process_sypm122_8",
+                "id": "Process_sypm122_9",
                 "inputs": [
                     "Activity_1tccbut"
                 ],
@@ -82,9 +82,9 @@
                         "resultVariable": "countries_list"
                     }
                 },
-                "id": "Process_sypm122_5",
+                "id": "Process_sypm122_6",
                 "inputs": [
-                    "StartEvent_1"
+                    "Activity_1mtt3dj"
                 ],
                 "internal": false,
                 "io_specification": null,
@@ -127,6 +127,34 @@
                 "result_variable": "countries_list",
                 "typename": "ServiceTask"
             },
+            "Activity_1mtt3dj": {
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": null,
+                "documentation": null,
+                "extensions": {},
+                "id": "Process_sypm122_5",
+                "inputs": [
+                    "StartEvent_1"
+                ],
+                "internal": false,
+                "io_specification": null,
+                "lane": null,
+                "lookahead": 2,
+                "manual": false,
+                "name": "Activity_1mtt3dj",
+                "outputs": [
+                    "Activity_0uyx9zu"
+                ],
+                "position": {
+                    "x": 120.0,
+                    "y": 137.0
+                },
+                "postscript": null,
+                "prescript": null,
+                "script": "True",
+                "typename": "ScriptTask"
+            },
             "Activity_1nlj3tu": {
                 "data_input_associations": [],
                 "data_output_associations": [],
@@ -146,7 +174,7 @@
                         }
                     ]
                 },
-                "id": "Process_sypm122_6",
+                "id": "Process_sypm122_7",
                 "inputs": [
                     "Activity_0uyx9zu"
                 ],
@@ -201,7 +229,7 @@
                         "resultVariable": "cities_in_a_country"
                     }
                 },
-                "id": "Process_sypm122_7",
+                "id": "Process_sypm122_8",
                 "inputs": [
                     "Activity_1nlj3tu"
                 ],
@@ -270,7 +298,7 @@
                     "typename": "NoneEventDefinition"
                 },
                 "extensions": {},
-                "id": "Process_sypm122_9",
+                "id": "Process_sypm122_10",
                 "inputs": [
                     "Activity_09g2tjz"
                 ],
@@ -339,10 +367,10 @@
                 "manual": false,
                 "name": "StartEvent_1",
                 "outputs": [
-                    "Activity_0uyx9zu"
+                    "Activity_1mtt3dj"
                 ],
                 "position": {
-                    "x": 179.0,
+                    "x": 72.0,
                     "y": 159.0
                 },
                 "typename": "StartEvent"

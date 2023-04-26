@@ -4,7 +4,7 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_1jxxr3o</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_1jxxr3o" sourceRef="StartEvent_1" targetRef="Activity_0uyx9zu" />
+    <bpmn:sequenceFlow id="Flow_1jxxr3o" sourceRef="StartEvent_1" targetRef="Activity_1mtt3dj" />
     <bpmn:serviceTask id="Activity_0uyx9zu" name="Get Countries">
       <bpmn:extensionElements>
         <spiffworkflow:serviceTaskOperator id="http/GetRequest" resultVariable="countries_list">
@@ -17,7 +17,7 @@
           </spiffworkflow:parameters>
         </spiffworkflow:serviceTaskOperator>
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1jxxr3o</bpmn:incoming>
+      <bpmn:incoming>Flow_0cl53wf</bpmn:incoming>
       <bpmn:outgoing>Flow_0pm7q65</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:endEvent id="Event_1vdcski">
@@ -162,12 +162,15 @@ del countries_data</bpmn:script>
       <bpmn:script># if the api returns an error we return an empty list
 cities = sorted(cities_in_a_country.get("data", []))</bpmn:script>
     </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_0cl53wf" sourceRef="Activity_1mtt3dj" targetRef="Activity_0uyx9zu" />
+    <bpmn:scriptTask id="Activity_1mtt3dj">
+      <bpmn:incoming>Flow_1jxxr3o</bpmn:incoming>
+      <bpmn:outgoing>Flow_0cl53wf</bpmn:outgoing>
+      <bpmn:script>True</bpmn:script>
+    </bpmn:scriptTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_sypm122">
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="179" y="159" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_09xoi1h_di" bpmnElement="Activity_0uyx9zu">
         <dc:Bounds x="250" y="137" width="100" height="80" />
         <bpmndi:BPMNLabel />
@@ -185,9 +188,17 @@ cities = sorted(cities_in_a_country.get("data", []))</bpmn:script>
       <bpmndi:BPMNShape id="Activity_07axbbj_di" bpmnElement="Activity_09g2tjz">
         <dc:Bounds x="640" y="137" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="72" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_103hd0h_di" bpmnElement="Activity_1mtt3dj">
+        <dc:Bounds x="120" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1jxxr3o_di" bpmnElement="Flow_1jxxr3o">
-        <di:waypoint x="215" y="177" />
-        <di:waypoint x="250" y="177" />
+        <di:waypoint x="90" y="159" />
+        <di:waypoint x="90" y="117" />
+        <di:waypoint x="170" y="117" />
+        <di:waypoint x="170" y="137" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0pm7q65_di" bpmnElement="Flow_0pm7q65">
         <di:waypoint x="350" y="177" />
@@ -204,6 +215,10 @@ cities = sorted(cities_in_a_country.get("data", []))</bpmn:script>
       <bpmndi:BPMNEdge id="Flow_0w7qf95_di" bpmnElement="Flow_0w7qf95">
         <di:waypoint x="740" y="177" />
         <di:waypoint x="882" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cl53wf_di" bpmnElement="Flow_0cl53wf">
+        <di:waypoint x="220" y="177" />
+        <di:waypoint x="250" y="177" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
