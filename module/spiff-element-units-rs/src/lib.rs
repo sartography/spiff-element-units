@@ -54,12 +54,13 @@ pub fn cache_element_units_for_workflow(
         let entry_path = cache::created_path_for_entry(
             cache_dir,
             cache_key,
-            CacheEntryType::ManifestEntry(manifest_entry.sha2.to_string()),
+            CacheEntryType::ManifestEntry(&manifest_entry.sha2),
         )?;
         writer::write(&entry_path, el_unit)?;
     }
 
-    let entry_path = cache::created_path_for_entry(cache_dir, cache_key, CacheEntryType::Manifest)?;
+    let entry_path =
+        cache::created_path_for_entry(cache_dir, cache_key, CacheEntryType::Manifest("TODO"))?;
     writer::write(&entry_path, &manifest)?;
 
     Ok(())
@@ -72,10 +73,11 @@ pub fn cache_element_units_for_workflow(
 pub fn workflow_from_cached_element_unit(
     cache_dir: &str,
     cache_key: &str,
-    _process_id: &str,
+    process_id: &str,
     element_id: &str,
 ) -> ApiResult<String> {
-    let entry_path = cache::path_for_entry(cache_dir, cache_key, CacheEntryType::Manifest);
+    let entry_path =
+        cache::path_for_entry(cache_dir, cache_key, CacheEntryType::Manifest(process_id));
     let manifest = reader::read::<Manifest>(&entry_path)?;
     let manifest_entry = manifest
         .last_item_for_key(element_id.to_string())
@@ -84,7 +86,7 @@ pub fn workflow_from_cached_element_unit(
     let entry_path = cache::path_for_entry(
         cache_dir,
         cache_key,
-        CacheEntryType::ManifestEntry(manifest_entry.sha2.to_string()),
+        CacheEntryType::ManifestEntry(&manifest_entry.sha2),
     );
     let element_unit = reader::read::<ElementUnit>(&entry_path)?;
     let workflow_spec = WorkflowSpec::from_element_unit(&element_unit);

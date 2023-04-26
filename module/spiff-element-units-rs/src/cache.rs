@@ -24,21 +24,22 @@ fn cache_path(cache_dir: &str, cache_key: &str) -> PathBuf {
 }
 
 pub mod entry {
+    use sha2::{Digest, Sha256};
 
-    pub enum Type {
+    pub enum Type<'a> {
         OriginalWorkflowSpecsJSON,
-        Manifest,
-        ManifestEntry(String),
+        Manifest(&'a str),
+        ManifestEntry(&'a str),
     }
 
-    impl Type {
+    impl<'a> Type<'a> {
         pub fn filename(&self) -> String {
             use Type::*;
 
             match self {
                 OriginalWorkflowSpecsJSON => "workflow_specs.json".to_string(),
-                Manifest => "manifest.json".to_string(),
-                ManifestEntry(id) => format!("{}.json", id),
+                Manifest(process_id) => format!("manifest.{:x}.json", Sha256::digest(process_id)),
+                ManifestEntry(sha2) => format!("{}.json", sha2),
             }
         }
     }
