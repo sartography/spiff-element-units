@@ -10,7 +10,6 @@ use std::collections::BTreeMap;
 // stable ordering when serializing. this may not always be desired
 // but is good for the integration tests which commit the cache.
 //
-
 pub type Map<V> = BTreeMap<String, V>;
 
 //
@@ -18,11 +17,25 @@ pub type Map<V> = BTreeMap<String, V>;
 // point to the same deserialized structure. instead of repeating the
 // data for each key, we maintain indexes into a `vec` per key.
 //
-
 #[derive(Debug, Default, Deserialize, Serialize)]
 pub struct IndexedVec<T> {
     pub items: Vec<T>,
     pub index_map: Map<Vec<usize>>,
+}
+
+//
+// element units, workflow/process/task specs can all be introspected in
+// a uniform fashion.
+//
+pub trait ElementIntrospection {
+    fn push_element_ids(&self, ids: &mut Vec<String>);
+
+    fn element_ids(&self) -> Vec<String> {
+        // TODO: with_capacity
+        let mut vec: Vec<String> = Vec::new();
+        self.push_element_ids(&mut vec);
+        vec
+    }
 }
 
 //
@@ -126,24 +139,13 @@ pub mod task_spec_mixin {
 //
 //
 
-pub trait ElementIDs {
-    fn push_element_ids(&self, ids: &mut Vec<String>);
-
-    fn element_ids(&self) -> Vec<String> {
-        // TODO: with_capacity
-        let mut vec: Vec<String> = Vec::new();
-        self.push_element_ids(&mut vec);
-        vec
-    }
-}
-
-impl ElementIDs for WorkflowSpec {
+impl ElementIntrospection for WorkflowSpec {
     fn push_element_ids(&self, ids: &mut Vec<String>) {
         self.spec.push_element_ids(ids);
     }
 }
 
-impl ElementIDs for ProcessSpec {
+impl ElementIntrospection for ProcessSpec {
     fn push_element_ids(&self, ids: &mut Vec<String>) {
         ids.push(self.name.to_string());
 
@@ -153,7 +155,7 @@ impl ElementIDs for ProcessSpec {
     }
 }
 
-impl ElementIDs for TaskSpec {
+impl ElementIntrospection for TaskSpec {
     fn push_element_ids(&self, ids: &mut Vec<String>) {
         ids.push(self.name.to_string());
     }

@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::error::Error;
 
-use crate::domain::{ElementIDs, IndexedVec, Map, WorkflowSpec};
+use crate::domain::{ElementIntrospection, IndexedVec, Map, WorkflowSpec};
 use crate::reader;
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -43,7 +43,7 @@ pub fn from_json_string(
     Ok(element_units_by_process_id)
 }
 
-impl ElementIDs for ElementUnit {
+impl ElementIntrospection for ElementUnit {
     fn push_element_ids(&self, ids: &mut Vec<String>) {
         match self {
             ElementUnit::FullWorkflow(w) => w.push_element_ids(ids),
