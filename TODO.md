@@ -12,7 +12,6 @@
 1. don't always take the last element unit, let callers provide capabilities mask
 1. don't parrot `serializer_version`, return our own
    1. embed version: https://stackoverflow.com/questions/27840394/how-can-a-rust-program-access-metadata-from-its-cargo-package
-1. manifest needs to be by process id
 
 ## v0.4.0
 
