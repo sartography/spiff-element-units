@@ -12,8 +12,9 @@
 1. env var to pretty print, off by default, set in tests for committed cache
 1. don't parrot `serializer_version`, recognize it and return our own
    1. embed version: https://stackoverflow.com/questions/27840394/how-can-a-rust-program-access-metadata-from-its-cargo-package
-1. add process_id back to the public api, original thinking was right there
 1. manifest needs to be by process id
+1. build element units for subprocesses that map to a call activity
+   1. same as if that process was passed in with the same cache key
 
 ## v0.4.0
 
@@ -27,5 +28,7 @@
 1. run integration tests as part of CI
 1. run cargo tests as part of CI
 1. maybe not run full build matrix on pr?
+   1. nothing real arch/os specific happening so just linux/x86_64 and sdist?
 1. cleanup the auto generated descriptions (pypi page is blank)
 1. make sure type hints work for the host applidcation
+1. are there too many to_strings?

@@ -30,6 +30,7 @@ class CacheTest(unittest.TestCase):
             element_unit_str = spiff_element_units.workflow_from_cached_element_unit(
                 TEST_CACHE_DIR,
                 key,
+                data.process_id,
                 data.process_id)
             
             assert isinstance(element_unit_str, str)
@@ -45,7 +46,8 @@ class CacheTest(unittest.TestCase):
                 spiff_element_units.workflow_from_cached_element_unit(
                     empty_cache_dir,
                     "somekey",
-                    "someid")
+                    "someid",
+                    "anotherid")
                 
             self.assertRaises(ValueError, read)
             
@@ -54,7 +56,8 @@ class CacheTest(unittest.TestCase):
             spiff_element_units.workflow_from_cached_element_unit(
                 TEST_CACHE_DIR,
                 "__akeyimadeupforthistest",
-                "wontmatter")
+                "wontmatter",
+                "whocares")
                 
         self.assertRaises(ValueError, read)
             

@@ -209,10 +209,10 @@ impl ElementUnit {
     pub fn sha2_str(&self) -> String {
         let mut hasher = Sha256::new();
         hasher.update(format!("{:?}", self.r#type()));
-	
-	let mut element_ids = self.element_ids();
-	element_ids.sort();
-	
+
+        let mut element_ids = self.element_ids();
+        element_ids.sort();
+
         for element_id in element_ids {
             hasher.update(element_id);
         }
