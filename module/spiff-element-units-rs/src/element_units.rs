@@ -1,8 +1,6 @@
-use crate::domain::{ElementIDs, ElementUnit, ElementUnits, Map, WorkflowSpec};
+use crate::domain::{ElementIDs, ElementUnit, ElementUnits, ElementUnitsByProcessID, WorkflowSpec};
 use crate::reader;
 use std::error::Error;
-
-pub type ElementUnitsByProcessID = Map<ElementUnits>;
 
 pub fn from_json_string(
     workflow_specs_json: &str,

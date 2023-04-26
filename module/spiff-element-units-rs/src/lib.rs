@@ -11,7 +11,7 @@ mod writer;
 
 use cache::entry::Type as CacheEntryType;
 use cache::manifest::Manifest;
-use domain::{ElementUnit, WorkflowSpec};
+use domain::ElementUnit;
 
 //
 // this is the public api. it is a thin waist on purpose to make other
@@ -95,7 +95,7 @@ pub fn workflow_from_cached_element_unit(
         CacheEntryType::ManifestEntry(&manifest_entry.sha2),
     );
     let element_unit = reader::read::<ElementUnit>(&entry_path)?;
-    let workflow_spec = WorkflowSpec::from_element_unit(&element_unit);
+    let workflow_spec = element_unit.to_workflow_spec();
 
     let contents = writer::write_to_string(workflow_spec)?;
 

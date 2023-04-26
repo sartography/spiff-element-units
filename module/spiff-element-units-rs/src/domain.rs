@@ -3,9 +3,9 @@ use serde_json;
 use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
-// TODO: look at breaking this file out into sub modules (name?) and re-exporting?
-//       - actually just move things to manifest, element_units, specs, etc
-// TODO: rename to basis?
+// TODO: move data structures/trait to basis.rs
+// TODO: move ElementUnit* to element_units
+// TODO: move *Specs to specs.rs
 
 //
 // for domain objects we stick with this map structure to support
@@ -42,6 +42,7 @@ pub enum ElementUnitType {
 }
 
 pub type ElementUnits = IndexedVec<ElementUnit>;
+pub type ElementUnitsByProcessID = Map<ElementUnits>;
 
 //
 // these structs define the subset of fields in each json structure
@@ -210,15 +211,9 @@ impl ElementUnit {
             ElementUnit::FullWorkflow(_) => ElementUnitType::FullWorkflow,
         }
     }
-}
-
-//
-//
-//
-
-impl WorkflowSpec {
-    pub fn from_element_unit(element_unit: &ElementUnit) -> &WorkflowSpec {
-        match element_unit {
+    
+    pub fn to_workflow_spec(&self) -> &WorkflowSpec {
+        match self {
             ElementUnit::FullWorkflow(ws) => ws,
         }
     }
