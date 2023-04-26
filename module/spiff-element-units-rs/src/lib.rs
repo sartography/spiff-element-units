@@ -2,6 +2,7 @@ use std::error::Error;
 use std::iter::zip;
 
 mod cache;
+mod config;
 mod domain;
 mod element_units;
 mod manifest;

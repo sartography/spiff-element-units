@@ -68,9 +68,7 @@ pub type Manifest = IndexedVec<ManifestEntry>;
 pub struct WorkflowSpec {
     pub spec: ProcessSpec,
     pub subprocess_specs: Map<ProcessSpec>,
-
-    #[serde(flatten)]
-    rest: Map<serde_json::Value>,
+    pub serializer_version: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]

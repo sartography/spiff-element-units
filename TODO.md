@@ -9,8 +9,7 @@
 1. form element unit that is full workflow with call activity subprocesses removed
    1. this element unit will have the first requirement flag (LAZY_CALL_ACTIVITIES)
 1. don't always take the last element unit, let callers provide capabilities mask
-1. env var to pretty print, off by default, set in tests for committed cache
-1. don't parrot `serializer_version`, recognize it and return our own
+1. don't parrot `serializer_version`, return our own
    1. embed version: https://stackoverflow.com/questions/27840394/how-can-a-rust-program-access-metadata-from-its-cargo-package
 1. manifest needs to be by process id
 1. build element units for subprocesses that map to a call activity
@@ -32,3 +31,6 @@
 1. cleanup the auto generated descriptions (pypi page is blank)
 1. make sure type hints work for the host applidcation
 1. are there too many to_strings?
+1. there is some issue in the tests when after an rmtree the cache dir can't be created again
+   1. create a test for it?
+   1. not sure if it affects callers that own the cache dir

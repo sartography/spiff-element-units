@@ -1,4 +1,5 @@
 import json
+import os
 import shutil
 import spiff_element_units
 import tempfile
@@ -19,6 +20,10 @@ class CacheTest(unittest.TestCase):
         # want separate tests that have to be run in a certain order.
         
         shutil.rmtree(TEST_CACHE_DIR)
+
+        # we pretty print for sanity in the tests
+        os.environ["SPIFF_ELEMENT_UNITS_PRETTY_JSON"] = "true"
+        
         for key, data in TEST_CASES.items():
             specs = read_specs_json(data.relname)
             spiff_element_units.cache_element_units_for_workflow(
