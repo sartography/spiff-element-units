@@ -4,7 +4,7 @@
 
 1. break up domain.rs
    1. move *Spec to spiffworkflow_specs
-   1. move ElementUnit* to element_units
+   1. then rename to basis.rs (with data structures and trait)
 1. form element unit that is full workflow with call activity subprocesses removed
    1. this element unit will have the first requirement flag (LAZY_CALL_ACTIVITIES)
 1. build element units for subprocesses that map to a call activity

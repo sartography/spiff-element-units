@@ -1,10 +1,8 @@
 use serde::{Deserialize, Serialize};
 use serde_json;
-use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 // TODO: move data structures/trait to basis.rs
-// TODO: move ElementUnit* to element_units
 // TODO: move *Specs to specs.rs
 
 //
@@ -26,23 +24,6 @@ pub struct IndexedVec<T> {
     pub items: Vec<T>,
     pub index_map: Map<Vec<usize>>,
 }
-
-//
-// element units that are supported within the lib.
-//
-
-#[derive(Debug, Deserialize, Serialize)]
-pub enum ElementUnit {
-    FullWorkflow(WorkflowSpec),
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub enum ElementUnitType {
-    FullWorkflow,
-}
-
-pub type ElementUnits = IndexedVec<ElementUnit>;
-pub type ElementUnitsByProcessID = Map<ElementUnits>;
 
 //
 // these structs define the subset of fields in each json structure
@@ -156,14 +137,6 @@ pub trait ElementIDs {
     }
 }
 
-impl ElementIDs for ElementUnit {
-    fn push_element_ids(&self, ids: &mut Vec<String>) {
-        match self {
-            ElementUnit::FullWorkflow(w) => w.push_element_ids(ids),
-        }
-    }
-}
-
 impl ElementIDs for WorkflowSpec {
     fn push_element_ids(&self, ids: &mut Vec<String>) {
         self.spec.push_element_ids(ids);
@@ -183,39 +156,6 @@ impl ElementIDs for ProcessSpec {
 impl ElementIDs for TaskSpec {
     fn push_element_ids(&self, ids: &mut Vec<String>) {
         ids.push(self.name.to_string());
-    }
-}
-
-//
-//
-//
-
-impl ElementUnit {
-    pub fn sha2_str(&self) -> String {
-        let mut hasher = Sha256::new();
-        hasher.update(format!("{:?}", self.r#type()));
-
-        let mut element_ids = self.element_ids();
-        element_ids.sort();
-
-        for element_id in element_ids {
-            hasher.update(element_id);
-        }
-
-        let hash = hasher.finalize();
-        format!("{:x}", hash)
-    }
-
-    pub fn r#type(&self) -> ElementUnitType {
-        match self {
-            ElementUnit::FullWorkflow(_) => ElementUnitType::FullWorkflow,
-        }
-    }
-    
-    pub fn to_workflow_spec(&self) -> &WorkflowSpec {
-        match self {
-            ElementUnit::FullWorkflow(ws) => ws,
-        }
     }
 }
 

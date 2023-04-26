@@ -11,7 +11,7 @@ mod writer;
 
 use cache::entry::Type as CacheEntryType;
 use cache::manifest::Manifest;
-use domain::ElementUnit;
+use element_units::ElementUnit;
 
 //
 // this is the public api. it is a thin waist on purpose to make other

@@ -1,7 +1,28 @@
-use crate::domain::{ElementIDs, ElementUnit, ElementUnits, ElementUnitsByProcessID, WorkflowSpec};
-use crate::reader;
+use serde::{Deserialize, Serialize};
+
+use sha2::{Digest, Sha256};
 use std::error::Error;
 
+use crate::domain::{ElementIDs, IndexedVec, Map, WorkflowSpec};
+use crate::reader;
+
+#[derive(Debug, Deserialize, Serialize)]
+pub enum ElementUnit {
+    FullWorkflow(WorkflowSpec),
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub enum ElementUnitType {
+    FullWorkflow,
+}
+
+pub type ElementUnits = IndexedVec<ElementUnit>;
+pub type ElementUnitsByProcessID = Map<ElementUnits>;
+
+//
+// constructs a map of element units grouped by process id that can be found in the
+// given workflow specs json string.
+//
 pub fn from_json_string(
     workflow_specs_json: &str,
 ) -> Result<ElementUnitsByProcessID, Box<dyn Error>> {
@@ -20,4 +41,41 @@ pub fn from_json_string(
     element_units_by_process_id.insert(process_id, element_units);
 
     Ok(element_units_by_process_id)
+}
+
+impl ElementIDs for ElementUnit {
+    fn push_element_ids(&self, ids: &mut Vec<String>) {
+        match self {
+            ElementUnit::FullWorkflow(w) => w.push_element_ids(ids),
+        }
+    }
+}
+
+impl ElementUnit {
+    pub fn sha2_str(&self) -> String {
+        let mut hasher = Sha256::new();
+        hasher.update(format!("{:?}", self.r#type()));
+
+        let mut element_ids = self.element_ids();
+        element_ids.sort();
+
+        for element_id in element_ids {
+            hasher.update(element_id);
+        }
+
+        let hash = hasher.finalize();
+        format!("{:x}", hash)
+    }
+
+    pub fn r#type(&self) -> ElementUnitType {
+        match self {
+            ElementUnit::FullWorkflow(_) => ElementUnitType::FullWorkflow,
+        }
+    }
+
+    pub fn to_workflow_spec(&self) -> &WorkflowSpec {
+        match self {
+            ElementUnit::FullWorkflow(ws) => ws,
+        }
+    }
 }
