@@ -13,7 +13,7 @@ use std::collections::BTreeMap;
 // but is good for the integration tests which commit the cache.
 //
 
-type Map<V> = BTreeMap<String, V>;
+pub type Map<V> = BTreeMap<String, V>;
 
 //
 // when dealing with element units we often have several keys that
