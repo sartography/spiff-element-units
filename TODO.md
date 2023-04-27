@@ -2,11 +2,14 @@
 
 ## v0.3.0
 
-1. form element unit that is full workflow with call activity subprocesses removed
-   1. this element unit will have the first requirement flag (LAZY_CALL_ACTIVITIES)
 1. build element units for subprocesses that map to a call activity
    1. same as if that process was passed in with the same cache key
+1. form element unit that is full workflow with call activity subprocesses removed
+1. err on the side of safety - no data inputs/outputs, etc
+   1. this element unit will have the first requirement flag (LAZY_CALL_ACTIVITIES)
 1. don't always take the last element unit, let callers provide capabilities mask
+   1. this can result in a weird tree of element units - stay simple
+   1. if callers don't opt in to something they don't get what is below - at least for now
 1. don't parrot `serializer_version`, return our own
    1. embed version: https://stackoverflow.com/questions/27840394/how-can-a-rust-program-access-metadata-from-its-cargo-package
 

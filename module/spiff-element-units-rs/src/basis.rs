@@ -2,6 +2,11 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
 //
+// basis has no dependencies within the lib. name shamelessly stolen
+// from one of the greatest languages of all time.
+//
+
+//
 // for domain objects we stick with this map structure to support
 // stable ordering when serializing. this may not always be desired
 // but is good for the integration tests which commit the cache.
@@ -34,9 +39,6 @@ pub trait ElementIntrospection {
     }
 }
 
-//
-// helper functions for IndexedVec
-//
 impl<T> IndexedVec<T> {
     pub fn push_for_keys(&mut self, item: T, keys: &[String]) {
         let index = self.items.len();
