@@ -7,6 +7,7 @@ mod domain;
 mod element_units;
 mod manifest;
 mod reader;
+mod specs;
 mod writer;
 
 use cache::entry::Type as CacheEntryType;
