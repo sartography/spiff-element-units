@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_json;
 
-use crate::domain::{ElementIntrospection, Map};
+use crate::basis::{ElementIntrospection, Map};
 
 //
 // these structs define the subset of fields in each json structure

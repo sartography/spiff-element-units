@@ -46,7 +46,7 @@ pub mod entry {
 }
 
 pub mod manifest {
-    use crate::domain::IndexedVec;
+    use crate::basis::IndexedVec;
     use crate::element_units::{ElementUnit, ElementUnitType};
     use serde::{Deserialize, Serialize};
 

@@ -1,8 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-// TODO: rename to basis.rs
-
 //
 // for domain objects we stick with this map structure to support
 // stable ordering when serializing. this may not always be desired

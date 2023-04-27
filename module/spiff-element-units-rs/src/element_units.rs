@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::error::Error;
 
-use crate::domain::{ElementIntrospection, IndexedVec, Map};
+use crate::basis::{ElementIntrospection, IndexedVec, Map};
 use crate::reader;
 use crate::specs::{WorkflowSpec};
 
