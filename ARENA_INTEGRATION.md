@@ -9,8 +9,8 @@ it can use the cached workflow to run the remaining portions of the process.
 ## Open Questions
 
 1. seeding the cache with all workflow specs
-1. what to use for the cache key
 1. updating the cache on save/upload/commit
+1. is the current cache key optimal?
 1. the full workflow spec is going to need to be loaded once per atomic unit
    1. if any of the workflow files change, the full workflow spec needs to be cached
    1. once cached, ideally we never need to do it again (until change) to start an instance

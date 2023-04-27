@@ -36,7 +36,8 @@ class CacheTest(unittest.TestCase):
                 TEST_CACHE_DIR,
                 key,
                 data.process_id,
-                data.process_id)
+                data.process_id,
+                0)
             
             assert isinstance(element_unit_str, str)
             element_unit_dict = json.loads(element_unit_str)
@@ -52,7 +53,8 @@ class CacheTest(unittest.TestCase):
                     empty_cache_dir,
                     "somekey",
                     "someid",
-                    "anotherid")
+                    "anotherid",
+                    0)
                 
             self.assertRaises(ValueError, read)
             
@@ -62,7 +64,8 @@ class CacheTest(unittest.TestCase):
                 TEST_CACHE_DIR,
                 "__akeyimadeupforthistest",
                 "wontmatter",
-                "whocares")
+                "whocares",
+                0)
                 
         self.assertRaises(ValueError, read)
             

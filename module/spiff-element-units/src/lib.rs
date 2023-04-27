@@ -30,10 +30,16 @@ fn workflow_from_cached_element_unit(
     cache_key: String,
     process_id: String,
     element_id: String,
+    capabilities: u64,
 ) -> PyResult<String> {
-    let result =
-        lib::workflow_from_cached_element_unit(&cache_dir, &cache_key, &process_id, &element_id)
-            .map_err(|e| PyValueError::new_err(e.to_string()))?;
+    let result = lib::workflow_from_cached_element_unit(
+        &cache_dir,
+        &cache_key,
+        &process_id,
+        &element_id,
+        capabilities,
+    )
+    .map_err(|e| PyValueError::new_err(e.to_string()))?;
 
     Ok(result)
 }

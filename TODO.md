@@ -9,11 +9,13 @@
 1. form element unit that is full workflow with call activity subprocesses removed
 1. err on the side of safety - no data inputs/outputs, etc
    1. this element unit will have the first requirement flag (LAZY_CALL_ACTIVITIES)
-1. don't always take the last element unit, let callers provide capabilities mask
+1. don't always take the last element unit, check capabilities mask
    1. this can result in a weird tree of element units - stay simple
    1. if callers don't opt in to something they don't get what is below - at least for now
 1. don't parrot `serializer_version`, return our own
    1. embed version: https://stackoverflow.com/questions/27840394/how-can-a-rust-program-access-metadata-from-its-cargo-package
+1. update README with new api
+1. test capabilities
 
 ## v0.4.0
 

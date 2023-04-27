@@ -5,7 +5,7 @@ use std::error::Error;
 
 use crate::basis::{ElementIntrospection, IndexedVec, Map};
 use crate::reader;
-use crate::specs::{WorkflowSpec};
+use crate::specs::WorkflowSpec;
 
 #[derive(Debug, Deserialize, Serialize)]
 pub enum ElementUnit {
@@ -27,19 +27,22 @@ pub type ElementUnitsByProcessID = Map<ElementUnits>;
 pub fn from_json_string(
     workflow_specs_json: &str,
 ) -> Result<ElementUnitsByProcessID, Box<dyn Error>> {
-    let mut element_units = ElementUnits {
+    let workflow_spec = reader::read_string::<WorkflowSpec>(workflow_specs_json)?;
+
+    let mut element_units_by_process_id = ElementUnitsByProcessID::new();
+    let mut main_process_element_units = ElementUnits {
         items: Default::default(),
         index_map: Default::default(),
     };
-    let workflow_spec = reader::read_string::<WorkflowSpec>(workflow_specs_json)?;
     let process_id = workflow_spec.spec.name.to_string();
-    let element_unit = ElementUnit::FullWorkflow(workflow_spec);
-    let element_ids = element_unit.element_ids();
 
-    element_units.push_for_keys(element_unit, &element_ids);
+    // the first element unit is always the full workflow. if nothing can be
+    // decomposed, or the caller's capabilities don't line up we always have
+    // a fallback.
+    let first_element_unit = ElementUnit::FullWorkflow(workflow_spec);
 
-    let mut element_units_by_process_id = ElementUnitsByProcessID::new();
-    element_units_by_process_id.insert(process_id, element_units);
+    main_process_element_units.push_element_unit(first_element_unit);
+    element_units_by_process_id.insert(process_id, main_process_element_units);
 
     Ok(element_units_by_process_id)
 }
@@ -78,5 +81,13 @@ impl ElementUnit {
         match self {
             ElementUnit::FullWorkflow(ws) => ws,
         }
+    }
+}
+
+impl ElementUnits {
+    pub fn push_element_unit(&mut self, element_unit: ElementUnit) {
+        let element_ids = element_unit.element_ids();
+
+        self.push_for_keys(element_unit, &element_ids);
     }
 }
