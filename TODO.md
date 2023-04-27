@@ -3,7 +3,7 @@
 ## v0.3.0
 
 1. need to have test versions of element units
-   1. build.rs? read from disk? just hardcode?e
+   1. build.rs? read from disk? just hardcode?
 1. build element units for subprocesses that map to a call activity
    1. same as if that process was passed in with the same cache key
 1. form element unit that is full workflow with call activity subprocesses removed
