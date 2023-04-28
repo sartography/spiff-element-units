@@ -2,7 +2,6 @@
 
 ## v0.3.0
 
-1. get pp1 specs added, loaded
 1. need to have test versions of element units
    1. build.rs? read from disk? just hardcode?
    1. how much do we leverage the integration tests vs rust tests?
@@ -11,14 +10,13 @@
 1. form element unit that is full workflow with call activity subprocesses removed
    1. err on the side of safety - no data inputs/outputs, etc
    1. this element unit will have the first requirement flag (LAZY_CALL_ACTIVITIES)
-1. don't always take the last element unit, check capabilities mask
-   1. this can result in a weird tree of element units - stay simple
-   1. if callers don't opt in to something they don't get what is below - at least for now
 1. don't parrot `serializer_version`, return our own
    1. embed version: https://stackoverflow.com/questions/27840394/how-can-a-rust-program-access-metadata-from-its-cargo-package
+   1. maybe just for workflows we create?
 1. update README with new api
 1. test capabilities
-1, need to add the full workflow to each subprocess spec and elements
+1, need to add the full workflow element unit for each subprocess spec to the manifest
+   1. if subprocess add elements also
 
 ## v0.4.0
 
@@ -40,3 +38,5 @@
 1. there is some issue in the tests when after an rmtree the cache dir can't be created again
    1. create a test for it?
    1. not sure if it affects callers that own the cache dir
+1. can dmn `decision_table`s be lazy loaded for `BusinessRuleTasks`?
+   1. for "free" if we make a subprocess out of them and swap the node for a `CallActivity`?

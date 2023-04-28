@@ -37,8 +37,7 @@ pub fn from_json_string(
     let process_id = workflow_spec.spec.name.to_string();
 
     // the first element unit is always the full workflow. if nothing can be
-    // decomposed, or the caller's capabilities don't line up we always have
-    // a fallback.
+    // decomposed we always have a fallback.
     let first_element_unit = ElementUnit::FullWorkflow(workflow_spec);
 
     main_process_element_units.push_element_unit(first_element_unit);

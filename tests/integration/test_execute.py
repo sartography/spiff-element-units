@@ -26,7 +26,6 @@ class ExecuteTest(unittest.TestCase):
                 TEST_CACHE_DIR,
                 key,
                 test.process_id,
-                test.process_id,
-                0)
+                test.process_id)
             specs = json.loads(specs_str)
             test_workflow_from_specs(test, specs)

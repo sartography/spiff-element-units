@@ -82,7 +82,6 @@ pub fn workflow_from_cached_element_unit(
     cache_key: &str,
     process_id: &str,
     element_id: &str,
-    _kcapabilities: u64,
 ) -> ApiResult<String> {
     let entry_path =
         cache::path_for_entry(cache_dir, cache_key, CacheEntryType::Manifest(process_id));

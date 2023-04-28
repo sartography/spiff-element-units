@@ -36,8 +36,7 @@ class CacheTest(unittest.TestCase):
                 TEST_CACHE_DIR,
                 key,
                 data.process_id,
-                data.process_id,
-                0)
+                data.process_id)
             
             assert isinstance(element_unit_str, str)
             element_unit_dict = json.loads(element_unit_str)
@@ -51,15 +50,16 @@ class CacheTest(unittest.TestCase):
         # are too complex to be considered a single test case but still something we
         # want to work with.
         #
-        # how this test handles nuking the cache dir needs to be
-        # reconsidered so we can break this out.
-        with open("tests/data/sideloaded/pp1.json") as f:
-            specs = f.read()
+        # how this test handles nuking the cache dir needs to be reconsidered so we
+        # can break this out.
+        for sideloaded in ["pp1"]:
+            with open(f"tests/data/sideloaded/{sideloaded}.json") as f:
+                specs = f.read()
         
-        spiff_element_units.cache_element_units_for_workflow(
-            TEST_CACHE_DIR,
-            "pp1",
-            specs)
+                spiff_element_units.cache_element_units_for_workflow(
+                    TEST_CACHE_DIR,
+                    sideloaded,
+                    specs)
 
     def test_reading_from_empty_cache_throws_expected_exception(self):
         with tempfile.TemporaryDirectory() as empty_cache_dir:
@@ -68,8 +68,7 @@ class CacheTest(unittest.TestCase):
                     empty_cache_dir,
                     "somekey",
                     "someid",
-                    "anotherid",
-                    0)
+                    "anotherid")
                 
             self.assertRaises(ValueError, read)
             
@@ -79,8 +78,7 @@ class CacheTest(unittest.TestCase):
                 TEST_CACHE_DIR,
                 "__akeyimadeupforthistest",
                 "wontmatter",
-                "whocares",
-                0)
+                "whocares")
                 
         self.assertRaises(ValueError, read)
             
