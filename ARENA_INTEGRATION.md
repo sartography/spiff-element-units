@@ -27,3 +27,4 @@ it can use the cached workflow to run the remaining portions of the process.
    1. can this be the same as if the called process was run directly?
 1. what happens if anything that applies to call activities is done to subprocesses?
 1. do lanes affect the ability to decompose anything?
+1. can decomposed workflows trip an escalation (or something similar) to signal another trip to the cache?

@@ -17,6 +17,7 @@
    1. embed version: https://stackoverflow.com/questions/27840394/how-can-a-rust-program-access-metadata-from-its-cargo-package
 1. update README with new api
 1. test capabilities
+1, need to add the full workflow to each subprocess spec and elements
 
 ## v0.4.0
 

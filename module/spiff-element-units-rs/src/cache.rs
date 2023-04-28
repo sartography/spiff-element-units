@@ -64,7 +64,7 @@ pub mod manifest {
             Self {
                 sha2: element_unit.sha2_str(),
                 r#type: element_unit.r#type(),
-                requirements: 0,
+                requirements: element_unit.requirements(),
             }
         }
     }

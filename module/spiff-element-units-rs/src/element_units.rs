@@ -77,6 +77,10 @@ impl ElementUnit {
         }
     }
 
+    pub fn requirements(&self) -> u64 {
+    0
+    }
+
     pub fn to_workflow_spec(&self) -> &WorkflowSpec {
         match self {
             ElementUnit::FullWorkflow(ws) => ws,
