@@ -2,6 +2,7 @@
 
 ## v0.3.0
 
+1. get pp1 specs added, loaded
 1. need to have test versions of element units
    1. build.rs? read from disk? just hardcode?
    1. how much do we leverage the integration tests vs rust tests?
