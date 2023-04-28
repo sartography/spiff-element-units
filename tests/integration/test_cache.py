@@ -46,6 +46,21 @@ class CacheTest(unittest.TestCase):
 
         # TODO: need to test passing in element ids
 
+        # sideloaded cases are those that don't originate from bpmn diagrams in the
+        # test-cases group of the process models. These typically are processes that
+        # are too complex to be considered a single test case but still something we
+        # want to work with.
+        #
+        # how this test handles nuking the cache dir needs to be
+        # reconsidered so we can break this out.
+        with open("tests/data/sideloaded/pp1.json") as f:
+            specs = f.read()
+        
+        spiff_element_units.cache_element_units_for_workflow(
+            TEST_CACHE_DIR,
+            "pp1",
+            specs)
+
     def test_reading_from_empty_cache_throws_expected_exception(self):
         with tempfile.TemporaryDirectory() as empty_cache_dir:
             def read():
