@@ -40,3 +40,7 @@
    1. for "free" if we make a subprocess out of them and swap the node for a `CallActivity`?
 1. way to type the main spec and subprocess_specs differently
 1. move things to Iterator (element_ids, processes, etc)
+1. using the serde objects as domain objects is probably too expensive
+   1. have intermediate objects that are ref/slice based?
+   1. most likely just do for element units before returning them out
+   1. could help with spec mixin interactions?

@@ -10,13 +10,15 @@ use crate::basis::{ElementIntrospection, Map};
 // form.
 //
 
+pub type RestMap = Map<serde_json::Value>;
+
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct WorkflowSpec {
     pub spec: ProcessSpec,
     pub subprocess_specs: Map<ProcessSpec>,
 
     #[serde(flatten)]
-    rest: Map<serde_json::Value>,
+    rest: RestMap,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -33,7 +35,7 @@ pub struct ProcessSpec {
     pub io_specification: serde_json::Value,
 
     #[serde(flatten)]
-    rest: Map<serde_json::Value>,
+    rest: RestMap,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -56,7 +58,7 @@ pub struct TaskSpec {
     pub script: Option<task_spec_mixin::Script>,
 
     #[serde(flatten)]
-    rest: Map<serde_json::Value>,
+    rest: RestMap,
 }
 
 pub mod task_spec_mixin {
@@ -121,5 +123,25 @@ impl ElementIntrospection for ProcessSpec {
 impl ElementIntrospection for TaskSpec {
     fn push_element_ids(&self, ids: &mut Vec<String>) {
         ids.push(self.name.to_string());
+    }
+}
+
+impl WorkflowSpec {
+    pub fn from_process(process_spec: &ProcessSpec, subprocess_specs: &Map<ProcessSpec>) -> Self {
+        Self {
+            spec: process_spec.clone(),
+            subprocess_specs: subprocess_specs.clone(),
+            rest: RestMap::default(),
+        }
+    }
+}
+
+impl TaskSpec {
+    pub fn subworkflow_name(&self) -> Option<String> {
+        let is_subworkflow_task = self.typename == "SubWorkflowTask";
+
+        is_subworkflow_task
+            .then_some(self.subprocess.as_ref().map(|sp| sp.spec.to_string()))
+            .flatten()
     }
 }

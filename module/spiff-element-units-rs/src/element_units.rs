@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 use sha2::{Digest, Sha256};
+use std::collections::HashSet;
 use std::error::Error;
 
 use crate::basis::{ElementIntrospection, IndexedVec, Map};
@@ -10,11 +11,13 @@ use crate::specs::{ProcessSpec, WorkflowSpec};
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub enum ElementUnit {
     FullWorkflow(WorkflowSpec),
+    IsolatedProcess(ProcessSpec, Map<ProcessSpec>),
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub enum ElementUnitType {
     FullWorkflow,
+    IsolatedProcess,
 }
 
 pub type ElementUnits = IndexedVec<ElementUnit>;
@@ -45,9 +48,9 @@ pub fn from_json_string(
 
         push_element_units_for_process_spec(&process_spec, &mut element_units);
 
-	if element_units.items.len() > 0 {
-        element_units_by_process_id.insert(process_id, element_units);
-	}
+        if element_units.items.len() > 0 {
+            element_units_by_process_id.insert(process_id, element_units);
+        }
     }
 
     Ok(element_units_by_process_id)
@@ -74,10 +77,38 @@ fn push_element_units_for_process_spec(
 ) {
 }
 
+fn insert_subworkflow_names(
+    process_spec: &ProcessSpec,
+    subprocess_specs: &Map<ProcessSpec>,
+    names: &mut HashSet<String>,
+) {
+    for (_, task_spec) in &process_spec.task_specs {
+        let unseen_subworkflow_spec = task_spec
+            .subworkflow_name()
+            .map(|n| subprocess_specs.get(&n))
+            .flatten()
+            .filter(|spec| names.contains(&spec.name));
+
+        if let Some(new_subworkflow_spec) = unseen_subworkflow_spec {
+            names.insert(new_subworkflow_spec.name.to_string());
+            insert_subworkflow_names(&new_subworkflow_spec, subprocess_specs, names)
+        }
+    }
+}
+
 impl ElementIntrospection for ElementUnit {
     fn push_element_ids(&self, ids: &mut Vec<String>) {
+        use ElementUnit::*;
+
         match self {
-            ElementUnit::FullWorkflow(w) => w.push_element_ids(ids),
+            FullWorkflow(workflow_spec) => workflow_spec.push_element_ids(ids),
+            IsolatedProcess(process_spec, subprocess_specs) => {
+                process_spec.push_element_ids(ids);
+
+                for (_, process_spec) in subprocess_specs {
+                    process_spec.push_element_ids(ids);
+                }
+            }
         }
     }
 }
@@ -99,14 +130,22 @@ impl ElementUnit {
     }
 
     pub fn r#type(&self) -> ElementUnitType {
+        use ElementUnit::*;
+
         match self {
-            ElementUnit::FullWorkflow(_) => ElementUnitType::FullWorkflow,
+            FullWorkflow(_) => ElementUnitType::FullWorkflow,
+            IsolatedProcess(_, _) => ElementUnitType::IsolatedProcess,
         }
     }
 
-    pub fn to_workflow_spec(&self) -> &WorkflowSpec {
+    pub fn to_workflow_spec(&self) -> WorkflowSpec {
+        use ElementUnit::*;
+
         match self {
-            ElementUnit::FullWorkflow(ws) => ws,
+            FullWorkflow(workflow_spec) => workflow_spec.clone(),
+            IsolatedProcess(process_spec, subprocess_specs) => {
+                WorkflowSpec::from_process(process_spec, subprocess_specs)
+            }
         }
     }
 }

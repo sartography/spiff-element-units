@@ -98,7 +98,7 @@ pub fn workflow_from_cached_element_unit(
     let element_unit = reader::read::<ElementUnit>(&entry_path)?;
     let workflow_spec = element_unit.to_workflow_spec();
 
-    let contents = writer::write_to_string(workflow_spec)?;
+    let contents = writer::write_to_string(&workflow_spec)?;
 
     Ok(contents)
 }
