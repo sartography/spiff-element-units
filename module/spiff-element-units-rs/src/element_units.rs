@@ -5,9 +5,9 @@ use std::error::Error;
 
 use crate::basis::{ElementIntrospection, IndexedVec, Map};
 use crate::reader;
-use crate::specs::WorkflowSpec;
+use crate::specs::{ProcessSpec, WorkflowSpec};
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub enum ElementUnit {
     FullWorkflow(WorkflowSpec),
 }
@@ -28,22 +28,36 @@ pub fn from_json_string(
     workflow_specs_json: &str,
 ) -> Result<ElementUnitsByProcessID, Box<dyn Error>> {
     let workflow_spec = reader::read_string::<WorkflowSpec>(workflow_specs_json)?;
-
+    let process_specs = &workflow_spec.process_specs();
     let mut element_units_by_process_id = ElementUnitsByProcessID::new();
-    let mut main_process_element_units = ElementUnits {
+
+    let mut element_units = ElementUnits {
         items: Default::default(),
         index_map: Default::default(),
     };
-    let process_id = workflow_spec.spec.name.to_string();
 
     // the first element unit is always the full workflow. if nothing can be
     // decomposed we always have a fallback.
-    let first_element_unit = ElementUnit::FullWorkflow(workflow_spec);
+    let first_element_unit = ElementUnit::FullWorkflow(workflow_spec.clone());
 
-    main_process_element_units.push_element_unit(first_element_unit);
-    element_units_by_process_id.insert(process_id, main_process_element_units);
+    element_units.push_element_unit(first_element_unit);
+
+    for process_spec in process_specs {
+        let mut element_units = element_units.clone();
+        let process_id = process_spec.name.to_string();
+
+        push_element_units_for_process_spec(process_spec, &mut element_units);
+        element_units_by_process_id.insert(process_id, element_units);
+    }
 
     Ok(element_units_by_process_id)
+}
+
+fn push_element_units_for_process_spec(
+    _process_spec: &ProcessSpec,
+    _element_units: &mut ElementUnits,
+) {
+    
 }
 
 impl ElementIntrospection for ElementUnit {

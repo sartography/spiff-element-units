@@ -10,7 +10,7 @@ use crate::basis::{ElementIntrospection, Map};
 // form.
 //
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct WorkflowSpec {
     pub spec: ProcessSpec,
     pub subprocess_specs: Map<ProcessSpec>,
@@ -19,7 +19,7 @@ pub struct WorkflowSpec {
     rest: Map<serde_json::Value>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct ProcessSpec {
     pub name: String,
     pub typename: String,
@@ -36,7 +36,7 @@ pub struct ProcessSpec {
     rest: Map<serde_json::Value>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct TaskSpec {
     pub name: String,
     pub typename: String,
@@ -74,7 +74,7 @@ pub mod task_spec_mixin {
     // need in this lib. any discrepencies should be thought of under that lens.
     //
 
-    #[derive(Debug, Deserialize, Serialize)]
+    #[derive(Clone, Debug, Deserialize, Serialize)]
     pub struct Bpmn {
         // for now at least we don't care about the actual value of thsese
         // fields, just that they have a value when determining if/how we
@@ -85,18 +85,18 @@ pub mod task_spec_mixin {
         pub lane: serde_json::Value,
     }
 
-    #[derive(Debug, Deserialize, Serialize)]
+    #[derive(Clone, Debug, Deserialize, Serialize)]
     pub struct Spiff {
         pub prescript: Option<String>,
         pub postscript: Option<String>,
     }
 
-    #[derive(Debug, Deserialize, Serialize)]
+    #[derive(Clone, Debug, Deserialize, Serialize)]
     pub struct Subprocess {
         pub spec: String,
     }
 
-    #[derive(Debug, Deserialize, Serialize)]
+    #[derive(Clone, Debug, Deserialize, Serialize)]
     pub struct Script {
         pub script: String,
     }
@@ -121,5 +121,13 @@ impl ElementIntrospection for ProcessSpec {
 impl ElementIntrospection for TaskSpec {
     fn push_element_ids(&self, ids: &mut Vec<String>) {
         ids.push(self.name.to_string());
+    }
+}
+
+impl WorkflowSpec {
+    pub fn process_specs<'a>(&'a self) -> Vec<&'a ProcessSpec> {
+        let mut specs: Vec<&ProcessSpec> = self.subprocess_specs.values().collect();
+        specs.push(&self.spec);
+        specs
     }
 }

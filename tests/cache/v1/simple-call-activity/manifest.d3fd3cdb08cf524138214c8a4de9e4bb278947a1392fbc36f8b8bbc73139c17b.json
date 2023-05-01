@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "sha2": "703d69f520edc745fcf9d3c03b5f52d12f0aed3429816ba2fa98c62f537457bc",
+      "type": "FullWorkflow"
+    }
+  ],
+  "index_map": {
+    "Activity_0q1z4d4": [
+      0
+    ],
+    "End": [
+      0
+    ],
+    "Event_05ktmeu": [
+      0
+    ],
+    "Process_p4pfxhq": [
+      0
+    ],
+    "Process_p4pfxhq.EndJoin": [
+      0
+    ],
+    "Start": [
+      0
+    ],
+    "StartEvent_1": [
+      0
+    ]
+  }
+}

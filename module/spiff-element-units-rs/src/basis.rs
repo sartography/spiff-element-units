@@ -18,7 +18,7 @@ pub type Map<V> = BTreeMap<String, V>;
 // point to the same deserialized structure. instead of repeating the
 // data for each key, we maintain indexes into a `vec` per key.
 //
-#[derive(Debug, Default, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct IndexedVec<T> {
     pub items: Vec<T>,
     pub index_map: Map<Vec<usize>>,
