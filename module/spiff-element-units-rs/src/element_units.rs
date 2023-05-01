@@ -31,16 +31,7 @@ pub fn from_json_string(
     let process_specs = &workflow_spec.process_specs();
     let mut element_units_by_process_id = ElementUnitsByProcessID::new();
 
-    let mut element_units = ElementUnits {
-        items: Default::default(),
-        index_map: Default::default(),
-    };
-
-    // the first element unit is always the full workflow. if nothing can be
-    // decomposed we always have a fallback.
-    let first_element_unit = ElementUnit::FullWorkflow(workflow_spec.clone());
-
-    element_units.push_element_unit(first_element_unit);
+    let element_units = default_element_units(&workflow_spec);
 
     for process_spec in process_specs {
         let mut element_units = element_units.clone();
@@ -51,6 +42,24 @@ pub fn from_json_string(
     }
 
     Ok(element_units_by_process_id)
+}
+
+fn default_element_units(workflow_spec: &WorkflowSpec) -> ElementUnits {
+    let mut element_units = ElementUnits {
+        items: Default::default(),
+        index_map: Default::default(),
+    };
+
+    // the first element unit is always the full workflow. if nothing can be
+    // decomposed we always have a fallback. this should not be permanent,
+    // ideally we will always have an element unit at some point. the next step
+    // away from needing this would be to only insert at the end for element ids
+    // that have no element units. this is a conservative measure but is not
+    // the most performant thing to do.
+    
+    let first_element_unit = ElementUnit::FullWorkflow(workflow_spec.clone());
+    element_units.push_element_unit(first_element_unit);
+    element_units
 }
 
 fn push_element_units_for_process_spec(
