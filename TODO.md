@@ -9,12 +9,10 @@
    1. same as if that process was passed in with the same cache key
 1. form element unit that is full workflow with call activity subprocesses removed
    1. err on the side of safety - no data inputs/outputs, etc
-   1. this element unit will have the first requirement flag (LAZY_CALL_ACTIVITIES)
 1. don't parrot `serializer_version`, return our own
    1. embed version: https://stackoverflow.com/questions/27840394/how-can-a-rust-program-access-metadata-from-its-cargo-package
    1. maybe just for workflows we create?
 1. update README with new api
-1. test capabilities
 1, need to add the full workflow element unit for each subprocess spec to the manifest
    1. if subprocess add elements also
 
@@ -40,3 +38,5 @@
    1. not sure if it affects callers that own the cache dir
 1. can dmn `decision_table`s be lazy loaded for `BusinessRuleTasks`?
    1. for "free" if we make a subprocess out of them and swap the node for a `CallActivity`?
+1. way to type the main spec and subprocess_specs differently
+1. move things to Iterator (element_ids, processes, etc)

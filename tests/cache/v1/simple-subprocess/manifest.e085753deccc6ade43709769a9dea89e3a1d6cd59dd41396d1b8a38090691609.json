@@ -1,31 +1,4 @@
 {
-  "items": [
-    {
-      "sha2": "ff16f1de117a8efba8c2bdb60cbbb0b5be8d45d7a3bb064338a46acbefea8c6e",
-      "type": "FullWorkflow"
-    }
-  ],
-  "index_map": {
-    "Activity_12x6czg": [
-      0
-    ],
-    "End": [
-      0
-    ],
-    "Event_0lhuova": [
-      0
-    ],
-    "Process_vv0fdgv": [
-      0
-    ],
-    "Process_vv0fdgv.EndJoin": [
-      0
-    ],
-    "Start": [
-      0
-    ],
-    "StartEvent_1": [
-      0
-    ]
-  }
+  "items": [],
+  "index_map": {}
 }

@@ -1,31 +1,4 @@
 {
-  "items": [
-    {
-      "sha2": "1ba4d4d9b0bdbba440379934920479c840e8b410466b4cbf92b933f28bc0f834",
-      "type": "FullWorkflow"
-    }
-  ],
-  "index_map": {
-    "Activity_0ecs1u1": [
-      0
-    ],
-    "End": [
-      0
-    ],
-    "Event_16rmzi1": [
-      0
-    ],
-    "Process_cqu23d1": [
-      0
-    ],
-    "Process_cqu23d1.EndJoin": [
-      0
-    ],
-    "Start": [
-      0
-    ],
-    "StartEvent_1": [
-      0
-    ]
-  }
+  "items": [],
+  "index_map": {}
 }

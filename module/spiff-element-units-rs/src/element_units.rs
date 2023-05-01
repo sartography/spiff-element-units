@@ -28,45 +28,47 @@ pub fn from_json_string(
     workflow_specs_json: &str,
 ) -> Result<ElementUnitsByProcessID, Box<dyn Error>> {
     let workflow_spec = reader::read_string::<WorkflowSpec>(workflow_specs_json)?;
-    let process_specs = &workflow_spec.process_specs();
     let mut element_units_by_process_id = ElementUnitsByProcessID::new();
 
-    let element_units = default_element_units(&workflow_spec);
+    {
+        let mut element_units = ElementUnits::default();
+        let process_id = workflow_spec.spec.name.to_string();
 
-    for process_spec in process_specs {
-        let mut element_units = element_units.clone();
-        let process_id = process_spec.name.to_string();
+        push_element_units_for_workflow_spec(&workflow_spec, &mut element_units);
+        push_element_units_for_process_spec(&workflow_spec.spec, &mut element_units);
 
-        push_element_units_for_process_spec(process_spec, &mut element_units);
+        element_units_by_process_id.insert(process_id, element_units);
+    }
+
+    for (process_id, process_spec) in workflow_spec.subprocess_specs {
+        let mut element_units = ElementUnits::default();
+
+        push_element_units_for_process_spec(&process_spec, &mut element_units);
         element_units_by_process_id.insert(process_id, element_units);
     }
 
     Ok(element_units_by_process_id)
 }
 
-fn default_element_units(workflow_spec: &WorkflowSpec) -> ElementUnits {
-    let mut element_units = ElementUnits {
-        items: Default::default(),
-        index_map: Default::default(),
-    };
-
+fn push_element_units_for_workflow_spec(
+    workflow_spec: &WorkflowSpec,
+    element_units: &mut ElementUnits,
+) {
     // the first element unit is always the full workflow. if nothing can be
     // decomposed we always have a fallback. this should not be permanent,
     // ideally we will always have an element unit at some point. the next step
     // away from needing this would be to only insert at the end for element ids
     // that have no element units. this is a conservative measure but is not
     // the most performant thing to do.
-    
+
     let first_element_unit = ElementUnit::FullWorkflow(workflow_spec.clone());
     element_units.push_element_unit(first_element_unit);
-    element_units
 }
 
 fn push_element_units_for_process_spec(
     _process_spec: &ProcessSpec,
     _element_units: &mut ElementUnits,
 ) {
-    
 }
 
 impl ElementIntrospection for ElementUnit {
@@ -111,5 +113,14 @@ impl ElementUnits {
         let element_ids = element_unit.element_ids();
 
         self.push_for_keys(element_unit, &element_ids);
+    }
+}
+
+impl Default for ElementUnits {
+    fn default() -> Self {
+        ElementUnits {
+            items: Default::default(),
+            index_map: Default::default(),
+        }
     }
 }

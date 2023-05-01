@@ -123,11 +123,3 @@ impl ElementIntrospection for TaskSpec {
         ids.push(self.name.to_string());
     }
 }
-
-impl WorkflowSpec {
-    pub fn process_specs<'a>(&'a self) -> Vec<&'a ProcessSpec> {
-        let mut specs: Vec<&ProcessSpec> = self.subprocess_specs.values().collect();
-        specs.push(&self.spec);
-        specs
-    }
-}
