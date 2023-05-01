@@ -44,7 +44,10 @@ pub fn from_json_string(
         let mut element_units = ElementUnits::default();
 
         push_element_units_for_process_spec(&process_spec, &mut element_units);
+
+	if element_units.items.len() > 0 {
         element_units_by_process_id.insert(process_id, element_units);
+	}
     }
 
     Ok(element_units_by_process_id)
