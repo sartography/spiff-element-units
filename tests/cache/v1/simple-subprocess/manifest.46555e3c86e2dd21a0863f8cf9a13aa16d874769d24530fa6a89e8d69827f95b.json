@@ -2,8 +2,7 @@
   "items": [
     {
       "sha2": "ff16f1de117a8efba8c2bdb60cbbb0b5be8d45d7a3bb064338a46acbefea8c6e",
-      "type": "FullWorkflow",
-      "requirements": 0
+      "type": "FullWorkflow"
     }
   ],
   "index_map": {

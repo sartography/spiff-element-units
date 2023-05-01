@@ -14,7 +14,10 @@ use crate::basis::{ElementIntrospection, Map};
 pub struct WorkflowSpec {
     pub spec: ProcessSpec,
     pub subprocess_specs: Map<ProcessSpec>,
-    pub serializer_version: String,
+    
+
+    #[serde(flatten)]
+    rest: Map<serde_json::Value>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]

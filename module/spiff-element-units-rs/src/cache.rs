@@ -54,7 +54,6 @@ pub mod manifest {
     pub struct ManifestEntry {
         pub sha2: String,
         pub r#type: ElementUnitType,
-        pub requirements: u64,
     }
 
     pub type Manifest = IndexedVec<ManifestEntry>;
@@ -64,7 +63,6 @@ pub mod manifest {
             Self {
                 sha2: element_unit.sha2_str(),
                 r#type: element_unit.r#type(),
-                requirements: element_unit.requirements(),
             }
         }
     }

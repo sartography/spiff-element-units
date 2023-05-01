@@ -4,7 +4,7 @@
 
 The library requires callers to provide:
 
-1. a serialized workflow spec in the form of `{"spec":..., "subprocess_specs"...}`  dumped to a json string
+1. a serialized workflow spec in the form of `{"spec": {..}, "subprocess_specs": {..}, serializer_version: "somevalue"}`  dumped to a json string
 1. a cache key that is used when refering to the above serialized workflow spec
 1. a directory used to store the element unit cache
 1. process and element ids
@@ -40,11 +40,12 @@ TODO: exceptions raised.
 def workflow_from_cached_element_unit(
     cache_dir: str,
     cache_key: str,
+    process_id: str,
     element_id: str,
 ) -> str:
 ```
 
-Returns the json representation of a workflow capable of executing the first element unit available for the `element_id` associated with `cache_key`. This can be used to start or resume a process from previously cached element units.
+Returns the json representation of a workflow capable of executing the first element unit available in `process_id` for the `element_id` associated with `cache_key`. This can be used to start or resume a process from previously cached element units.
 
 TODO: exceptions raised.
 
