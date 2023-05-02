@@ -86,14 +86,16 @@ fn push_element_units_for_process_spec(
         return;
     }
 
+    //
+    // first none workflow element unit - if all subprocesses are referenced by call
+    // activities in the main process, drop them so they can be lazy loaded by the
+    // workflow runner.
+    //
     let spec_references = process_spec.spec_references();
-    /*
-    let call_activity_references: Vec<SpecReference> = spec_references
-        .into_iter()
+    let call_activity_references: Vec<&SpecReference> = spec_references
+        .iter()
         .filter(|sr| !process_spec.task_specs.contains_key(&sr.spec_name))
         .collect();
-	*/
-let call_activity_references = spec_references;
 
     if call_activity_references.len() != subprocess_specs.len() {
         return;

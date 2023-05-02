@@ -151,7 +151,7 @@ impl WorkflowSpec {
 
 impl ProcessSpec {
     pub fn isolable(&self) -> bool {
-        self.data_objects.len() > 0
+        self.data_objects.len() == 0
             && is_empty(&self.io_specification)
             && is_empty(&self.correlation_keys)
     }
@@ -189,7 +189,7 @@ fn is_empty(val: &serde_json::Value) -> bool {
 }
 
 #[cfg(test)]
-mod task_spec_tests {
+mod spec_tests {
     use super::*;
     use std::error::Error;
     use std::path::{Path, PathBuf};
@@ -199,30 +199,33 @@ mod task_spec_tests {
     type ReadResult<T> = Result<T, Box<dyn Error>>;
 
     #[test]
-    fn test_no_tasks_has_no_spec_references() -> ReadResult<()> {
+    fn test_no_tasks() -> ReadResult<()> {
         let path = test_case_path("no-tasks/no-tasks.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
+	assert_eq!(workflow_spec.spec.isolable(), true);
 	assert_eq!(workflow_spec.spec.spec_references().len(), 0);
 
         Ok(())
     }
 
     #[test]
-    fn test_simple_call_activity_has_one_spec_reference() -> ReadResult<()> {
+    fn test_simple_call_activity() -> ReadResult<()> {
         let path = test_case_path("simple-call-activity/simple_call_activity.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
+	assert_eq!(workflow_spec.spec.isolable(), true);
 	assert_eq!(workflow_spec.spec.spec_references().len(), 1);
 
         Ok(())
     }
 
     #[test]
-    fn test_simple_subprocess_has_one_spec_reference() -> ReadResult<()> {
+    fn test_simple_subprocess() -> ReadResult<()> {
         let path = test_case_path("simple-subprocess/simple_subprocess.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
+	assert_eq!(workflow_spec.spec.isolable(), true);
 	assert_eq!(workflow_spec.spec.spec_references().len(), 1);
 
         Ok(())
