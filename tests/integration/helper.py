@@ -5,24 +5,19 @@ from SpiffWorkflow.bpmn.serializer.workflow import BpmnWorkflowSerializer
 from SpiffWorkflow.bpmn.workflow import BpmnWorkflow
 from SpiffWorkflow.spiff.parser.process import SpiffBpmnParser
 from SpiffWorkflow.spiff.serializer.config import SPIFF_SPEC_CONFIG
+from SpiffWorkflow.task import TaskState
 
 SPEC_CONVERTER = BpmnWorkflowSerializer.configure_workflow_spec_converter(SPIFF_SPEC_CONFIG)
 
 TEST_CACHE_DIR = "tests/cache"
 
-# TODO: have just one executor that doesn't call do_engine_steps and just
-# gets the next ready task and runs it
-def _do_engine_steps(workflow):
+def _run_tasks(workflow):
     while not workflow.is_completed():
-        workflow.do_engine_steps()
+        ready_tasks = workflow.get_tasks(TaskState.READY)
+        if len(ready_tasks) == 0:
+            break
+        ready_tasks[0].run()
         workflow.refresh_waiting_tasks()
-
-def _two_manual_tasks(workflow):
-    workflow.do_engine_steps()
-    workflow.get_ready_user_tasks()[0].run()
-    workflow.do_engine_steps()
-    workflow.get_ready_user_tasks()[0].run()
-    workflow.do_engine_steps()
 
 @dataclass
 class TestCaseData:
@@ -32,12 +27,12 @@ class TestCaseData:
     expected_result: dict
 
 TEST_CASES = {
-    "nested-call-activities": TestCaseData("nested-call-activities/nested_call_activity.json", "Process_cqu23d1", _do_engine_steps, {"x": 1}),
-    "no-tasks": TestCaseData("no-tasks/no-tasks.json", "no_tasks", _do_engine_steps, {}),
-    "single-task": TestCaseData("single-task/single_task.json", "SingleTask_Process", _do_engine_steps, {"x": 1}),
+    "nested-call-activities": TestCaseData("nested-call-activities/nested_call_activity.json", "Process_cqu23d1", _run_tasks, {"x": 1}),
+    "no-tasks": TestCaseData("no-tasks/no-tasks.json", "no_tasks", _run_tasks, {}),
+    "single-task": TestCaseData("single-task/single_task.json", "SingleTask_Process", _run_tasks, {"x": 1}),
     "simple-call-activity": TestCaseData("simple-call-activity/simple_call_activity.json", "Process_p4pfxhq", _do_engine_steps, {"x": 1}),
-    "simple-subprocess": TestCaseData("simple-subprocess/simple_subprocess.json", "Process_vv0fdgv", _do_engine_steps, {"x": 1}),
-    "manual-tasks": TestCaseData("manual-tasks/manual_tasks.json", "Process_diu8ta2", _two_manual_tasks, {}),
+    "simple-subprocess": TestCaseData("simple-subprocess/simple_subprocess.json", "Process_vv0fdgv", _run_tasks, {"x": 1}),
+    "manual-tasks": TestCaseData("manual-tasks/manual_tasks.json", "Process_diu8ta2", _run_tasks, {}),
 }
 
 def read_specs_json(relname):
