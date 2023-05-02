@@ -92,6 +92,11 @@ fn push_element_units_for_process_spec(
     // workflow runner.
     //
     let spec_references = process_spec.spec_references();
+
+    if spec_references.len() == 0 {
+        return;
+    }
+
     let call_activity_references: Vec<&SpecReference> = spec_references
         .iter()
         .filter(|sr| !process_spec.task_specs.contains_key(&sr.spec_name))

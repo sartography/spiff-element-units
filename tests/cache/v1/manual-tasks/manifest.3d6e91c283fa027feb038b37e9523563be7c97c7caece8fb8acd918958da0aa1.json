@@ -3,44 +3,32 @@
     {
       "sha2": "8ed585eeff8e32da79ece4a2bed17cc9fb418d7df912cb470ddb63d63bfb7c91",
       "type": "FullWorkflow"
-    },
-    {
-      "sha2": "0e2d7602d6a9c28af4ec8dd5e5e3c1bfbbe38d8ddad00c10cd999615ad2eb3de",
-      "type": "LazyCallActivities"
     }
   ],
   "index_map": {
     "Activity_1h7gm30": [
-      0,
-      1
+      0
     ],
     "Activity_1n7p3m4": [
-      0,
-      1
+      0
     ],
     "End": [
-      0,
-      1
+      0
     ],
     "Event_0iozjmo": [
-      0,
-      1
+      0
     ],
     "Process_diu8ta2": [
-      0,
-      1
+      0
     ],
     "Process_diu8ta2.EndJoin": [
-      0,
-      1
+      0
     ],
     "Start": [
-      0,
-      1
+      0
     ],
     "StartEvent_1": [
-      0,
-      1
+      0
     ]
   }
 }

@@ -203,8 +203,8 @@ mod spec_tests {
         let path = test_case_path("no-tasks/no-tasks.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
-	assert_eq!(workflow_spec.spec.isolable(), true);
-	assert_eq!(workflow_spec.spec.spec_references().len(), 0);
+        assert_eq!(workflow_spec.spec.isolable(), true);
+        assert_eq!(workflow_spec.spec.spec_references().len(), 0);
 
         Ok(())
     }
@@ -214,8 +214,8 @@ mod spec_tests {
         let path = test_case_path("simple-call-activity/simple_call_activity.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
-	assert_eq!(workflow_spec.spec.isolable(), true);
-	assert_eq!(workflow_spec.spec.spec_references().len(), 1);
+        assert_eq!(workflow_spec.spec.isolable(), true);
+        assert_eq!(workflow_spec.spec.spec_references().len(), 1);
 
         Ok(())
     }
@@ -225,15 +225,15 @@ mod spec_tests {
         let path = test_case_path("simple-subprocess/simple_subprocess.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
-	assert_eq!(workflow_spec.spec.isolable(), true);
-	assert_eq!(workflow_spec.spec.spec_references().len(), 1);
+        assert_eq!(workflow_spec.spec.isolable(), true);
+        assert_eq!(workflow_spec.spec.spec_references().len(), 1);
 
         Ok(())
     }
 
     fn test_case_path(test_case: &str) -> PathBuf {
         // TODO: set an env? so this works in and out of docker
-	// TODO: test helper module? broader test items in TODOs
+        // TODO: test helper module? broader test items in TODOs
         let base_path = Path::new("/integration/tests/data/specs-json/test-cases");
         base_path.join(test_case)
     }

@@ -3,36 +3,26 @@
     {
       "sha2": "98d3c3da9164f9fc382954290c4febcecb015bc24391139ea9b892b7b9f07e10",
       "type": "FullWorkflow"
-    },
-    {
-      "sha2": "904bfda794c9f61b0ca0ace02732bc97a3da1c7f91c6829f18af86b7ee9e68a9",
-      "type": "LazyCallActivities"
     }
   ],
   "index_map": {
     "End": [
-      0,
-      1
+      0
     ],
     "Event_0qq9il3": [
-      0,
-      1
+      0
     ],
     "Start": [
-      0,
-      1
+      0
     ],
     "StartEvent_1": [
-      0,
-      1
+      0
     ],
     "no_tasks": [
-      0,
-      1
+      0
     ],
     "no_tasks.EndJoin": [
-      0,
-      1
+      0
     ]
   }
 }

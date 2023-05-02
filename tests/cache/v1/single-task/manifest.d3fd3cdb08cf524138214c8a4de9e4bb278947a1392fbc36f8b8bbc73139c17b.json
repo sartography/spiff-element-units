@@ -3,40 +3,29 @@
     {
       "sha2": "4cffe82760da44af959b87b682110140fcdab732fc3c37cbf912810a781d49ba",
       "type": "FullWorkflow"
-    },
-    {
-      "sha2": "bd2ed60f1b77d8f311356136fd5899c65898308d271983a13006d33028ca0df0",
-      "type": "LazyCallActivities"
     }
   ],
   "index_map": {
     "Activity_1mwbqi4": [
-      0,
-      1
+      0
     ],
     "End": [
-      0,
-      1
+      0
     ],
     "Event_1gsb2u0": [
-      0,
-      1
+      0
     ],
     "SingleTask_Process": [
-      0,
-      1
+      0
     ],
     "SingleTask_Process.EndJoin": [
-      0,
-      1
+      0
     ],
     "Start": [
-      0,
-      1
+      0
     ],
     "StartEvent_1": [
-      0,
-      1
+      0
     ]
   }
 }
