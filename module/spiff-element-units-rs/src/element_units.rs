@@ -1,23 +1,22 @@
 use serde::{Deserialize, Serialize};
 
 use sha2::{Digest, Sha256};
-use std::collections::HashSet;
 use std::error::Error;
 
 use crate::basis::{ElementIntrospection, IndexedVec, Map};
 use crate::reader;
-use crate::specs::{ProcessSpec, WorkflowSpec};
+use crate::specs::{ProcessSpec, SpecReference, WorkflowSpec};
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub enum ElementUnit {
     FullWorkflow(WorkflowSpec),
-    IsolatedProcess(ProcessSpec, Map<ProcessSpec>),
+    LazyCallActivities(ProcessSpec),
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub enum ElementUnitType {
     FullWorkflow,
-    IsolatedProcess,
+    LazyCallActivities,
 }
 
 pub type ElementUnits = IndexedVec<ElementUnit>;
@@ -31,6 +30,7 @@ pub fn from_json_string(
     workflow_specs_json: &str,
 ) -> Result<ElementUnitsByProcessID, Box<dyn Error>> {
     let workflow_spec = reader::read_string::<WorkflowSpec>(workflow_specs_json)?;
+    let subprocess_specs = &workflow_spec.subprocess_specs;
     let mut element_units_by_process_id = ElementUnitsByProcessID::new();
 
     {
@@ -38,20 +38,26 @@ pub fn from_json_string(
         let process_id = workflow_spec.spec.name.to_string();
 
         push_element_units_for_workflow_spec(&workflow_spec, &mut element_units);
-        push_element_units_for_process_spec(&workflow_spec.spec, &mut element_units);
+        push_element_units_for_process_spec(
+            &workflow_spec.spec,
+            subprocess_specs,
+            &mut element_units,
+        );
 
         element_units_by_process_id.insert(process_id, element_units);
     }
 
-    for (process_id, process_spec) in workflow_spec.subprocess_specs {
+    /*
+    for (process_id, process_spec) in subprocess_specs {
         let mut element_units = ElementUnits::default();
 
-        push_element_units_for_process_spec(&process_spec, &mut element_units);
+        push_element_units_for_process_spec(&process_spec, subprocess_specs, &mut element_units);
 
         if element_units.items.len() > 0 {
-            element_units_by_process_id.insert(process_id, element_units);
+            element_units_by_process_id.insert(process_id.to_string(), element_units);
         }
     }
+    */
 
     Ok(element_units_by_process_id)
 }
@@ -72,28 +78,29 @@ fn push_element_units_for_workflow_spec(
 }
 
 fn push_element_units_for_process_spec(
-    _process_spec: &ProcessSpec,
-    _element_units: &mut ElementUnits,
-) {
-}
-
-fn insert_subworkflow_names(
     process_spec: &ProcessSpec,
     subprocess_specs: &Map<ProcessSpec>,
-    names: &mut HashSet<String>,
+    element_units: &mut ElementUnits,
 ) {
-    for (_, task_spec) in &process_spec.task_specs {
-        let unseen_subworkflow_spec = task_spec
-            .subworkflow_name()
-            .map(|n| subprocess_specs.get(&n))
-            .flatten()
-            .filter(|spec| names.contains(&spec.name));
-
-        if let Some(new_subworkflow_spec) = unseen_subworkflow_spec {
-            names.insert(new_subworkflow_spec.name.to_string());
-            insert_subworkflow_names(&new_subworkflow_spec, subprocess_specs, names)
-        }
+    if !process_spec.isolable() {
+        return;
     }
+
+    let spec_references = process_spec.spec_references();
+    /*
+    let call_activity_references: Vec<SpecReference> = spec_references
+        .into_iter()
+        .filter(|sr| !process_spec.task_specs.contains_key(&sr.spec_name))
+        .collect();
+	*/
+let call_activity_references = spec_references;
+
+    if call_activity_references.len() != subprocess_specs.len() {
+        return;
+    }
+
+    let element_unit = ElementUnit::LazyCallActivities(process_spec.clone());
+    element_units.push_element_unit(element_unit)
 }
 
 impl ElementIntrospection for ElementUnit {
@@ -102,12 +109,8 @@ impl ElementIntrospection for ElementUnit {
 
         match self {
             FullWorkflow(workflow_spec) => workflow_spec.push_element_ids(ids),
-            IsolatedProcess(process_spec, subprocess_specs) => {
+            LazyCallActivities(process_spec) => {
                 process_spec.push_element_ids(ids);
-
-                for (_, process_spec) in subprocess_specs {
-                    process_spec.push_element_ids(ids);
-                }
             }
         }
     }
@@ -134,7 +137,7 @@ impl ElementUnit {
 
         match self {
             FullWorkflow(_) => ElementUnitType::FullWorkflow,
-            IsolatedProcess(_, _) => ElementUnitType::IsolatedProcess,
+            LazyCallActivities(_) => ElementUnitType::LazyCallActivities,
         }
     }
 
@@ -143,9 +146,7 @@ impl ElementUnit {
 
         match self {
             FullWorkflow(workflow_spec) => workflow_spec.clone(),
-            IsolatedProcess(process_spec, subprocess_specs) => {
-                WorkflowSpec::from_process(process_spec, subprocess_specs)
-            }
+            LazyCallActivities(process_spec) => WorkflowSpec::from_process(process_spec),
         }
     }
 }

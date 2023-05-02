@@ -104,6 +104,19 @@ pub mod task_spec_mixin {
     }
 }
 
+//
+//
+//
+
+pub struct SpecReference {
+    pub spec_name: String,
+    pub task_typename: String,
+}
+
+//
+//
+//
+
 impl ElementIntrospection for WorkflowSpec {
     fn push_element_ids(&self, ids: &mut Vec<String>) {
         self.spec.push_element_ids(ids);
@@ -127,21 +140,98 @@ impl ElementIntrospection for TaskSpec {
 }
 
 impl WorkflowSpec {
-    pub fn from_process(process_spec: &ProcessSpec, subprocess_specs: &Map<ProcessSpec>) -> Self {
+    pub fn from_process(process_spec: &ProcessSpec) -> Self {
         Self {
             spec: process_spec.clone(),
-            subprocess_specs: subprocess_specs.clone(),
+            subprocess_specs: Map::<ProcessSpec>::new(),
             rest: RestMap::default(),
         }
     }
 }
 
-impl TaskSpec {
-    pub fn subworkflow_name(&self) -> Option<String> {
-        let is_subworkflow_task = self.typename == "SubWorkflowTask";
+impl ProcessSpec {
+    pub fn isolable(&self) -> bool {
+        self.data_objects.len() > 0
+            && is_empty(&self.io_specification)
+            && is_empty(&self.correlation_keys)
+    }
 
-        is_subworkflow_task
-            .then_some(self.subprocess.as_ref().map(|sp| sp.spec.to_string()))
+    pub fn spec_references(&self) -> Vec<SpecReference> {
+        self.task_specs
+            .values()
+            .map(|ts| ts.spec_reference())
+            .into_iter()
             .flatten()
+            .collect()
+    }
+}
+
+impl TaskSpec {
+    pub fn spec_reference(&self) -> Option<SpecReference> {
+        let spec_name = self.subprocess.as_ref()?.spec.to_string();
+        let task_typename = self.typename.to_string();
+
+        Some(SpecReference {
+            spec_name,
+            task_typename,
+        })
+    }
+}
+
+fn is_empty(val: &serde_json::Value) -> bool {
+    use serde_json::Value::*;
+
+    match val {
+        Null => true,
+        Object(o) => o.len() == 0,
+        _ => false,
+    }
+}
+
+#[cfg(test)]
+mod task_spec_tests {
+    use super::*;
+    use std::error::Error;
+    use std::path::{Path, PathBuf};
+
+    use crate::reader::read;
+
+    type ReadResult<T> = Result<T, Box<dyn Error>>;
+
+    #[test]
+    fn test_no_tasks_has_no_spec_references() -> ReadResult<()> {
+        let path = test_case_path("no-tasks/no-tasks.json");
+        let workflow_spec: WorkflowSpec = read(&path)?;
+
+	assert_eq!(workflow_spec.spec.spec_references().len(), 0);
+
+        Ok(())
+    }
+
+    #[test]
+    fn test_simple_call_activity_has_one_spec_reference() -> ReadResult<()> {
+        let path = test_case_path("simple-call-activity/simple_call_activity.json");
+        let workflow_spec: WorkflowSpec = read(&path)?;
+
+	assert_eq!(workflow_spec.spec.spec_references().len(), 1);
+
+        Ok(())
+    }
+
+    #[test]
+    fn test_simple_subprocess_has_one_spec_reference() -> ReadResult<()> {
+        let path = test_case_path("simple-subprocess/simple_subprocess.json");
+        let workflow_spec: WorkflowSpec = read(&path)?;
+
+	assert_eq!(workflow_spec.spec.spec_references().len(), 1);
+
+        Ok(())
+    }
+
+    fn test_case_path(test_case: &str) -> PathBuf {
+        // TODO: set an env? so this works in and out of docker
+	// TODO: test helper module? broader test items in TODOs
+        let base_path = Path::new("/integration/tests/data/specs-json/test-cases");
+        base_path.join(test_case)
     }
 }
