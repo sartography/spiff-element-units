@@ -21,13 +21,12 @@ def _load_future_specs(workflow, specs_loader):
         
         if missing_spec not in loaded_specs:
             lazy_spec, lazy_subprocess_specs = converted_specs(specs_loader(missing_spec, missing_spec))
-            if missing_spec not in lazy_subprocess_specs:
-                lazy_subprocess_specs[missing_spec] = lazy_spec
+            lazy_subprocess_specs[missing_spec] = lazy_spec
 
-            for (k, v) in lazy_subprocess_specs.items():
-                if k not in loaded_specs:
-                    workflow.subprocess_specs[k] = v
-                    loaded_specs.add(k)
+            for name, spec in lazy_subprocess_specs.items():
+                if name not in loaded_specs:
+                    workflow.subprocess_specs[name] = spec
+                    loaded_specs.add(name)
 
 def _run_tasks(workflow, specs_loader):
     while not workflow.is_completed():
