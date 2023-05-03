@@ -4,15 +4,13 @@
 
 1. test more in spiff-arena
 
-## v0.4.0
-
 1. new api to get element units without using the cache
 1. new api to write existing element units to the cache
 1. split cache into spiff-element-units-disk-cache
 1. split spiffworkflow-specs to own lib
 1. add support for the `all_specs` structure
 
-## rest
+## mostly unordered queue
 
 1. run integration tests as part of CI
 1. run cargo tests as part of CI
