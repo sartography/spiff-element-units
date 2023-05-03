@@ -14,6 +14,8 @@ use cache::entry::Type as CacheEntryType;
 use cache::manifest::Manifest;
 use element_units::ElementUnit;
 
+const VERSION: &str = env!("CARGO_PKG_VERSION");
+
 //
 // this is the public api. it is a thin waist on purpose to make other
 // language bindings and caller interactions simple. we don't want to be
@@ -96,7 +98,9 @@ pub fn workflow_from_cached_element_unit(
         CacheEntryType::ManifestEntry(&manifest_entry.sha2),
     );
     let element_unit = reader::read::<ElementUnit>(&entry_path)?;
-    let workflow_spec = element_unit.to_workflow_spec();
+    let mut workflow_spec = element_unit.to_workflow_spec();
+
+    workflow_spec.set_serializer_version(VERSION);
 
     let contents = writer::write_to_string(&workflow_spec)?;
 

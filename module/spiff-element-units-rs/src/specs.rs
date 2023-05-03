@@ -136,6 +136,13 @@ impl WorkflowSpec {
             rest: RestMap::default(),
         }
     }
+
+    pub fn set_serializer_version(&mut self, version: &str) {
+        let key = "serializer_version".to_string();
+        let value = serde_json::Value::String(format!("spiff-element-units-{}", version));
+
+        self.rest.insert(key, value);
+    }
 }
 
 impl ProcessSpec {

@@ -42,6 +42,7 @@ class CacheTest(unittest.TestCase):
             element_unit_dict = json.loads(element_unit_str)
             assert isinstance(element_unit_dict, dict)
             assert data.process_id == element_unit_dict["spec"]["name"]
+            assert element_unit_dict["serializer_version"].startswith("spiff-element-units-")
 
         # TODO: need to test passing in element ids
 
