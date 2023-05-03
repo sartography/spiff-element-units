@@ -19,6 +19,7 @@ def _load_future_specs(workflow, specs_loader):
             continue
         spec_to_load = task.task_spec.spec
         if spec_to_load not in loaded_specs and spec_to_load not in workflow.subprocess_specs:
+            print(f"LOAD: {spec_to_load}")
             subprocess_specs = specs_loader(spec_to_load, spec_to_load)
             # TODO: as we need to lazy load more this will need to load in "subprocess_specs" also
             workflow.subprocess_specs[spec_to_load] = subprocess_specs["spec"]

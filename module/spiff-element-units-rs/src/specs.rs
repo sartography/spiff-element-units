@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use serde::{Deserialize, Serialize};
 use serde_json;
 
@@ -104,19 +106,6 @@ pub mod task_spec_mixin {
     }
 }
 
-//
-//
-//
-
-pub struct SpecReference {
-    pub spec_name: String,
-    pub task_typename: String,
-}
-
-//
-//
-//
-
 impl ElementIntrospection for WorkflowSpec {
     fn push_element_ids(&self, ids: &mut Vec<String>) {
         self.spec.push_element_ids(ids);
@@ -156,25 +145,21 @@ impl ProcessSpec {
             && is_empty(&self.correlation_keys)
     }
 
-    pub fn spec_references(&self) -> Vec<SpecReference> {
+    pub fn call_activity_spec_references(&self) -> Vec<String> {
         self.task_specs
             .values()
-            .map(|ts| ts.spec_reference())
+            .map(|ts| ts.call_activity_spec_reference())
             .into_iter()
             .flatten()
+            .collect::<HashSet<_>>()
+            .into_iter()
             .collect()
     }
 }
 
 impl TaskSpec {
-    pub fn spec_reference(&self) -> Option<SpecReference> {
-        let spec_name = self.subprocess.as_ref()?.spec.to_string();
-        let task_typename = self.typename.to_string();
-
-        Some(SpecReference {
-            spec_name,
-            task_typename,
-        })
+    pub fn call_activity_spec_reference(&self) -> Option<String> {
+        (self.typename == "CallActivity").then_some(self.subprocess.as_ref()?.spec.to_string())
     }
 }
 
@@ -204,7 +189,7 @@ mod spec_tests {
         let workflow_spec: WorkflowSpec = read(&path)?;
 
         assert_eq!(workflow_spec.spec.isolable(), true);
-        assert_eq!(workflow_spec.spec.spec_references().len(), 0);
+        assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 0);
 
         Ok(())
     }
@@ -215,7 +200,7 @@ mod spec_tests {
         let workflow_spec: WorkflowSpec = read(&path)?;
 
         assert_eq!(workflow_spec.spec.isolable(), true);
-        assert_eq!(workflow_spec.spec.spec_references().len(), 1);
+        assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 1);
 
         Ok(())
     }
@@ -226,7 +211,7 @@ mod spec_tests {
         let workflow_spec: WorkflowSpec = read(&path)?;
 
         assert_eq!(workflow_spec.spec.isolable(), true);
-        assert_eq!(workflow_spec.spec.spec_references().len(), 1);
+        assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 0);
 
         Ok(())
     }

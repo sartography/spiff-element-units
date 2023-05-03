@@ -5,7 +5,7 @@ use std::error::Error;
 
 use crate::basis::{ElementIntrospection, IndexedVec, Map};
 use crate::reader;
-use crate::specs::{ProcessSpec, SpecReference, WorkflowSpec};
+use crate::specs::{ProcessSpec, WorkflowSpec};
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub enum ElementUnit {
@@ -22,6 +22,8 @@ pub enum ElementUnitType {
 pub type ElementUnits = IndexedVec<ElementUnit>;
 pub type ElementUnitsByProcessID = Map<ElementUnits>;
 
+type ElementUnitForProcessID = (String, ElementUnit);
+
 //
 // constructs a map of element units grouped by process id that can be found in the
 // given workflow specs json string.
@@ -30,42 +32,25 @@ pub fn from_json_string(
     workflow_specs_json: &str,
 ) -> Result<ElementUnitsByProcessID, Box<dyn Error>> {
     let workflow_spec = reader::read_string::<WorkflowSpec>(workflow_specs_json)?;
-    let subprocess_specs = &workflow_spec.subprocess_specs;
     let mut element_units_by_process_id = ElementUnitsByProcessID::new();
 
-    {
-        let mut element_units = ElementUnits::default();
-        let process_id = workflow_spec.spec.name.to_string();
-
-        push_element_units_for_workflow_spec(&workflow_spec, &mut element_units);
-        push_element_units_for_process_spec(
-            &workflow_spec.spec,
-            subprocess_specs,
-            &mut element_units,
-        );
-
-        element_units_by_process_id.insert(process_id, element_units);
+    for (process_id, element_unit) in element_units_for_workflow_spec(&workflow_spec) {
+        element_units_by_process_id
+            .entry(process_id)
+            .and_modify(|eu| eu.push_element_unit(element_unit.clone()))
+            .or_insert({
+                let mut eu = ElementUnits::default();
+                eu.push_element_unit(element_unit);
+                eu
+            });
     }
-
-    /*
-    for (process_id, process_spec) in subprocess_specs {
-        let mut element_units = ElementUnits::default();
-
-        push_element_units_for_process_spec(&process_spec, subprocess_specs, &mut element_units);
-
-        if element_units.items.len() > 0 {
-            element_units_by_process_id.insert(process_id.to_string(), element_units);
-        }
-    }
-    */
 
     Ok(element_units_by_process_id)
 }
 
-fn push_element_units_for_workflow_spec(
-    workflow_spec: &WorkflowSpec,
-    element_units: &mut ElementUnits,
-) {
+fn element_units_for_workflow_spec(workflow_spec: &WorkflowSpec) -> Vec<ElementUnitForProcessID> {
+    let mut element_units = Vec::<ElementUnitForProcessID>::new();
+
     // the first element unit is always the full workflow. if nothing can be
     // decomposed we always have a fallback. this should not be permanent,
     // ideally we will always have an element unit at some point. the next step
@@ -74,40 +59,36 @@ fn push_element_units_for_workflow_spec(
     // the most performant thing to do.
 
     let first_element_unit = ElementUnit::FullWorkflow(workflow_spec.clone());
-    element_units.push_element_unit(first_element_unit);
+    element_units.push((workflow_spec.spec.name.to_string(), first_element_unit));
+
+    // next we see if we can start to isolate the process specs. this is the first
+    // step to decomposing the workflow. currently under limited circumstances we can
+    // remove subprocesses for call activities and turn them into their own element
+    // units. instead of one large workflow this results in several smaller workflows
+    // which can make our lives easier down the road.
+
+    lazy_call_activity_element_units(&workflow_spec).map(|eu| element_units.extend(eu));
+
+    element_units
 }
 
-fn push_element_units_for_process_spec(
-    process_spec: &ProcessSpec,
-    subprocess_specs: &Map<ProcessSpec>,
-    element_units: &mut ElementUnits,
-) {
-    if !process_spec.isolable() {
-        return;
-    }
+fn lazy_call_activity_element_units(
+    workflow_spec: &WorkflowSpec,
+) -> Option<Vec<ElementUnitForProcessID>> {
+    let process_spec = &workflow_spec.spec;
+    
+    let call_activity_spec_references = process_spec
+        .isolable()
+        .then_some(process_spec.call_activity_spec_references())
+        .filter(|refs| !refs.is_empty())
+	.filter(|refs| refs.len() == workflow_spec.subprocess_specs.len())?;
 
-    //
-    // first none workflow element unit - if all subprocesses are referenced by call
-    // activities in the main process, drop them so they can be lazy loaded by the
-    // workflow runner.
-    //
-    let spec_references = process_spec.spec_references();
-
-    if spec_references.len() == 0 {
-        return;
-    }
-
-    let call_activity_references: Vec<&SpecReference> = spec_references
-        .iter()
-        .filter(|sr| !process_spec.task_specs.contains_key(&sr.spec_name))
-        .collect();
-
-    if call_activity_references.len() != subprocess_specs.len() {
-        return;
-    }
+    let mut element_units = Vec::<ElementUnitForProcessID>::new();
 
     let element_unit = ElementUnit::LazyCallActivities(process_spec.clone());
-    element_units.push_element_unit(element_unit)
+    element_units.push((process_spec.name.to_string(), element_unit));
+
+    Some(element_units)
 }
 
 impl ElementIntrospection for ElementUnit {
