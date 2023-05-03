@@ -76,17 +76,27 @@ fn lazy_call_activity_element_units(
     workflow_spec: &WorkflowSpec,
 ) -> Option<Vec<ElementUnitForProcessID>> {
     let process_spec = &workflow_spec.spec;
-    
+
     let call_activity_spec_references = process_spec
         .isolable()
         .then_some(process_spec.call_activity_spec_references())
         .filter(|refs| !refs.is_empty())
-	.filter(|refs| refs.len() == workflow_spec.subprocess_specs.len())?;
+        .filter(|refs| refs.len() == workflow_spec.subprocess_specs.len())?;
 
     let mut element_units = Vec::<ElementUnitForProcessID>::new();
 
     let element_unit = ElementUnit::LazyCallActivities(process_spec.clone());
     element_units.push((process_spec.name.to_string(), element_unit));
+
+    for spec_ref in call_activity_spec_references {
+        let process_spec = workflow_spec
+            .subprocess_specs
+            .get(&spec_ref)
+            .filter(|spec| spec.isolable())?;
+
+        let element_unit = ElementUnit::LazyCallActivities(process_spec.clone());
+        element_units.push((spec_ref, element_unit));
+    }
 
     Some(element_units)
 }
