@@ -2,16 +2,9 @@
 
 ## v0.3.0
 
-1. form element unit that is full workflow with call activity subprocesses removed
-   1. err on the side of safety - no data inputs/outputs, etc
-   1. make sure no human tasks are in play - actually only allow known task typenames
-1. build element units for subprocesses that map to a call activity
-   1. same as if that process was passed in with the same cache key
-1. bug if more than one call activity points to a subprocess (len check)
 1. don't parrot `serializer_version`, return our own
    1. embed version: https://stackoverflow.com/questions/27840394/how-can-a-rust-program-access-metadata-from-its-cargo-package
    1. maybe just for workflows we create?
-1. update README with new api
 
 ## v0.4.0
 
@@ -47,3 +40,4 @@
 1, need to add the full workflow element unit for each subprocess spec to the manifest
    1. if subprocess add elements also
 1. write log under each cache key
+1. check for known task types?

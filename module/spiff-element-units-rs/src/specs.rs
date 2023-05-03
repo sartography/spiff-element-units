@@ -174,7 +174,7 @@ fn is_empty(val: &serde_json::Value) -> bool {
 }
 
 #[cfg(test)]
-mod spec_tests {
+mod tests {
     use super::*;
     use std::error::Error;
     use std::path::{Path, PathBuf};

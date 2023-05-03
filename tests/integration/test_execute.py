@@ -14,7 +14,6 @@ from .helper import (
 class ExecuteTest(unittest.TestCase):
 
     def test_can_execute_specs_json_test_cases(self):
-        return
         for k in TEST_CASES.keys():
             test = TEST_CASES[k]
             specs = load_specs_json(test.relname)
