@@ -13,17 +13,20 @@ TEST_CACHE_DIR = "tests/cache"
 
 def _load_future_specs(workflow, specs_loader):
     future_tasks = workflow.get_tasks(TaskState.FUTURE)
-    loaded_specs = set()
+    loaded_specs = set(workflow.subprocess_specs.keys())
     for task in future_tasks:
         if not task.task_spec.spec_type == "Call Activity":
             continue
-        spec_to_load = task.task_spec.spec
-        if spec_to_load not in loaded_specs and spec_to_load not in workflow.subprocess_specs:
-            print(f"LOAD: {spec_to_load}")
-            subprocess_specs = specs_loader(spec_to_load, spec_to_load)
-            # TODO: as we need to lazy load more this will need to load in "subprocess_specs" also
-            workflow.subprocess_specs[spec_to_load] = subprocess_specs["spec"]
-            loaded_specs.add(spec_to_load)
+        missing_spec = task.task_spec.spec
+        if missing_spec not in loaded_specs:
+            lazy_spec, lazy_subprocess_specs = converted_specs(specs_loader(missing_spec, missing_spec))
+            if missing_spec not in lazy_subprocess_specs:
+                lazy_subprocess_specs[missing_spec] = lazy_spec
+
+            for (k, v) in lazy_subprocess_specs.items():
+                if k not in loaded_specs:
+                    workflow.subprocess_specs[k] = v
+                    loaded_specs.add(k)
 
 def _run_tasks(workflow, specs_loader):
     while not workflow.is_completed():
@@ -59,7 +62,7 @@ def load_specs_json(relname):
     with open(f"tests/data/specs-json/test-cases/{relname}") as f:
         return json.load(f)
 
-def converted_specs(specs, process_id):
+def converted_specs(specs):
     converted_specs = {
         "spec": SPEC_CONVERTER.restore(specs["spec"]),
         "subprocess_specs": {
@@ -70,12 +73,12 @@ def converted_specs(specs, process_id):
     subprocesses = converted_specs["subprocess_specs"]
     return (top_level, subprocesses)
 
-def workflow_from_specs(specs, process_id):
-    top_level, subprocesses = converted_specs(specs, process_id)
+def workflow_from_specs(specs):
+    top_level, subprocesses = converted_specs(specs)
     return BpmnWorkflow(top_level, subprocesses)
 
 def test_workflow_from_specs(test, specs, specs_loader):
-    workflow = workflow_from_specs(specs, test.process_id)
+    workflow = workflow_from_specs(specs)
     test.executor(workflow, specs_loader)
     assert workflow.is_completed()
     assert workflow.data == test.expected_result
