@@ -22,7 +22,7 @@ SINGLE_TASK = bpmn_test_case("single-task/single_task.bpmn")
 
 SUPPORTING_FILES = {
     MULTIPLE_CALL_ACTIVITIES: [
-        bpmn_test_case("countries-and-cities/country_cities.bpmn"),
+        SINGLE_TASK,
         bpmn_test_case("manual-tasks/manual_tasks.bpmn"),
         bpmn_test_case("no-tasks/no-tasks.bpmn"),
     ],

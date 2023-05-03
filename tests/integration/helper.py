@@ -11,17 +11,17 @@ SPEC_CONVERTER = BpmnWorkflowSerializer.configure_workflow_spec_converter(SPIFF_
 
 TEST_CACHE_DIR = "tests/cache"
 
-def _load_future_specs(workflow, specs_loader):
-    future_tasks = workflow.get_tasks(TaskState.FUTURE)
+def _lazy_load_specs(workflow, specs_loader):
+    tasks = workflow.get_tasks(TaskState.DEFINITE_MASK)
     loaded_specs = set(workflow.subprocess_specs.keys())
-    for task in future_tasks:
+    for task in tasks:
         if not task.task_spec.spec_type == "Call Activity":
             continue
-        missing_spec = task.task_spec.spec
+        spec_to_check = task.task_spec.spec
         
-        if missing_spec not in loaded_specs:
-            lazy_spec, lazy_subprocess_specs = converted_specs(specs_loader(missing_spec, missing_spec))
-            lazy_subprocess_specs[missing_spec] = lazy_spec
+        if spec_to_check not in loaded_specs:
+            lazy_spec, lazy_subprocess_specs = converted_specs(specs_loader(spec_to_check, spec_to_check))
+            lazy_subprocess_specs[spec_to_check] = lazy_spec
 
             for name, spec in lazy_subprocess_specs.items():
                 if name not in loaded_specs:
@@ -33,7 +33,7 @@ def _run_tasks(workflow, specs_loader):
         ready_tasks = workflow.get_tasks(TaskState.READY)
         if len(ready_tasks) == 0:
             break
-        _load_future_specs(workflow, specs_loader)
+        _lazy_load_specs(workflow, specs_loader)
         task = ready_tasks[0]
         task.run()
         workflow.refresh_waiting_tasks()
@@ -46,12 +46,13 @@ class TestCaseData:
     expected_result: dict
 
 TEST_CASES = {
+    "manual-tasks": TestCaseData("manual-tasks/manual_tasks.json", "Process_diu8ta2", _run_tasks, {}),
+    "multiple-call-activities": TestCaseData("mutliple-call-activities/multiple_call_activities.json", "Process_90mmqlw", _run_tasks, {"x": 1}),
     "nested-call-activities": TestCaseData("nested-call-activities/nested_call_activity.json", "Process_cqu23d1", _run_tasks, {"x": 1}),
     "no-tasks": TestCaseData("no-tasks/no-tasks.json", "no_tasks", _run_tasks, {}),
     "single-task": TestCaseData("single-task/single_task.json", "SingleTask_Process", _run_tasks, {"x": 1}),
     "simple-call-activity": TestCaseData("simple-call-activity/simple_call_activity.json", "Process_p4pfxhq", _run_tasks, {"x": 1}),
     "simple-subprocess": TestCaseData("simple-subprocess/simple_subprocess.json", "Process_vv0fdgv", _run_tasks, {"x": 1}),
-    "manual-tasks": TestCaseData("manual-tasks/manual_tasks.json", "Process_diu8ta2", _run_tasks, {}),
 }
 
 def read_specs_json(relname):
