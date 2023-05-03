@@ -50,7 +50,7 @@ def workflow_from_cached_element_unit(
 
 Returns the json representation of a workflow capable of executing the first element unit available in `process_id` for the `element_id` associated with `cache_key`. This can be used to start or resume a process from previously cached element units.
 
-Raises `ValueError` if `cache_dir` does not exist or an element unit cannot be formed with the given inputs.
+Raises `ValueError` if `cache_dir` does not exist or a workflow cannot be formed with the given inputs.
 
 ## Development
 

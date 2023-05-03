@@ -3,7 +3,6 @@
 ## v0.3.0
 
 1. test more in spiff-arena
-1. update README to talk about lazy loading requirements for callers
 
 ## v0.4.0
 
