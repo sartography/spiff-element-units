@@ -4,6 +4,7 @@
 
 1. test more in spiff-arena
    1. any process with manual/user tasks is not isolable, will revist after 0.3.0
+   1. update pyi file
 
 1. new api to get element units without using the cache
 1. new api to write existing element units to the cache
