@@ -18,6 +18,7 @@ def _load_future_specs(workflow, specs_loader):
         if not task.task_spec.spec_type == "Call Activity":
             continue
         missing_spec = task.task_spec.spec
+        
         if missing_spec not in loaded_specs:
             lazy_spec, lazy_subprocess_specs = converted_specs(specs_loader(missing_spec, missing_spec))
             if missing_spec not in lazy_subprocess_specs:
@@ -46,7 +47,7 @@ class TestCaseData:
     expected_result: dict
 
 TEST_CASES = {
-    #"nested-call-activities": TestCaseData("nested-call-activities/nested_call_activity.json", "Process_cqu23d1", _run_tasks, {"x": 1}),
+    "nested-call-activities": TestCaseData("nested-call-activities/nested_call_activity.json", "Process_cqu23d1", _run_tasks, {"x": 1}),
     #"no-tasks": TestCaseData("no-tasks/no-tasks.json", "no_tasks", _run_tasks, {}),
     #"single-task": TestCaseData("single-task/single_task.json", "SingleTask_Process", _run_tasks, {"x": 1}),
     "simple-call-activity": TestCaseData("simple-call-activity/simple_call_activity.json", "Process_p4pfxhq", _run_tasks, {"x": 1}),
