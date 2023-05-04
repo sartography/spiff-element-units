@@ -2,8 +2,7 @@
 
 ## v0.3.0
 
-1. test more in spiff-arena
-   1. any process with manual/user tasks is not isolable, will revist after 0.3.0
+1. ship
 
 ## mostly unordered queue
 
