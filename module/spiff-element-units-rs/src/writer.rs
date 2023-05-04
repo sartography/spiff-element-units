@@ -5,6 +5,8 @@ use std::fs::File;
 use std::io::{self, BufWriter, Write};
 use std::path::PathBuf;
 
+use crate::config;
+
 //
 // write `contents` to file at `path`.
 //
@@ -34,7 +36,13 @@ where
 {
     let file = File::create(path)?;
     let mut writer = BufWriter::new(file);
-    serde_json::to_writer_pretty(&mut writer, value)?;
+
+    if config::pretty_json() {
+        serde_json::to_writer_pretty(&mut writer, value)?;
+    } else {
+        serde_json::to_writer(&mut writer, value)?;
+    }
+
     writer.flush()?;
 
     Ok(())

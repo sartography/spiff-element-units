@@ -1,15 +1,20 @@
 use std::error::Error;
 use std::iter::zip;
 
+mod basis;
 mod cache;
-mod domain;
+mod config;
 mod element_units;
 mod manifest;
 mod reader;
+mod specs;
 mod writer;
 
 use cache::entry::Type as CacheEntryType;
-use domain::{ElementUnit, Manifest, WorkflowSpec};
+use cache::manifest::Manifest;
+use element_units::ElementUnit;
+
+const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 //
 // this is the public api. it is a thin waist on purpose to make other
@@ -44,21 +49,28 @@ pub fn cache_element_units_for_workflow(
     )?;
     writer::write_string(&entry_path, workflow_specs_json)?;
 
-    let el_units = element_units::from_json_string(&workflow_specs_json)?;
-    let manifest = manifest::from_element_units(&el_units);
-    let el_units_and_manifest_entries = zip(&el_units.items, &manifest.items);
+    let el_units_by_process_id = element_units::from_json_string(&workflow_specs_json)?;
 
-    for (el_unit, manifest_entry) in el_units_and_manifest_entries {
+    for (process_id, el_units) in el_units_by_process_id.iter() {
+        let manifest = manifest::from_element_units(&el_units);
+        let el_units_and_manifest_entries = zip(&el_units.items, &manifest.items);
+
+        for (el_unit, manifest_entry) in el_units_and_manifest_entries {
+            let entry_path = cache::created_path_for_entry(
+                cache_dir,
+                cache_key,
+                CacheEntryType::ManifestEntry(&manifest_entry.sha2),
+            )?;
+            writer::write(&entry_path, el_unit)?;
+        }
+
         let entry_path = cache::created_path_for_entry(
             cache_dir,
             cache_key,
-            CacheEntryType::ManifestEntry(manifest_entry.sha2.to_string()),
+            CacheEntryType::Manifest(process_id),
         )?;
-        writer::write(&entry_path, el_unit)?;
+        writer::write(&entry_path, &manifest)?;
     }
-
-    let entry_path = cache::created_path_for_entry(cache_dir, cache_key, CacheEntryType::Manifest)?;
-    writer::write(&entry_path, &manifest)?;
 
     Ok(())
 }
@@ -70,9 +82,11 @@ pub fn cache_element_units_for_workflow(
 pub fn workflow_from_cached_element_unit(
     cache_dir: &str,
     cache_key: &str,
+    process_id: &str,
     element_id: &str,
 ) -> ApiResult<String> {
-    let entry_path = cache::path_for_entry(cache_dir, cache_key, CacheEntryType::Manifest);
+    let entry_path =
+        cache::path_for_entry(cache_dir, cache_key, CacheEntryType::Manifest(process_id));
     let manifest = reader::read::<Manifest>(&entry_path)?;
     let manifest_entry = manifest
         .last_item_for_key(element_id.to_string())
@@ -81,12 +95,14 @@ pub fn workflow_from_cached_element_unit(
     let entry_path = cache::path_for_entry(
         cache_dir,
         cache_key,
-        CacheEntryType::ManifestEntry(manifest_entry.sha2.to_string()),
+        CacheEntryType::ManifestEntry(&manifest_entry.sha2),
     );
     let element_unit = reader::read::<ElementUnit>(&entry_path)?;
-    let workflow_spec = WorkflowSpec::from_element_unit(&element_unit);
+    let mut workflow_spec = element_unit.to_workflow_spec();
 
-    let contents = writer::write_to_string(workflow_spec)?;
+    workflow_spec.set_serializer_version(VERSION);
+
+    let contents = writer::write_to_string(&workflow_spec)?;
 
     Ok(contents)
 }

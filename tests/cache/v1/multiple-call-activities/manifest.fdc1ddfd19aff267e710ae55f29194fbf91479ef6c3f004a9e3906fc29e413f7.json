@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "sha2": "e028e0ba9cbd64227aa3230cd27f42026c3b03c921e915378f9ee5ac504f05b8",
+      "type": "FullWorkflow"
+    }
+  ],
+  "index_map": {
+    "Activity_0d5dido": [
+      0
+    ],
+    "Activity_0rsppq2": [
+      0
+    ],
+    "Activity_185dcnc": [
+      0
+    ],
+    "End": [
+      0
+    ],
+    "Event_0yflyfj": [
+      0
+    ],
+    "Process_90mmqlw": [
+      0
+    ],
+    "Process_90mmqlw.EndJoin": [
+      0
+    ],
+    "Start": [
+      0
+    ],
+    "StartEvent_1": [
+      0
+    ]
+  }
+}

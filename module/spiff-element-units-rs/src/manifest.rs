@@ -1,4 +1,5 @@
-use crate::domain::{ElementUnits, Manifest, ManifestEntry};
+use crate::cache::manifest::{Manifest, ManifestEntry};
+use crate::element_units::ElementUnits;
 
 pub fn from_element_units(element_units: &ElementUnits) -> Manifest {
     Manifest {

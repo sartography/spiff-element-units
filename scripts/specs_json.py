@@ -15,22 +15,29 @@ def bpmn_test_case(suffix):
     return f"{PROCESS_MODELS_DIR}/test-cases/{suffix}"
 
 MULTIPLE_CALL_ACTIVITIES = bpmn_test_case("mutliple-call-activities/multiple_call_activities.bpmn")
+NESTED_CALL_ACTIVITY = bpmn_test_case("nested-call-activities/nested_call_activity.bpmn")
 SIMPLE_CALL_ACTIVITY = bpmn_test_case("simple-call-activity/simple_call_activity.bpmn")
 SIMPLE_SUBPROCESS = bpmn_test_case("simple-subprocess/simple_subprocess.bpmn")
+SINGLE_TASK = bpmn_test_case("single-task/single_task.bpmn")
 
 SUPPORTING_FILES = {
     MULTIPLE_CALL_ACTIVITIES: [
-        bpmn_test_case("countries-and-cities/country_cities.bpmn"),
+        SINGLE_TASK,
         bpmn_test_case("manual-tasks/manual_tasks.bpmn"),
         bpmn_test_case("no-tasks/no-tasks.bpmn"),
     ],
+    NESTED_CALL_ACTIVITY: [
+        SIMPLE_CALL_ACTIVITY,
+        SINGLE_TASK,
+    ],
     SIMPLE_CALL_ACTIVITY: [
-        bpmn_test_case("single-task/single_task.bpmn"),
+        SINGLE_TASK,
     ],
 }
 
 PROCESS_IDS = {
     MULTIPLE_CALL_ACTIVITIES: "Process_90mmqlw",
+    NESTED_CALL_ACTIVITY: "Process_cqu23d1",
     SIMPLE_CALL_ACTIVITY: "Process_p4pfxhq",
     SIMPLE_SUBPROCESS: "Process_vv0fdgv",
 }

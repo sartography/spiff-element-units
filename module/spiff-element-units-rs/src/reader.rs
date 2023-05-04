@@ -34,7 +34,7 @@ mod tests {
     use super::*;
     use std::path::Path;
 
-    use crate::domain::WorkflowSpec;
+    use crate::specs::WorkflowSpec;
 
     type ReadResult<T> = Result<T, Box<dyn Error>>;
 
