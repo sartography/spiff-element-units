@@ -150,6 +150,17 @@ impl ProcessSpec {
         self.data_objects.len() == 0
             && is_empty(&self.io_specification)
             && is_empty(&self.correlation_keys)
+            && !self.has_human_task()
+    }
+
+    pub fn has_human_task(&self) -> bool {
+        for (_, task) in &self.task_specs {
+            if task.is_human_task() {
+                return true;
+            }
+        }
+
+        false
     }
 
     pub fn call_activity_spec_references(&self) -> Vec<String> {
@@ -167,6 +178,10 @@ impl ProcessSpec {
 impl TaskSpec {
     pub fn call_activity_spec_reference(&self) -> Option<String> {
         (self.typename == "CallActivity").then_some(self.subprocess.as_ref()?.spec.to_string())
+    }
+
+    pub fn is_human_task(&self) -> bool {
+        self.typename == "UserTask" || self.typename == "ManualTask"
     }
 }
 
@@ -189,6 +204,17 @@ mod tests {
     use crate::reader::read;
 
     type ReadResult<T> = Result<T, Box<dyn Error>>;
+
+    #[test]
+    fn test_manual_tasks() -> ReadResult<()> {
+        let path = test_case_path("manual-tasks/manual_tasks.json");
+        let workflow_spec: WorkflowSpec = read(&path)?;
+
+        assert_eq!(workflow_spec.spec.isolable(), false);
+        assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 0);
+
+        Ok(())
+    }
 
     #[test]
     fn test_no_tasks() -> ReadResult<()> {
