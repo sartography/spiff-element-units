@@ -4,16 +4,14 @@
 
 1. test more in spiff-arena
    1. any process with manual/user tasks is not isolable, will revist after 0.3.0
-   1. update pyi file
+
+## mostly unordered queue
 
 1. new api to get element units without using the cache
 1. new api to write existing element units to the cache
 1. split cache into spiff-element-units-disk-cache
 1. split spiffworkflow-specs to own lib
 1. add support for the `all_specs` structure
-
-## mostly unordered queue
-
 1. run integration tests as part of CI
 1. run cargo tests as part of CI
 1. maybe not run full build matrix on pr?
@@ -41,3 +39,4 @@
    1. if subprocess add elements also
 1. write log under each cache key
 1. check for known task types?
+1. manual/user task restrictions from 0.3.0

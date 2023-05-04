@@ -11,9 +11,10 @@ def cache_element_units_for_workflow(
 def workflow_from_cached_element_unit(
         cache_dir: str,
         cache_key: str,
+        process_id: str,
         element_id: str) -> str:
     """
     Returns a workflow described in specs json format that is capable of 
-    executing an element unit that contains element_id and is associated 
-    with cache_key.
+    executing an element unit that contains element_id within process_id 
+    and is associated with cache_key.
     """
