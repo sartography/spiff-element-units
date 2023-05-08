@@ -20,7 +20,7 @@ pub struct WorkflowSpec {
     pub subprocess_specs: Map<ProcessSpec>,
 
     #[serde(flatten)]
-    rest: RestMap,
+    pub rest: RestMap,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -129,14 +129,6 @@ impl ElementIntrospection for TaskSpec {
 }
 
 impl WorkflowSpec {
-    pub fn from_process(process_spec: &ProcessSpec) -> Self {
-        Self {
-            spec: process_spec.clone(),
-            subprocess_specs: Map::<ProcessSpec>::new(),
-            rest: RestMap::default(),
-        }
-    }
-
     pub fn set_serializer_version(&mut self, version: &str) {
         let key = "serializer_version".to_string();
         let value = serde_json::Value::String(format!("spiff-element-units-{}", version));
@@ -150,17 +142,6 @@ impl ProcessSpec {
         self.data_objects.len() == 0
             && is_empty(&self.io_specification)
             && is_empty(&self.correlation_keys)
-            && !self.has_human_task()
-    }
-
-    pub fn has_human_task(&self) -> bool {
-        for (_, task) in &self.task_specs {
-            if task.is_human_task() {
-                return true;
-            }
-        }
-
-        false
     }
 
     pub fn call_activity_spec_references(&self) -> Vec<String> {
@@ -178,10 +159,6 @@ impl ProcessSpec {
 impl TaskSpec {
     pub fn call_activity_spec_reference(&self) -> Option<String> {
         (self.typename == "CallActivity").then_some(self.subprocess.as_ref()?.spec.to_string())
-    }
-
-    pub fn is_human_task(&self) -> bool {
-        self.typename == "UserTask" || self.typename == "ManualTask"
     }
 }
 

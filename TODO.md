@@ -1,8 +1,17 @@
 # TODOs
 
-## v0.3.0
+## v0.3.1
 
-1. ship
+1. no longer recognize events or "internal" tasks
+   1. you won't be able to find an element unit for some end join
+1. lazy call activities restricted to: all subprocesses are top level call activities
+   1. all activity ids must be unique
+1. first element unit besides full workflow is lazy at the top level with no subprocesses
+   1. push for process/element ids from the top level
+1. for each call activity, element unit of lazy at the top level + its spec as subprocess
+   1. push for call activity id and each of its recognized task id
+1. in the integration tests, do some save/restore (maybe on human task?)
+1. bump the versions
 
 ## mostly unordered queue
 
@@ -34,9 +43,9 @@
    1. build.rs? read from disk? just hardcode?
    1. how much do we leverage the integration tests vs rust tests?
    1. when we don't use the serde objects, unit tests become easier?
-1, need to add the full workflow element unit for each subprocess spec to the manifest
+1. need to add the full workflow element unit for each subprocess spec to the manifest
    1. if subprocess add elements also
 1. write log under each cache key
 1. check for known task types?
-1. manual/user task restrictions from 0.3.0
 1. "mutliple-call-activities/multiple_call_activities.json" naming has tripped me up 2x now
+1. look at more (self) -> X to transition objects instead of clone

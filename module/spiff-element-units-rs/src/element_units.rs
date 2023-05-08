@@ -5,12 +5,12 @@ use std::error::Error;
 
 use crate::basis::{ElementIntrospection, IndexedVec, Map};
 use crate::reader;
-use crate::specs::{ProcessSpec, WorkflowSpec};
+use crate::specs::{ProcessSpec, RestMap, WorkflowSpec};
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub enum ElementUnit {
     FullWorkflow(WorkflowSpec),
-    LazyCallActivities(ProcessSpec),
+    LazyCallActivities(ProcessSpec, Map<ProcessSpec>),
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -84,17 +84,20 @@ fn lazy_call_activity_element_units(
         .filter(|refs| refs.len() == workflow_spec.subprocess_specs.len())?;
 
     let mut element_units = Vec::<ElementUnitForProcessID>::new();
+    let subprocess_specs = Map::<ProcessSpec>::new();
 
-    let element_unit = ElementUnit::LazyCallActivities(process_spec.clone());
+    let element_unit = ElementUnit::LazyCallActivities(process_spec.clone(), subprocess_specs);
     element_units.push((process_spec.name.to_string(), element_unit));
 
     for spec_ref in call_activity_spec_references {
         let process_spec = workflow_spec
             .subprocess_specs
             .get(&spec_ref)
-            .filter(|spec| spec.isolable())?;
+            .filter(|spec| spec.isolable())
+            .filter(|spec| spec.call_activity_spec_references().len() == 0)?;
 
-        let element_unit = ElementUnit::LazyCallActivities(process_spec.clone());
+        let subprocess_specs = Map::<ProcessSpec>::new();
+        let element_unit = ElementUnit::LazyCallActivities(process_spec.clone(), subprocess_specs);
         element_units.push((spec_ref, element_unit));
     }
 
@@ -107,7 +110,7 @@ impl ElementIntrospection for ElementUnit {
 
         match self {
             FullWorkflow(workflow_spec) => workflow_spec.push_element_ids(ids),
-            LazyCallActivities(process_spec) => {
+            LazyCallActivities(process_spec, _) => {
                 process_spec.push_element_ids(ids);
             }
         }
@@ -135,16 +138,20 @@ impl ElementUnit {
 
         match self {
             FullWorkflow(_) => ElementUnitType::FullWorkflow,
-            LazyCallActivities(_) => ElementUnitType::LazyCallActivities,
+            LazyCallActivities(_, _) => ElementUnitType::LazyCallActivities,
         }
     }
 
-    pub fn to_workflow_spec(&self) -> WorkflowSpec {
+    pub fn to_workflow_spec(self) -> WorkflowSpec {
         use ElementUnit::*;
 
         match self {
-            FullWorkflow(workflow_spec) => workflow_spec.clone(),
-            LazyCallActivities(process_spec) => WorkflowSpec::from_process(process_spec),
+            FullWorkflow(workflow_spec) => workflow_spec,
+            LazyCallActivities(spec, subprocess_specs) => WorkflowSpec {
+                spec,
+                subprocess_specs,
+                rest: RestMap::default(),
+            },
         }
     }
 }
