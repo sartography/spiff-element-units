@@ -6,10 +6,6 @@
    1. push for call activity id and each of its recognized task id (no top level/process ids)
    1. ResumableCallActivity
 1. in the integration tests, do some save/restore (maybe on human task?)
-1. the LazyCallActivities just got overloaded
-   1. LazyCallActivities - top level no call activity subprocess specs
-   1. PromotedCallActivity - call activity as top level process and its subprocesses
-   1. ResumableCallActivity - top level with a call activity and its subprocesses
 1. Rename the *CallActivity* element units to Subprocess?
 
 ## mostly unordered queue
@@ -24,8 +20,8 @@
 1. maybe not run full build matrix on pr?
    1. nothing real arch/os specific happening so just linux/x86_64 and sdist?
 1. cleanup the auto generated descriptions (pypi page is blank)
-1. make sure type hints work for the host applidcation
 1. are there too many to_strings?
+   1. yes tied into domain objects vs serde objects
 1. there is some issue in the tests when after an rmtree the cache dir can't be created again
    1. create a test for it?
    1. not sure if it affects callers that own the cache dir
@@ -42,9 +38,6 @@
    1. build.rs? read from disk? just hardcode?
    1. how much do we leverage the integration tests vs rust tests?
    1. when we don't use the serde objects, unit tests become easier?
-1. need to add the full workflow element unit for each subprocess spec to the manifest
-   1. if subprocess add elements also
 1. write log under each cache key
-1. check for known task types?
 1. "mutliple-call-activities/multiple_call_activities.json" naming has tripped me up 2x now
 1. look at more (self) -> X to transition objects instead of clone

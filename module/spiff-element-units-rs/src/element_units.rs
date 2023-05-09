@@ -12,6 +12,7 @@ pub enum ElementUnit {
     FullWorkflow(WorkflowSpec),
     LazyCallActivities(ProcessSpec, SubprocessSpecs),
     PromotedCallActivity(ProcessSpec, SubprocessSpecs),
+    ResumableCallActivity(String, ProcessSpec, SubprocessSpecs),
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -19,6 +20,7 @@ pub enum ElementUnitType {
     FullWorkflow,
     LazyCallActivities,
     PromotedCallActivity,
+    ResumableCallActivity,
 }
 
 pub type ElementUnits = IndexedVec<ElementUnit>;
@@ -120,14 +122,15 @@ fn lazy_call_activity_element_units(
         let mut subprocess_specs = Map::<ProcessSpec>::new();
         let element_unit =
             ElementUnit::PromotedCallActivity(subprocess_spec.clone(), subprocess_specs.clone());
-        element_units.push((spec_ref, element_unit));
+        element_units.push((spec_ref.clone(), element_unit));
 
         // 3 - a workflow per call activity with its subprocess specs loaded to facilitate
         //     resuming a workflow from an element within a call activity
 
         subprocess_specs.insert(subprocess_spec.name.to_string(), subprocess_spec.clone());
 
-        let element_unit = ElementUnit::LazyCallActivities(process_spec.clone(), subprocess_specs);
+        let element_unit =
+            ElementUnit::ResumableCallActivity(spec_ref, process_spec.clone(), subprocess_specs);
         element_units.push((process_spec.name.to_string(), element_unit));
     }
 
@@ -140,20 +143,17 @@ impl ElementIntrospection for ElementUnit {
 
         match self {
             FullWorkflow(workflow_spec) => workflow_spec.push_element_ids(ids),
-            LazyCallActivities(process_spec, subprocess_specs) => {
-                process_spec.push_element_ids(ids);
-
-		for (_, subprocess_spec) in subprocess_specs {
-		    subprocess_spec.push_element_ids(ids);
-		}
-            },
-            PromotedCallActivity(process_spec, subprocess_specs) => {
-                process_spec.push_element_ids(ids);
-
-		for (_, subprocess_spec) in subprocess_specs {
-		    subprocess_spec.push_element_ids(ids);
-		}
+            LazyCallActivities(process_spec, subprocess_specs)
+            | PromotedCallActivity(process_spec, subprocess_specs) => {
+                self.push_process_element_ids(ids, &process_spec, &subprocess_specs)
             }
+            ResumableCallActivity(spec_ref, process_spec, subprocess_specs) => self
+                .push_resumable_process_element_ids(
+                    ids,
+                    &spec_ref,
+                    &process_spec,
+                    &subprocess_specs,
+                ),
         }
     }
 }
@@ -181,6 +181,7 @@ impl ElementUnit {
             FullWorkflow(_) => ElementUnitType::FullWorkflow,
             LazyCallActivities(_, _) => ElementUnitType::LazyCallActivities,
             PromotedCallActivity(_, _) => ElementUnitType::PromotedCallActivity,
+            ResumableCallActivity(_, _, _) => ElementUnitType::ResumableCallActivity,
         }
     }
 
@@ -189,17 +190,38 @@ impl ElementUnit {
 
         match self {
             FullWorkflow(workflow_spec) => workflow_spec,
-            LazyCallActivities(spec, subprocess_specs) => WorkflowSpec {
-                spec,
-                subprocess_specs,
-                rest: RestMap::default(),
-            },
-            PromotedCallActivity(spec, subprocess_specs) => WorkflowSpec {
+            LazyCallActivities(spec, subprocess_specs)
+            | PromotedCallActivity(spec, subprocess_specs)
+            | ResumableCallActivity(_, spec, subprocess_specs) => WorkflowSpec {
                 spec,
                 subprocess_specs,
                 rest: RestMap::default(),
             },
         }
+    }
+
+    fn push_process_element_ids(
+        &self,
+        ids: &mut Vec<String>,
+        process_spec: &ProcessSpec,
+        subprocess_specs: &SubprocessSpecs,
+    ) {
+        process_spec.push_element_ids(ids);
+
+        for (_, subprocess_spec) in subprocess_specs {
+            subprocess_spec.push_element_ids(ids);
+        }
+    }
+
+    fn push_resumable_process_element_ids(
+        &self,
+        ids: &mut Vec<String>,
+        spec_ref: &String,
+        process_spec: &ProcessSpec,
+        subprocess_specs: &SubprocessSpecs,
+    ) {
+        ids.push(spec_ref.to_string());
+        // TODO: rest of them
     }
 }
 
