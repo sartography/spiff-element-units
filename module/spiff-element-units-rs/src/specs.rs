@@ -226,15 +226,15 @@ mod tests {
         assert_eq!(workflow_spec.spec.isolable(), true);
         assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 0);
 
-	let manual_task = workflow_spec.spec.task_specs.get("Activity_1n7p3m4").unwrap();
-	assert_eq!(manual_task.is_rendered(), true);
-	assert_eq!(manual_task.is_event(), false);
-	assert_eq!(manual_task.isolable(), true);
+	let it = workflow_spec.spec.task_specs.get("Activity_1n7p3m4").unwrap();
+	assert_eq!(it.is_rendered(), true);
+	assert_eq!(it.is_event(), false);
+	assert_eq!(it.isolable(), true);
 
-	let start_event = workflow_spec.spec.task_specs.get("StartEvent_1").unwrap();
-	assert_eq!(manual_task.is_rendered(), true);
-	assert_eq!(manual_task.is_event(), true);
-	assert_eq!(manual_task.isolable(), false);
+	let it = workflow_spec.spec.task_specs.get("StartEvent_1").unwrap();
+	assert_eq!(it.is_rendered(), true);
+	assert_eq!(it.is_event(), true);
+	assert_eq!(it.isolable(), false);
 
         Ok(())
     }
