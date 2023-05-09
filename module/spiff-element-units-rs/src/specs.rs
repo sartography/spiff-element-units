@@ -231,6 +231,11 @@ mod tests {
 	assert_eq!(manual_task.is_event(), false);
 	assert_eq!(manual_task.isolable(), true);
 
+	let start_event = workflow_spec.spec.task_specs.get("StartEvent_1").unwrap();
+	assert_eq!(manual_task.is_rendered(), true);
+	assert_eq!(manual_task.is_event(), true);
+	assert_eq!(manual_task.isolable(), false);
+
         Ok(())
     }
 
