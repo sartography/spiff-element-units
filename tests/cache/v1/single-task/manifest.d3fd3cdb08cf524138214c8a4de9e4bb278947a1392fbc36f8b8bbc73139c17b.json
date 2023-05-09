@@ -1,11 +1,14 @@
 {
   "items": [
     {
-      "sha2": "8480654db7c6521e06e7c42251ed53623b629e64eba8a7dc6a47ce5769c6c65d",
+      "sha2": "63b8f2da6048e8cb1720b15ef163ef2abb8431b513aab92437b4ec4551620449",
       "type": "FullWorkflow"
     }
   ],
   "index_map": {
+    "Activity_1mwbqi4": [
+      0
+    ],
     "SingleTask_Process": [
       0
     ]

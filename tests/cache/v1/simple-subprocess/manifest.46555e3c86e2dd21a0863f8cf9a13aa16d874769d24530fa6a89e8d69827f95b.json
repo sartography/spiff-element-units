@@ -1,12 +1,16 @@
 {
   "items": [
     {
-      "sha2": "c1332a24b44055b21eb60cda30c803a445c5ea2640cac62c7bd559ed6f45fd73",
+      "sha2": "469473023918e3a16cedce3144acb02f026ce1ded4b277f4bf459acb6ad0892b",
       "type": "FullWorkflow"
     }
   ],
   "index_map": {
     "Activity_12x6czg": [
+      0,
+      0
+    ],
+    "Activity_1qrv734": [
       0
     ],
     "Process_vv0fdgv": [

@@ -1,27 +1,57 @@
 {
   "items": [
     {
-      "sha2": "a70a8c38781e3bef6fa2d615083323c64e069ae8b5f5035ccd4d8709442b4eb3",
+      "sha2": "01d3b74d568ad448f81e0f7c144990cf5e0b2eaeb97b059ef430f592da95f3c7",
       "type": "FullWorkflow"
     },
     {
-      "sha2": "e255f407785b247e0819e71e90afe94d22c67450b058c69edd1d04f920df92f4",
+      "sha2": "22db898ef1d187622005b2e873e175859de2c6161eae4f355b5f3036d9b777d2",
       "type": "LazyCallActivities"
     },
     {
-      "sha2": "e255f407785b247e0819e71e90afe94d22c67450b058c69edd1d04f920df92f4",
+      "sha2": "22db898ef1d187622005b2e873e175859de2c6161eae4f355b5f3036d9b777d2",
       "type": "LazyCallActivities"
     },
     {
-      "sha2": "e255f407785b247e0819e71e90afe94d22c67450b058c69edd1d04f920df92f4",
+      "sha2": "22db898ef1d187622005b2e873e175859de2c6161eae4f355b5f3036d9b777d2",
       "type": "LazyCallActivities"
     },
     {
-      "sha2": "e255f407785b247e0819e71e90afe94d22c67450b058c69edd1d04f920df92f4",
+      "sha2": "22db898ef1d187622005b2e873e175859de2c6161eae4f355b5f3036d9b777d2",
       "type": "LazyCallActivities"
     }
   ],
   "index_map": {
+    "Activity_0d5dido": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "Activity_0rsppq2": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "Activity_185dcnc": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "Activity_1h7gm30": [
+      0
+    ],
+    "Activity_1mwbqi4": [
+      0
+    ],
+    "Activity_1n7p3m4": [
+      0
+    ],
     "Process_90mmqlw": [
       0,
       1,

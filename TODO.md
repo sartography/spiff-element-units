@@ -3,9 +3,8 @@
 ## v0.3.1
 
 1. no longer recognize events or "internal" tasks
-   1. you won't be able to find an element unit for some end join
-1. lazy call activities restricted to: all subprocesses are top level call activities
-   1. all activity ids must be unique
+   1. you won't be able to find an element unit for some end join or events (for now)
+   1. but you can for process, manual task, script task, etc.
 1. first element unit besides full workflow is lazy at the top level with no subprocesses
    1. push for process/element ids from the top level
 1. for each call activity, element unit of lazy at the top level + its spec as subprocess

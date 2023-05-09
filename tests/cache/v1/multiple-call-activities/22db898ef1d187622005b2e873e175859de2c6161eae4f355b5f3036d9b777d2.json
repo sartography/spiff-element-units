@@ -207,61 +207,33 @@
       "file": "tests/data/process-models/test-cases/mutliple-call-activities/multiple_call_activities.bpmn"
     },
     {
-      "SingleTask_Process": {
-        "name": "SingleTask_Process",
+      "no_tasks": {
+        "name": "no_tasks",
         "typename": "BpmnProcessSpec",
         "task_specs": {
-          "Activity_1mwbqi4": {
-            "name": "Activity_1mwbqi4",
-            "typename": "ScriptTask",
-            "inputs": [
-              "StartEvent_1"
-            ],
-            "outputs": [
-              "Event_1gsb2u0"
-            ],
-            "data_input_associations": [],
-            "data_output_associations": [],
-            "io_specification": null,
-            "lane": null,
-            "prescript": null,
-            "postscript": null,
-            "script": "x=1",
-            "description": "x=1",
-            "documentation": null,
-            "extensions": {},
-            "id": "SingleTask_Process_5",
-            "internal": false,
-            "lookahead": 2,
-            "manual": false,
-            "position": {
-              "x": 270.0,
-              "y": 137.0
-            }
-          },
           "End": {
             "name": "End",
             "typename": "Simple",
             "inputs": [
-              "SingleTask_Process.EndJoin"
+              "no_tasks.EndJoin"
             ],
             "outputs": [],
             "prescript": null,
             "postscript": null,
             "description": "",
-            "id": "SingleTask_Process_3",
+            "id": "no_tasks_3",
             "internal": false,
             "lookahead": 2,
             "manual": false
           },
-          "Event_1gsb2u0": {
-            "name": "Event_1gsb2u0",
+          "Event_0qq9il3": {
+            "name": "Event_0qq9il3",
             "typename": "EndEvent",
             "inputs": [
-              "Activity_1mwbqi4"
+              "StartEvent_1"
             ],
             "outputs": [
-              "SingleTask_Process.EndJoin"
+              "no_tasks.EndJoin"
             ],
             "data_input_associations": [],
             "data_output_associations": [],
@@ -277,31 +249,14 @@
               "typename": "NoneEventDefinition"
             },
             "extensions": {},
-            "id": "SingleTask_Process_6",
+            "id": "no_tasks_5",
             "internal": false,
             "lookahead": 2,
             "manual": false,
             "position": {
-              "x": 432.0,
+              "x": 272.0,
               "y": 159.0
             }
-          },
-          "SingleTask_Process.EndJoin": {
-            "name": "SingleTask_Process.EndJoin",
-            "typename": "_EndJoin",
-            "inputs": [
-              "Event_1gsb2u0"
-            ],
-            "outputs": [
-              "End"
-            ],
-            "prescript": null,
-            "postscript": null,
-            "description": "",
-            "id": "SingleTask_Process_2",
-            "internal": false,
-            "lookahead": 2,
-            "manual": false
           },
           "Start": {
             "name": "Start",
@@ -313,7 +268,7 @@
             "prescript": null,
             "postscript": null,
             "description": "",
-            "id": "SingleTask_Process_1",
+            "id": "no_tasks_1",
             "internal": false,
             "lookahead": 2,
             "manual": false
@@ -325,7 +280,7 @@
               "Start"
             ],
             "outputs": [
-              "Activity_1mwbqi4"
+              "Event_0qq9il3"
             ],
             "data_input_associations": [],
             "data_output_associations": [],
@@ -341,7 +296,7 @@
               "typename": "NoneEventDefinition"
             },
             "extensions": {},
-            "id": "SingleTask_Process_4",
+            "id": "no_tasks_4",
             "internal": false,
             "lookahead": 2,
             "manual": false,
@@ -349,13 +304,30 @@
               "x": 179.0,
               "y": 159.0
             }
+          },
+          "no_tasks.EndJoin": {
+            "name": "no_tasks.EndJoin",
+            "typename": "_EndJoin",
+            "inputs": [
+              "Event_0qq9il3"
+            ],
+            "outputs": [
+              "End"
+            ],
+            "prescript": null,
+            "postscript": null,
+            "description": "",
+            "id": "no_tasks_2",
+            "internal": false,
+            "lookahead": 2,
+            "manual": false
           }
         },
         "data_objects": {},
         "correlation_keys": {},
         "io_specification": null,
-        "description": "SingleTask_Process",
-        "file": "tests/data/process-models/test-cases/single-task/single_task.bpmn"
+        "description": "No Tasks",
+        "file": "tests/data/process-models/test-cases/no-tasks/no-tasks.bpmn"
       }
     }
   ]

@@ -204,7 +204,7 @@ fn is_empty(val: &serde_json::Value) -> bool {
 }
 
 fn is_empty_or_missing(key: &str, map: &RestMap) -> bool {
-    map.get(key).filter(|val| is_empty(val)).is_some()
+    map.get(key).filter(|val| !is_empty(val)).is_none()
 }
 
 #[cfg(test)]
@@ -225,6 +225,11 @@ mod tests {
         assert_eq!(workflow_spec.has_unique_element_ids(), true);
         assert_eq!(workflow_spec.spec.isolable(), true);
         assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 0);
+
+	let manual_task = workflow_spec.spec.task_specs.get("Activity_1n7p3m4").unwrap();
+	assert_eq!(manual_task.is_rendered(), true);
+	assert_eq!(manual_task.is_event(), false);
+	assert_eq!(manual_task.isolable(), true);
 
         Ok(())
     }
@@ -258,7 +263,7 @@ mod tests {
         let path = test_case_path("simple-subprocess/simple_subprocess.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
-        assert_eq!(workflow_spec.has_unique_element_ids(), true);
+        assert_eq!(workflow_spec.has_unique_element_ids(), false);
         assert_eq!(workflow_spec.spec.isolable(), true);
         assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 0);
 

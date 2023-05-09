@@ -1,11 +1,17 @@
 {
   "items": [
     {
-      "sha2": "d14b186e4bbc3e2d3f15fc35108f1b28c0fa128a6f41465168be6b8c91060d05",
+      "sha2": "db23c8c07ee99877c5ada8928bff661247235a3a6543ec702c81533c64e57573",
       "type": "LazyCallActivities"
     }
   ],
   "index_map": {
+    "Activity_1h7gm30": [
+      0
+    ],
+    "Activity_1n7p3m4": [
+      0
+    ],
     "Process_diu8ta2": [
       0
     ]
