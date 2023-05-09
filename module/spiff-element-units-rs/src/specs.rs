@@ -13,11 +13,12 @@ use crate::basis::{ElementIntrospection, Map};
 //
 
 pub type RestMap = Map<serde_json::Value>;
+pub type SubprocessSpecs = Map<ProcessSpec>;
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct WorkflowSpec {
     pub spec: ProcessSpec,
-    pub subprocess_specs: Map<ProcessSpec>,
+    pub subprocess_specs: SubprocessSpecs,
 
     #[serde(flatten)]
     pub rest: RestMap,
@@ -187,7 +188,7 @@ mod tests {
         let path = test_case_path("manual-tasks/manual_tasks.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
-        assert_eq!(workflow_spec.spec.isolable(), false);
+        assert_eq!(workflow_spec.spec.isolable(), true);
         assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 0);
 
         Ok(())

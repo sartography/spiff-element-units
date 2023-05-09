@@ -5,12 +5,12 @@ use std::error::Error;
 
 use crate::basis::{ElementIntrospection, IndexedVec, Map};
 use crate::reader;
-use crate::specs::{ProcessSpec, RestMap, WorkflowSpec};
+use crate::specs::{ProcessSpec, RestMap, SubprocessSpecs, WorkflowSpec};
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub enum ElementUnit {
     FullWorkflow(WorkflowSpec),
-    LazyCallActivities(ProcessSpec, Map<ProcessSpec>),
+    LazyCallActivities(ProcessSpec, SubprocessSpecs),
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -77,6 +77,11 @@ fn lazy_call_activity_element_units(
 ) -> Option<Vec<ElementUnitForProcessID>> {
     let process_spec = &workflow_spec.spec;
 
+    // this wave of element units consists of three layers that work together
+    //
+    // 1 - the full workflow with all call activity subprocess specs removed
+    //     the caller is assumed to be able to lazy load the specs when needed
+
     let call_activity_spec_references = process_spec
         .isolable()
         .then_some(process_spec.call_activity_spec_references())
@@ -89,16 +94,28 @@ fn lazy_call_activity_element_units(
     let element_unit = ElementUnit::LazyCallActivities(process_spec.clone(), subprocess_specs);
     element_units.push((process_spec.name.to_string(), element_unit));
 
+    // 2 - each call activity subprocess elevated to a top level process to facilitate
+    //     lazy loading
+
     for spec_ref in call_activity_spec_references {
-        let process_spec = workflow_spec
+        let subprocess_spec = workflow_spec
             .subprocess_specs
             .get(&spec_ref)
             .filter(|spec| spec.isolable())
             .filter(|spec| spec.call_activity_spec_references().len() == 0)?;
 
-        let subprocess_specs = Map::<ProcessSpec>::new();
-        let element_unit = ElementUnit::LazyCallActivities(process_spec.clone(), subprocess_specs);
+        let mut subprocess_specs = Map::<ProcessSpec>::new();
+        let element_unit =
+            ElementUnit::LazyCallActivities(subprocess_spec.clone(), subprocess_specs.clone());
         element_units.push((spec_ref, element_unit));
+
+        // 3 - a workflow per call activity with its subprocess specs loaded to facilitate
+        //     resuming a workflow from an element within a call activity
+
+        subprocess_specs.insert(subprocess_spec.name.to_string(), subprocess_spec.clone());
+
+        let element_unit = ElementUnit::LazyCallActivities(process_spec.clone(), subprocess_specs);
+        element_units.push((process_spec.name.to_string(), element_unit));
     }
 
     Some(element_units)

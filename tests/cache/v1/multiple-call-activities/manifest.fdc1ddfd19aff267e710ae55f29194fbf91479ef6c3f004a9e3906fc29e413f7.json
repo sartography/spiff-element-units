@@ -7,44 +7,83 @@
     {
       "sha2": "6dee626ce2bd042455268e6e1187be6a5d63871d821ccac5e56c122ac5bc99e3",
       "type": "LazyCallActivities"
+    },
+    {
+      "sha2": "6dee626ce2bd042455268e6e1187be6a5d63871d821ccac5e56c122ac5bc99e3",
+      "type": "LazyCallActivities"
+    },
+    {
+      "sha2": "6dee626ce2bd042455268e6e1187be6a5d63871d821ccac5e56c122ac5bc99e3",
+      "type": "LazyCallActivities"
+    },
+    {
+      "sha2": "6dee626ce2bd042455268e6e1187be6a5d63871d821ccac5e56c122ac5bc99e3",
+      "type": "LazyCallActivities"
     }
   ],
   "index_map": {
     "Activity_0d5dido": [
       0,
-      1
+      1,
+      2,
+      3,
+      4
     ],
     "Activity_0rsppq2": [
       0,
-      1
+      1,
+      2,
+      3,
+      4
     ],
     "Activity_185dcnc": [
       0,
-      1
+      1,
+      2,
+      3,
+      4
     ],
     "End": [
       0,
-      1
+      1,
+      2,
+      3,
+      4
     ],
     "Event_0yflyfj": [
       0,
-      1
+      1,
+      2,
+      3,
+      4
     ],
     "Process_90mmqlw": [
       0,
-      1
+      1,
+      2,
+      3,
+      4
     ],
     "Process_90mmqlw.EndJoin": [
       0,
-      1
+      1,
+      2,
+      3,
+      4
     ],
     "Start": [
       0,
-      1
+      1,
+      2,
+      3,
+      4
     ],
     "StartEvent_1": [
       0,
-      1
+      1,
+      2,
+      3,
+      4
     ]
   }
 }
