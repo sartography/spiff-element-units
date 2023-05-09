@@ -2,10 +2,8 @@
 
 ## v0.3.1
 
-1. first element unit besides full workflow is lazy at the top level with no subprocesses
-   1. push for process/element ids from the top level
 1. for each call activity, element unit of lazy at the top level + its spec as subprocess
-   1. push for call activity id and each of its recognized task id
+   1. push for call activity id and each of its recognized task id (no top level/process ids)
 1. in the integration tests, do some save/restore (maybe on human task?)
 1. the LazyCallActivities just got overloaded
    1. LazyCallActivities - top level no call activity subprocess specs

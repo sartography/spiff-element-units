@@ -65,7 +65,8 @@ fn element_units_for_workflow_spec(workflow_spec: &WorkflowSpec) -> Vec<ElementU
     // all process specs. this is to prevent an ambiguos situation where a element
     // id could point to multiple element units. like all of our restrictions ideally
     // this is lifted in the future but better to run the whole workflow than the
-    // wrong portion.
+    // wrong portion. this does mean any workflow with collapsed/expanded subprocesses
+    // cannot be decomposed.
 
     if !workflow_spec.has_unique_element_ids() {
         return element_units;
