@@ -9,7 +9,7 @@
       "type": "LazyCallActivities"
     },
     {
-      "sha2": "34e376f0b3d9d6211acd77b9ffe6b6086c65e12a358b2b30ef24f267c256d98a",
+      "sha2": "7d531abdbc785c6c97ba517667f9f5a1fed49df72530978868221afe1526b227",
       "type": "LazyCallActivities"
     },
     {
@@ -17,7 +17,7 @@
       "type": "LazyCallActivities"
     },
     {
-      "sha2": "7d531abdbc785c6c97ba517667f9f5a1fed49df72530978868221afe1526b227",
+      "sha2": "34e376f0b3d9d6211acd77b9ffe6b6086c65e12a358b2b30ef24f267c256d98a",
       "type": "LazyCallActivities"
     }
   ],
@@ -45,7 +45,7 @@
     ],
     "Activity_1h7gm30": [
       0,
-      4
+      2
     ],
     "Activity_1mwbqi4": [
       0,
@@ -53,7 +53,7 @@
     ],
     "Activity_1n7p3m4": [
       0,
-      4
+      2
     ],
     "Process_90mmqlw": [
       0,
@@ -64,7 +64,7 @@
     ],
     "Process_diu8ta2": [
       0,
-      4
+      2
     ],
     "SingleTask_Process": [
       0,
@@ -72,7 +72,7 @@
     ],
     "no_tasks": [
       0,
-      2
+      4
     ]
   }
 }

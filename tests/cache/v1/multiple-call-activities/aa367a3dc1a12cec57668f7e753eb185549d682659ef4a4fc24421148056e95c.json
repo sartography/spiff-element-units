@@ -1,5 +1,5 @@
 {
-  "LazyCallActivities": [
+  "PromotedCallActivity": [
     {
       "name": "no_tasks",
       "typename": "BpmnProcessSpec",

@@ -1,5 +1,5 @@
 {
-  "LazyCallActivities": [
+  "PromotedCallActivity": [
     {
       "name": "Process_diu8ta2",
       "typename": "BpmnProcessSpec",

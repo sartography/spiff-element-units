@@ -4,11 +4,13 @@
 
 1. for each call activity, element unit of lazy at the top level + its spec as subprocess
    1. push for call activity id and each of its recognized task id (no top level/process ids)
+   1. ResumableCallActivity
 1. in the integration tests, do some save/restore (maybe on human task?)
 1. the LazyCallActivities just got overloaded
    1. LazyCallActivities - top level no call activity subprocess specs
    1. PromotedCallActivity - call activity as top level process and its subprocesses
    1. ResumableCallActivity - top level with a call activity and its subprocesses
+1. Rename the *CallActivity* element units to Subprocess?
 
 ## mostly unordered queue
 

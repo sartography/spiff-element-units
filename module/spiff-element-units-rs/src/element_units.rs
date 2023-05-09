@@ -11,12 +11,14 @@ use crate::specs::{ProcessSpec, RestMap, SubprocessSpecs, WorkflowSpec};
 pub enum ElementUnit {
     FullWorkflow(WorkflowSpec),
     LazyCallActivities(ProcessSpec, SubprocessSpecs),
+    PromotedCallActivity(ProcessSpec, SubprocessSpecs),
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub enum ElementUnitType {
     FullWorkflow,
     LazyCallActivities,
+    PromotedCallActivity,
 }
 
 pub type ElementUnits = IndexedVec<ElementUnit>;
@@ -117,7 +119,7 @@ fn lazy_call_activity_element_units(
 
         let mut subprocess_specs = Map::<ProcessSpec>::new();
         let element_unit =
-            ElementUnit::LazyCallActivities(subprocess_spec.clone(), subprocess_specs.clone());
+            ElementUnit::PromotedCallActivity(subprocess_spec.clone(), subprocess_specs.clone());
         element_units.push((spec_ref, element_unit));
 
         // 3 - a workflow per call activity with its subprocess specs loaded to facilitate
@@ -139,6 +141,13 @@ impl ElementIntrospection for ElementUnit {
         match self {
             FullWorkflow(workflow_spec) => workflow_spec.push_element_ids(ids),
             LazyCallActivities(process_spec, subprocess_specs) => {
+                process_spec.push_element_ids(ids);
+
+		for (_, subprocess_spec) in subprocess_specs {
+		    subprocess_spec.push_element_ids(ids);
+		}
+            },
+            PromotedCallActivity(process_spec, subprocess_specs) => {
                 process_spec.push_element_ids(ids);
 
 		for (_, subprocess_spec) in subprocess_specs {
@@ -171,6 +180,7 @@ impl ElementUnit {
         match self {
             FullWorkflow(_) => ElementUnitType::FullWorkflow,
             LazyCallActivities(_, _) => ElementUnitType::LazyCallActivities,
+            PromotedCallActivity(_, _) => ElementUnitType::PromotedCallActivity,
         }
     }
 
@@ -180,6 +190,11 @@ impl ElementUnit {
         match self {
             FullWorkflow(workflow_spec) => workflow_spec,
             LazyCallActivities(spec, subprocess_specs) => WorkflowSpec {
+                spec,
+                subprocess_specs,
+                rest: RestMap::default(),
+            },
+            PromotedCallActivity(spec, subprocess_specs) => WorkflowSpec {
                 spec,
                 subprocess_specs,
                 rest: RestMap::default(),
