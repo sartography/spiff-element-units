@@ -1,0 +1,128 @@
+{
+  "FullWorkflow": {
+    "spec": {
+      "name": "no_tasks",
+      "typename": "BpmnProcessSpec",
+      "task_specs": {
+        "End": {
+          "name": "End",
+          "typename": "Simple",
+          "inputs": [
+            "no_tasks.EndJoin"
+          ],
+          "outputs": [],
+          "prescript": null,
+          "postscript": null,
+          "description": "",
+          "id": "no_tasks_3",
+          "internal": false,
+          "lookahead": 2,
+          "manual": false
+        },
+        "Event_0qq9il3": {
+          "name": "Event_0qq9il3",
+          "typename": "EndEvent",
+          "inputs": [
+            "StartEvent_1"
+          ],
+          "outputs": [
+            "no_tasks.EndJoin"
+          ],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
+          "prescript": null,
+          "postscript": null,
+          "description": null,
+          "documentation": null,
+          "event_definition": {
+            "external": false,
+            "internal": false,
+            "typename": "NoneEventDefinition"
+          },
+          "extensions": {},
+          "id": "no_tasks_5",
+          "internal": false,
+          "lookahead": 2,
+          "manual": false,
+          "position": {
+            "x": 272.0,
+            "y": 159.0
+          }
+        },
+        "Start": {
+          "name": "Start",
+          "typename": "StartTask",
+          "inputs": [],
+          "outputs": [
+            "StartEvent_1"
+          ],
+          "prescript": null,
+          "postscript": null,
+          "description": "",
+          "id": "no_tasks_1",
+          "internal": false,
+          "lookahead": 2,
+          "manual": false
+        },
+        "StartEvent_1": {
+          "name": "StartEvent_1",
+          "typename": "StartEvent",
+          "inputs": [
+            "Start"
+          ],
+          "outputs": [
+            "Event_0qq9il3"
+          ],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
+          "prescript": null,
+          "postscript": null,
+          "description": null,
+          "documentation": null,
+          "event_definition": {
+            "external": false,
+            "internal": false,
+            "typename": "NoneEventDefinition"
+          },
+          "extensions": {},
+          "id": "no_tasks_4",
+          "internal": false,
+          "lookahead": 2,
+          "manual": false,
+          "position": {
+            "x": 179.0,
+            "y": 159.0
+          }
+        },
+        "no_tasks.EndJoin": {
+          "name": "no_tasks.EndJoin",
+          "typename": "_EndJoin",
+          "inputs": [
+            "Event_0qq9il3"
+          ],
+          "outputs": [
+            "End"
+          ],
+          "prescript": null,
+          "postscript": null,
+          "description": "",
+          "id": "no_tasks_2",
+          "internal": false,
+          "lookahead": 2,
+          "manual": false
+        }
+      },
+      "data_objects": {},
+      "correlation_keys": {},
+      "io_specification": null,
+      "description": "No Tasks",
+      "file": "tests/data/process-models/test-cases/no-tasks/no-tasks.bpmn"
+    },
+    "subprocess_specs": {},
+    "serializer_version": "spiff-element-units-integration"
+  }
+}
