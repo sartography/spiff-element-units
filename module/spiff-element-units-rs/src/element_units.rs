@@ -1,7 +1,7 @@
-use serde::{Deserialize, Serialize};
-
-use sha2::{Digest, Sha256};
 use std::error::Error;
+
+use serde::{Deserialize, Serialize};
+use sha2::{Digest, Sha256};
 
 use crate::basis::{ElementIntrospection, IndexedVec, Map};
 use crate::reader;
@@ -60,6 +60,16 @@ fn element_units_for_workflow_spec(workflow_spec: &WorkflowSpec) -> Vec<ElementU
 
     let first_element_unit = ElementUnit::FullWorkflow(workflow_spec.clone());
     element_units.push((workflow_spec.spec.name.to_string(), first_element_unit));
+
+    // we have a restriction in place that all element ids must be unique across
+    // all process specs. this is to prevent an ambiguos situation where a element
+    // id could point to multiple element units. like all of our restrictions ideally
+    // this is lifted in the future but better to run the whole workflow than the
+    // wrong portion.
+
+    if !workflow_spec.has_unique_element_ids() {
+        return element_units;
+    }
 
     // next we see if we can start to isolate the process specs. this is the first
     // step to decomposing the workflow. currently under limited circumstances we can

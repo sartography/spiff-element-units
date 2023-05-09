@@ -110,6 +110,10 @@ pub mod task_spec_mixin {
 impl ElementIntrospection for WorkflowSpec {
     fn push_element_ids(&self, ids: &mut Vec<String>) {
         self.spec.push_element_ids(ids);
+
+        for (_, subprocess_spec) in &self.subprocess_specs {
+            subprocess_spec.push_element_ids(ids);
+        }
     }
 }
 
@@ -130,6 +134,17 @@ impl ElementIntrospection for TaskSpec {
 }
 
 impl WorkflowSpec {
+    pub fn has_unique_element_ids(&self) -> bool {
+        let element_ids = self.element_ids();
+        let unique_element_ids: Vec<_> = element_ids
+            .iter()
+            .collect::<HashSet<_>>()
+            .into_iter()
+            .collect();
+
+        element_ids.len() == unique_element_ids.len()
+    }
+
     pub fn set_serializer_version(&mut self, version: &str) {
         let key = "serializer_version".to_string();
         let value = serde_json::Value::String(format!("spiff-element-units-{}", version));
@@ -188,6 +203,7 @@ mod tests {
         let path = test_case_path("manual-tasks/manual_tasks.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
+	assert_eq!(workflow_spec.has_unique_element_ids(), true);
         assert_eq!(workflow_spec.spec.isolable(), true);
         assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 0);
 
@@ -199,6 +215,7 @@ mod tests {
         let path = test_case_path("no-tasks/no-tasks.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
+	assert_eq!(workflow_spec.has_unique_element_ids(), true);
         assert_eq!(workflow_spec.spec.isolable(), true);
         assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 0);
 
@@ -210,6 +227,7 @@ mod tests {
         let path = test_case_path("simple-call-activity/simple_call_activity.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
+	assert_eq!(workflow_spec.has_unique_element_ids(), true);
         assert_eq!(workflow_spec.spec.isolable(), true);
         assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 1);
 
@@ -221,6 +239,7 @@ mod tests {
         let path = test_case_path("simple-subprocess/simple_subprocess.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
+	assert_eq!(workflow_spec.has_unique_element_ids(), true);
         assert_eq!(workflow_spec.spec.isolable(), true);
         assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 0);
 
