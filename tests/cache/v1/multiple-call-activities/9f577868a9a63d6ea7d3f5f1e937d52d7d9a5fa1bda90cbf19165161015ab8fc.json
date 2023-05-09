@@ -1,5 +1,6 @@
 {
-  "LazyCallActivities": [
+  "ResumableCallActivity": [
+    "Process_diu8ta2",
     {
       "name": "Process_90mmqlw",
       "typename": "BpmnProcessSpec",
@@ -207,33 +208,87 @@
       "file": "tests/data/process-models/test-cases/mutliple-call-activities/multiple_call_activities.bpmn"
     },
     {
-      "no_tasks": {
-        "name": "no_tasks",
+      "Process_diu8ta2": {
+        "name": "Process_diu8ta2",
         "typename": "BpmnProcessSpec",
         "task_specs": {
+          "Activity_1h7gm30": {
+            "name": "Activity_1h7gm30",
+            "typename": "ManualTask",
+            "inputs": [
+              "StartEvent_1"
+            ],
+            "outputs": [
+              "Activity_1n7p3m4"
+            ],
+            "data_input_associations": [],
+            "data_output_associations": [],
+            "io_specification": null,
+            "lane": null,
+            "prescript": null,
+            "postscript": null,
+            "description": null,
+            "documentation": null,
+            "extensions": {},
+            "id": "Process_diu8ta2_5",
+            "internal": false,
+            "lookahead": 2,
+            "manual": false,
+            "position": {
+              "x": 270.0,
+              "y": 137.0
+            }
+          },
+          "Activity_1n7p3m4": {
+            "name": "Activity_1n7p3m4",
+            "typename": "ManualTask",
+            "inputs": [
+              "Activity_1h7gm30"
+            ],
+            "outputs": [
+              "Event_0iozjmo"
+            ],
+            "data_input_associations": [],
+            "data_output_associations": [],
+            "io_specification": null,
+            "lane": null,
+            "prescript": null,
+            "postscript": null,
+            "description": null,
+            "documentation": null,
+            "extensions": {},
+            "id": "Process_diu8ta2_6",
+            "internal": false,
+            "lookahead": 2,
+            "manual": false,
+            "position": {
+              "x": 430.0,
+              "y": 137.0
+            }
+          },
           "End": {
             "name": "End",
             "typename": "Simple",
             "inputs": [
-              "no_tasks.EndJoin"
+              "Process_diu8ta2.EndJoin"
             ],
             "outputs": [],
             "prescript": null,
             "postscript": null,
             "description": "",
-            "id": "no_tasks_3",
+            "id": "Process_diu8ta2_3",
             "internal": false,
             "lookahead": 2,
             "manual": false
           },
-          "Event_0qq9il3": {
-            "name": "Event_0qq9il3",
+          "Event_0iozjmo": {
+            "name": "Event_0iozjmo",
             "typename": "EndEvent",
             "inputs": [
-              "StartEvent_1"
+              "Activity_1n7p3m4"
             ],
             "outputs": [
-              "no_tasks.EndJoin"
+              "Process_diu8ta2.EndJoin"
             ],
             "data_input_associations": [],
             "data_output_associations": [],
@@ -249,14 +304,31 @@
               "typename": "NoneEventDefinition"
             },
             "extensions": {},
-            "id": "no_tasks_5",
+            "id": "Process_diu8ta2_7",
             "internal": false,
             "lookahead": 2,
             "manual": false,
             "position": {
-              "x": 272.0,
+              "x": 592.0,
               "y": 159.0
             }
+          },
+          "Process_diu8ta2.EndJoin": {
+            "name": "Process_diu8ta2.EndJoin",
+            "typename": "_EndJoin",
+            "inputs": [
+              "Event_0iozjmo"
+            ],
+            "outputs": [
+              "End"
+            ],
+            "prescript": null,
+            "postscript": null,
+            "description": "",
+            "id": "Process_diu8ta2_2",
+            "internal": false,
+            "lookahead": 2,
+            "manual": false
           },
           "Start": {
             "name": "Start",
@@ -268,7 +340,7 @@
             "prescript": null,
             "postscript": null,
             "description": "",
-            "id": "no_tasks_1",
+            "id": "Process_diu8ta2_1",
             "internal": false,
             "lookahead": 2,
             "manual": false
@@ -280,7 +352,7 @@
               "Start"
             ],
             "outputs": [
-              "Event_0qq9il3"
+              "Activity_1h7gm30"
             ],
             "data_input_associations": [],
             "data_output_associations": [],
@@ -296,7 +368,7 @@
               "typename": "NoneEventDefinition"
             },
             "extensions": {},
-            "id": "no_tasks_4",
+            "id": "Process_diu8ta2_4",
             "internal": false,
             "lookahead": 2,
             "manual": false,
@@ -304,30 +376,13 @@
               "x": 179.0,
               "y": 159.0
             }
-          },
-          "no_tasks.EndJoin": {
-            "name": "no_tasks.EndJoin",
-            "typename": "_EndJoin",
-            "inputs": [
-              "Event_0qq9il3"
-            ],
-            "outputs": [
-              "End"
-            ],
-            "prescript": null,
-            "postscript": null,
-            "description": "",
-            "id": "no_tasks_2",
-            "internal": false,
-            "lookahead": 2,
-            "manual": false
           }
         },
         "data_objects": {},
         "correlation_keys": {},
         "io_specification": null,
-        "description": "No Tasks",
-        "file": "tests/data/process-models/test-cases/no-tasks/no-tasks.bpmn"
+        "description": "Process_diu8ta2",
+        "file": "tests/data/process-models/test-cases/manual-tasks/manual_tasks.bpmn"
       }
     }
   ]

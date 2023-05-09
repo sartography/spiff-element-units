@@ -172,6 +172,18 @@ impl ProcessSpec {
             .into_iter()
             .collect()
     }
+
+    pub fn call_activities_referencing_spec(&self, spec: &String) -> Vec<&TaskSpec> {
+        self.task_specs
+            .values()
+            .filter(|ts| {
+                ts.call_activity_spec_reference()
+                    .filter(|spec_ref| spec_ref == spec)
+                    .is_some()
+            })
+            .into_iter()
+            .collect()
+    }
 }
 
 impl TaskSpec {

@@ -1,5 +1,6 @@
 {
-  "LazyCallActivities": [
+  "ResumableCallActivity": [
+    "SingleTask_Process",
     {
       "name": "Process_90mmqlw",
       "typename": "BpmnProcessSpec",

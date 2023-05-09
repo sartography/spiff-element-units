@@ -9,43 +9,37 @@
       "type": "LazyCallActivities"
     },
     {
-      "sha2": "7d531abdbc785c6c97ba517667f9f5a1fed49df72530978868221afe1526b227",
-      "type": "LazyCallActivities"
+      "sha2": "bb8de086a9e6c0d6479f79c9c07e7e5e753bb4ecadd7c32f15f77eb04a309d5b",
+      "type": "ResumableCallActivity"
     },
     {
-      "sha2": "016b7eecb47a74ca298f614760ff1644cefc4dc258ba1edfe2f5f5b9e19e2920",
-      "type": "LazyCallActivities"
+      "sha2": "0eea0a1496b413848a6d2de4f1ef82639f20d120d1743ccf608b0346e925bc70",
+      "type": "ResumableCallActivity"
     },
     {
-      "sha2": "34e376f0b3d9d6211acd77b9ffe6b6086c65e12a358b2b30ef24f267c256d98a",
-      "type": "LazyCallActivities"
+      "sha2": "9f577868a9a63d6ea7d3f5f1e937d52d7d9a5fa1bda90cbf19165161015ab8fc",
+      "type": "ResumableCallActivity"
     }
   ],
   "index_map": {
     "Activity_0d5dido": [
       0,
       1,
-      2,
-      3,
-      4
+      2
     ],
     "Activity_0rsppq2": [
       0,
       1,
-      2,
-      3,
       4
     ],
     "Activity_185dcnc": [
       0,
       1,
-      2,
-      3,
-      4
+      3
     ],
     "Activity_1h7gm30": [
       0,
-      2
+      4
     ],
     "Activity_1mwbqi4": [
       0,
@@ -53,26 +47,26 @@
     ],
     "Activity_1n7p3m4": [
       0,
-      2
+      4
     ],
     "Process_90mmqlw": [
       0,
-      1,
-      2,
-      3,
-      4
+      1
     ],
     "Process_diu8ta2": [
       0,
-      2
+      4,
+      4
     ],
     "SingleTask_Process": [
       0,
+      3,
       3
     ],
     "no_tasks": [
       0,
-      4
+      2,
+      2
     ]
   }
 }

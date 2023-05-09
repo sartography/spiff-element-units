@@ -145,7 +145,7 @@ impl ElementIntrospection for ElementUnit {
             FullWorkflow(workflow_spec) => workflow_spec.push_element_ids(ids),
             LazyCallActivities(process_spec, subprocess_specs)
             | PromotedCallActivity(process_spec, subprocess_specs) => {
-                self.push_process_element_ids(ids, &process_spec, &subprocess_specs)
+                self.push_all_process_element_ids(ids, &process_spec, &subprocess_specs)
             }
             ResumableCallActivity(spec_ref, process_spec, subprocess_specs) => self
                 .push_resumable_process_element_ids(
@@ -200,7 +200,7 @@ impl ElementUnit {
         }
     }
 
-    fn push_process_element_ids(
+    fn push_all_process_element_ids(
         &self,
         ids: &mut Vec<String>,
         process_spec: &ProcessSpec,
@@ -220,8 +220,19 @@ impl ElementUnit {
         process_spec: &ProcessSpec,
         subprocess_specs: &SubprocessSpecs,
     ) {
+        // a resumable call activity element unit is designed to be called using either
+        // the process referenced by the call activity
         ids.push(spec_ref.to_string());
-        // TODO: rest of them
+
+        // the name of the call activities that reference the spec
+	for call_activity in process_spec.call_activities_referencing_spec(spec_ref) {
+	    call_activity.push_element_ids(ids);
+	}
+
+        // any element within the call activity
+        subprocess_specs
+            .get(spec_ref)
+            .map(|subprocess| subprocess.push_element_ids(ids));
     }
 }
 
