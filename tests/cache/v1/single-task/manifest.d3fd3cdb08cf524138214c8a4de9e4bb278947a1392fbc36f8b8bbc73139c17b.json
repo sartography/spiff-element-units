@@ -1,30 +1,12 @@
 {
   "items": [
     {
-      "sha2": "4cffe82760da44af959b87b682110140fcdab732fc3c37cbf912810a781d49ba",
+      "sha2": "8480654db7c6521e06e7c42251ed53623b629e64eba8a7dc6a47ce5769c6c65d",
       "type": "FullWorkflow"
     }
   ],
   "index_map": {
-    "Activity_1mwbqi4": [
-      0
-    ],
-    "End": [
-      0
-    ],
-    "Event_1gsb2u0": [
-      0
-    ],
     "SingleTask_Process": [
-      0
-    ],
-    "SingleTask_Process.EndJoin": [
-      0
-    ],
-    "Start": [
-      0
-    ],
-    "StartEvent_1": [
       0
     ]
   }

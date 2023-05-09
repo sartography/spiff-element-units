@@ -1,27 +1,12 @@
 {
   "items": [
     {
-      "sha2": "904bfda794c9f61b0ca0ace02732bc97a3da1c7f91c6829f18af86b7ee9e68a9",
+      "sha2": "835d0468b94df0f308cc5497152aa72c3bc7edd8a55c69ffce677364b4558022",
       "type": "LazyCallActivities"
     }
   ],
   "index_map": {
-    "End": [
-      0
-    ],
-    "Event_0qq9il3": [
-      0
-    ],
-    "Start": [
-      0
-    ],
-    "StartEvent_1": [
-      0
-    ],
     "no_tasks": [
-      0
-    ],
-    "no_tasks.EndJoin": [
       0
     ]
   }

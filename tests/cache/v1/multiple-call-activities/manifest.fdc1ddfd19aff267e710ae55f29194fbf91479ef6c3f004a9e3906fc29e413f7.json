@@ -1,62 +1,27 @@
 {
   "items": [
     {
-      "sha2": "e028e0ba9cbd64227aa3230cd27f42026c3b03c921e915378f9ee5ac504f05b8",
+      "sha2": "a70a8c38781e3bef6fa2d615083323c64e069ae8b5f5035ccd4d8709442b4eb3",
       "type": "FullWorkflow"
     },
     {
-      "sha2": "6dee626ce2bd042455268e6e1187be6a5d63871d821ccac5e56c122ac5bc99e3",
+      "sha2": "e255f407785b247e0819e71e90afe94d22c67450b058c69edd1d04f920df92f4",
       "type": "LazyCallActivities"
     },
     {
-      "sha2": "6dee626ce2bd042455268e6e1187be6a5d63871d821ccac5e56c122ac5bc99e3",
+      "sha2": "e255f407785b247e0819e71e90afe94d22c67450b058c69edd1d04f920df92f4",
       "type": "LazyCallActivities"
     },
     {
-      "sha2": "6dee626ce2bd042455268e6e1187be6a5d63871d821ccac5e56c122ac5bc99e3",
+      "sha2": "e255f407785b247e0819e71e90afe94d22c67450b058c69edd1d04f920df92f4",
       "type": "LazyCallActivities"
     },
     {
-      "sha2": "6dee626ce2bd042455268e6e1187be6a5d63871d821ccac5e56c122ac5bc99e3",
+      "sha2": "e255f407785b247e0819e71e90afe94d22c67450b058c69edd1d04f920df92f4",
       "type": "LazyCallActivities"
     }
   ],
   "index_map": {
-    "Activity_0d5dido": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
-    "Activity_0rsppq2": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
-    "Activity_185dcnc": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
-    "End": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
-    "Event_0yflyfj": [
-      0,
-      1,
-      2,
-      3,
-      4
-    ],
     "Process_90mmqlw": [
       0,
       1,
@@ -64,26 +29,14 @@
       3,
       4
     ],
-    "Process_90mmqlw.EndJoin": [
-      0,
-      1,
-      2,
-      3,
-      4
+    "Process_diu8ta2": [
+      0
     ],
-    "Start": [
-      0,
-      1,
-      2,
-      3,
-      4
+    "SingleTask_Process": [
+      0
     ],
-    "StartEvent_1": [
-      0,
-      1,
-      2,
-      3,
-      4
+    "no_tasks": [
+      0
     ]
   }
 }

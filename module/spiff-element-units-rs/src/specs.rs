@@ -129,7 +129,9 @@ impl ElementIntrospection for ProcessSpec {
 
 impl ElementIntrospection for TaskSpec {
     fn push_element_ids(&self, ids: &mut Vec<String>) {
-        ids.push(self.name.to_string());
+        if self.isolable() {
+            ids.push(self.name.to_string());
+        }
     }
 }
 
@@ -142,7 +144,7 @@ impl WorkflowSpec {
             .into_iter()
             .collect();
 
-        element_ids.len() == unique_element_ids.len()
+        !element_ids.is_empty() && element_ids.len() == unique_element_ids.len()
     }
 
     pub fn set_serializer_version(&mut self, version: &str) {
@@ -176,16 +178,33 @@ impl TaskSpec {
     pub fn call_activity_spec_reference(&self) -> Option<String> {
         (self.typename == "CallActivity").then_some(self.subprocess.as_ref()?.spec.to_string())
     }
+
+    pub fn isolable(&self) -> bool {
+        self.typename != "Simple" && self.is_rendered() && !self.is_event()
+    }
+
+    fn is_event(&self) -> bool {
+        !is_empty_or_missing("event_definition", &self.rest)
+    }
+
+    fn is_rendered(&self) -> bool {
+        !is_empty_or_missing("position", &self.rest)
+    }
 }
 
 fn is_empty(val: &serde_json::Value) -> bool {
     use serde_json::Value::*;
 
+    // TODO: fill this out as needed, eventually get rid of _ =>
     match val {
         Null => true,
         Object(o) => o.len() == 0,
         _ => false,
     }
+}
+
+fn is_empty_or_missing(key: &str, map: &RestMap) -> bool {
+    map.get(key).filter(|val| is_empty(val)).is_some()
 }
 
 #[cfg(test)]
@@ -203,7 +222,7 @@ mod tests {
         let path = test_case_path("manual-tasks/manual_tasks.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
-	assert_eq!(workflow_spec.has_unique_element_ids(), true);
+        assert_eq!(workflow_spec.has_unique_element_ids(), true);
         assert_eq!(workflow_spec.spec.isolable(), true);
         assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 0);
 
@@ -215,7 +234,7 @@ mod tests {
         let path = test_case_path("no-tasks/no-tasks.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
-	assert_eq!(workflow_spec.has_unique_element_ids(), true);
+        assert_eq!(workflow_spec.has_unique_element_ids(), true);
         assert_eq!(workflow_spec.spec.isolable(), true);
         assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 0);
 
@@ -227,7 +246,7 @@ mod tests {
         let path = test_case_path("simple-call-activity/simple_call_activity.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
-	assert_eq!(workflow_spec.has_unique_element_ids(), true);
+        assert_eq!(workflow_spec.has_unique_element_ids(), true);
         assert_eq!(workflow_spec.spec.isolable(), true);
         assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 1);
 
@@ -239,7 +258,7 @@ mod tests {
         let path = test_case_path("simple-subprocess/simple_subprocess.json");
         let workflow_spec: WorkflowSpec = read(&path)?;
 
-	assert_eq!(workflow_spec.has_unique_element_ids(), true);
+        assert_eq!(workflow_spec.has_unique_element_ids(), true);
         assert_eq!(workflow_spec.spec.isolable(), true);
         assert_eq!(workflow_spec.spec.call_activity_spec_references().len(), 0);
 

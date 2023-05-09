@@ -1,53 +1,26 @@
 {
   "items": [
     {
-      "sha2": "703d69f520edc745fcf9d3c03b5f52d12f0aed3429816ba2fa98c62f537457bc",
+      "sha2": "1d61ae42663e5ce88038e10f2c339878ac00a8459b7afd0479e94b622a85710c",
       "type": "FullWorkflow"
     },
     {
-      "sha2": "7fe93955e1bb58f8a75e21cb2e716b36ff03d7a86e5ea5b27c9184481ed68e8a",
+      "sha2": "3011dc19a7a232fced80fba56397d9c9c568fccbfc98cd2975824a77f7cfa01c",
       "type": "LazyCallActivities"
     },
     {
-      "sha2": "7fe93955e1bb58f8a75e21cb2e716b36ff03d7a86e5ea5b27c9184481ed68e8a",
+      "sha2": "3011dc19a7a232fced80fba56397d9c9c568fccbfc98cd2975824a77f7cfa01c",
       "type": "LazyCallActivities"
     }
   ],
   "index_map": {
-    "Activity_0q1z4d4": [
-      0,
-      1,
-      2
-    ],
-    "End": [
-      0,
-      1,
-      2
-    ],
-    "Event_05ktmeu": [
-      0,
-      1,
-      2
-    ],
     "Process_p4pfxhq": [
       0,
       1,
       2
     ],
-    "Process_p4pfxhq.EndJoin": [
-      0,
-      1,
-      2
-    ],
-    "Start": [
-      0,
-      1,
-      2
-    ],
-    "StartEvent_1": [
-      0,
-      1,
-      2
+    "SingleTask_Process": [
+      0
     ]
   }
 }
