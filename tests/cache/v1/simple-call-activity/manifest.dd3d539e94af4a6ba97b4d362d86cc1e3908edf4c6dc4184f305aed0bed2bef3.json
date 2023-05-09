@@ -9,7 +9,7 @@
       "type": "LazyCallActivities"
     },
     {
-      "sha2": "f0a4737b0029184ef1d661079890c4fc23d7939e36e08cc42984c8e3b1a88906",
+      "sha2": "69886d310be4ce86695599bd3607710322aff8c939c78a67d10a82bd77a98ded",
       "type": "LazyCallActivities"
     }
   ],
@@ -20,7 +20,8 @@
       2
     ],
     "Activity_1mwbqi4": [
-      0
+      0,
+      2
     ],
     "Process_p4pfxhq": [
       0,
@@ -28,7 +29,8 @@
       2
     ],
     "SingleTask_Process": [
-      0
+      0,
+      2
     ]
   }
 }

@@ -137,8 +137,12 @@ impl ElementIntrospection for ElementUnit {
 
         match self {
             FullWorkflow(workflow_spec) => workflow_spec.push_element_ids(ids),
-            LazyCallActivities(process_spec, _) => {
+            LazyCallActivities(process_spec, subprocess_specs) => {
                 process_spec.push_element_ids(ids);
+
+		for (_, subprocess_spec) in subprocess_specs {
+		    subprocess_spec.push_element_ids(ids);
+		}
             }
         }
     }
