@@ -92,7 +92,8 @@ fn lazy_call_activity_element_units(
 ) -> Option<Vec<ElementUnitForProcessID>> {
     let process_spec = &workflow_spec.spec;
 
-    // this wave of element units consists of three layers that work together
+    // this wave of element units consists of three layers that work together - if any
+    // step fails for this workflow the entire concept is abandoned.
     //
     // 1 - the full workflow with all call activity subprocess specs removed
     //     the caller is assumed to be able to lazy load the specs when needed
