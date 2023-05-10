@@ -226,9 +226,9 @@ impl ElementUnit {
         ids.push(spec_ref.to_string());
 
         // the name of the call activities that reference the spec
-	for call_activity in process_spec.call_activities_referencing_spec(spec_ref) {
-	    call_activity.push_element_ids(ids);
-	}
+        for call_activity in process_spec.call_activities_referencing_spec(spec_ref) {
+            call_activity.push_element_ids(ids);
+        }
 
         // any element within the call activity
         subprocess_specs
