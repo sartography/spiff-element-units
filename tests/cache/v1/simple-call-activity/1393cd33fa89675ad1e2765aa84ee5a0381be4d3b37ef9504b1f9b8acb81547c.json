@@ -1,74 +1,18 @@
 {
-  "ResumableCallActivity": [
-    "Process_diu8ta2",
+  "ResumableSubprocess": [
+    "SingleTask_Process",
     {
-      "name": "Process_90mmqlw",
+      "name": "Process_p4pfxhq",
       "typename": "BpmnProcessSpec",
       "task_specs": {
-        "Activity_0d5dido": {
-          "name": "Activity_0d5dido",
-          "typename": "CallActivity",
-          "inputs": [
-            "Activity_0rsppq2"
-          ],
-          "outputs": [
-            "Event_0yflyfj"
-          ],
-          "data_input_associations": [],
-          "data_output_associations": [],
-          "io_specification": null,
-          "lane": null,
-          "prescript": null,
-          "postscript": null,
-          "spec": "no_tasks",
-          "description": null,
-          "documentation": null,
-          "extensions": {},
-          "id": "Process_90mmqlw_7",
-          "internal": false,
-          "lookahead": 2,
-          "manual": false,
-          "position": {
-            "x": 590.0,
-            "y": 137.0
-          }
-        },
-        "Activity_0rsppq2": {
-          "name": "Activity_0rsppq2",
-          "typename": "CallActivity",
-          "inputs": [
-            "Activity_185dcnc"
-          ],
-          "outputs": [
-            "Activity_0d5dido"
-          ],
-          "data_input_associations": [],
-          "data_output_associations": [],
-          "io_specification": null,
-          "lane": null,
-          "prescript": null,
-          "postscript": null,
-          "spec": "Process_diu8ta2",
-          "description": null,
-          "documentation": null,
-          "extensions": {},
-          "id": "Process_90mmqlw_6",
-          "internal": false,
-          "lookahead": 2,
-          "manual": false,
-          "position": {
-            "x": 430.0,
-            "y": 137.0
-          }
-        },
-        "Activity_185dcnc": {
-          "name": "Activity_185dcnc",
+        "Activity_0q1z4d4": {
+          "name": "Activity_0q1z4d4",
           "typename": "CallActivity",
           "inputs": [
             "StartEvent_1"
           ],
           "outputs": [
-            "Activity_0rsppq2"
+            "Event_05ktmeu"
           ],
           "data_input_associations": [],
           "data_output_associations": [],
@@ -80,7 +24,7 @@
           "description": null,
           "documentation": null,
           "extensions": {},
-          "id": "Process_90mmqlw_5",
+          "id": "Process_p4pfxhq_5",
           "internal": false,
           "lookahead": 2,
           "manual": false,
@@ -93,25 +37,25 @@
           "name": "End",
           "typename": "Simple",
           "inputs": [
-            "Process_90mmqlw.EndJoin"
+            "Process_p4pfxhq.EndJoin"
           ],
           "outputs": [],
           "prescript": null,
           "postscript": null,
           "description": "",
-          "id": "Process_90mmqlw_3",
+          "id": "Process_p4pfxhq_3",
           "internal": false,
           "lookahead": 2,
           "manual": false
         },
-        "Event_0yflyfj": {
-          "name": "Event_0yflyfj",
+        "Event_05ktmeu": {
+          "name": "Event_05ktmeu",
           "typename": "EndEvent",
           "inputs": [
-            "Activity_0d5dido"
+            "Activity_0q1z4d4"
           ],
           "outputs": [
-            "Process_90mmqlw.EndJoin"
+            "Process_p4pfxhq.EndJoin"
           ],
           "data_input_associations": [],
           "data_output_associations": [],
@@ -127,20 +71,20 @@
             "typename": "NoneEventDefinition"
           },
           "extensions": {},
-          "id": "Process_90mmqlw_8",
+          "id": "Process_p4pfxhq_6",
           "internal": false,
           "lookahead": 2,
           "manual": false,
           "position": {
-            "x": 752.0,
+            "x": 432.0,
             "y": 159.0
           }
         },
-        "Process_90mmqlw.EndJoin": {
-          "name": "Process_90mmqlw.EndJoin",
+        "Process_p4pfxhq.EndJoin": {
+          "name": "Process_p4pfxhq.EndJoin",
           "typename": "_EndJoin",
           "inputs": [
-            "Event_0yflyfj"
+            "Event_05ktmeu"
           ],
           "outputs": [
             "End"
@@ -148,7 +92,7 @@
           "prescript": null,
           "postscript": null,
           "description": "",
-          "id": "Process_90mmqlw_2",
+          "id": "Process_p4pfxhq_2",
           "internal": false,
           "lookahead": 2,
           "manual": false
@@ -163,7 +107,7 @@
           "prescript": null,
           "postscript": null,
           "description": "",
-          "id": "Process_90mmqlw_1",
+          "id": "Process_p4pfxhq_1",
           "internal": false,
           "lookahead": 2,
           "manual": false
@@ -175,7 +119,7 @@
             "Start"
           ],
           "outputs": [
-            "Activity_185dcnc"
+            "Activity_0q1z4d4"
           ],
           "data_input_associations": [],
           "data_output_associations": [],
@@ -191,7 +135,7 @@
             "typename": "NoneEventDefinition"
           },
           "extensions": {},
-          "id": "Process_90mmqlw_4",
+          "id": "Process_p4pfxhq_4",
           "internal": false,
           "lookahead": 2,
           "manual": false,
@@ -204,22 +148,22 @@
       "data_objects": {},
       "correlation_keys": {},
       "io_specification": null,
-      "description": "Process_90mmqlw",
-      "file": "tests/data/process-models/test-cases/mutliple-call-activities/multiple_call_activities.bpmn"
+      "description": "Process_p4pfxhq",
+      "file": "tests/data/process-models/test-cases/simple-call-activity/simple_call_activity.bpmn"
     },
     {
-      "Process_diu8ta2": {
-        "name": "Process_diu8ta2",
+      "SingleTask_Process": {
+        "name": "SingleTask_Process",
         "typename": "BpmnProcessSpec",
         "task_specs": {
-          "Activity_1h7gm30": {
-            "name": "Activity_1h7gm30",
-            "typename": "ManualTask",
+          "Activity_1mwbqi4": {
+            "name": "Activity_1mwbqi4",
+            "typename": "ScriptTask",
             "inputs": [
               "StartEvent_1"
             ],
             "outputs": [
-              "Activity_1n7p3m4"
+              "Event_1gsb2u0"
             ],
             "data_input_associations": [],
             "data_output_associations": [],
@@ -227,10 +171,11 @@
             "lane": null,
             "prescript": null,
             "postscript": null,
-            "description": null,
+            "script": "x=1",
+            "description": "x=1",
             "documentation": null,
             "extensions": {},
-            "id": "Process_diu8ta2_5",
+            "id": "SingleTask_Process_5",
             "internal": false,
             "lookahead": 2,
             "manual": false,
@@ -239,56 +184,29 @@
               "y": 137.0
             }
           },
-          "Activity_1n7p3m4": {
-            "name": "Activity_1n7p3m4",
-            "typename": "ManualTask",
-            "inputs": [
-              "Activity_1h7gm30"
-            ],
-            "outputs": [
-              "Event_0iozjmo"
-            ],
-            "data_input_associations": [],
-            "data_output_associations": [],
-            "io_specification": null,
-            "lane": null,
-            "prescript": null,
-            "postscript": null,
-            "description": null,
-            "documentation": null,
-            "extensions": {},
-            "id": "Process_diu8ta2_6",
-            "internal": false,
-            "lookahead": 2,
-            "manual": false,
-            "position": {
-              "x": 430.0,
-              "y": 137.0
-            }
-          },
           "End": {
             "name": "End",
             "typename": "Simple",
             "inputs": [
-              "Process_diu8ta2.EndJoin"
+              "SingleTask_Process.EndJoin"
             ],
             "outputs": [],
             "prescript": null,
             "postscript": null,
             "description": "",
-            "id": "Process_diu8ta2_3",
+            "id": "SingleTask_Process_3",
             "internal": false,
             "lookahead": 2,
             "manual": false
           },
-          "Event_0iozjmo": {
-            "name": "Event_0iozjmo",
+          "Event_1gsb2u0": {
+            "name": "Event_1gsb2u0",
             "typename": "EndEvent",
             "inputs": [
-              "Activity_1n7p3m4"
+              "Activity_1mwbqi4"
             ],
             "outputs": [
-              "Process_diu8ta2.EndJoin"
+              "SingleTask_Process.EndJoin"
             ],
             "data_input_associations": [],
             "data_output_associations": [],
@@ -304,20 +222,20 @@
               "typename": "NoneEventDefinition"
             },
             "extensions": {},
-            "id": "Process_diu8ta2_7",
+            "id": "SingleTask_Process_6",
             "internal": false,
             "lookahead": 2,
             "manual": false,
             "position": {
-              "x": 592.0,
+              "x": 432.0,
               "y": 159.0
             }
           },
-          "Process_diu8ta2.EndJoin": {
-            "name": "Process_diu8ta2.EndJoin",
+          "SingleTask_Process.EndJoin": {
+            "name": "SingleTask_Process.EndJoin",
             "typename": "_EndJoin",
             "inputs": [
-              "Event_0iozjmo"
+              "Event_1gsb2u0"
             ],
             "outputs": [
               "End"
@@ -325,7 +243,7 @@
             "prescript": null,
             "postscript": null,
             "description": "",
-            "id": "Process_diu8ta2_2",
+            "id": "SingleTask_Process_2",
             "internal": false,
             "lookahead": 2,
             "manual": false
@@ -340,7 +258,7 @@
             "prescript": null,
             "postscript": null,
             "description": "",
-            "id": "Process_diu8ta2_1",
+            "id": "SingleTask_Process_1",
             "internal": false,
             "lookahead": 2,
             "manual": false
@@ -352,7 +270,7 @@
               "Start"
             ],
             "outputs": [
-              "Activity_1h7gm30"
+              "Activity_1mwbqi4"
             ],
             "data_input_associations": [],
             "data_output_associations": [],
@@ -368,7 +286,7 @@
               "typename": "NoneEventDefinition"
             },
             "extensions": {},
-            "id": "Process_diu8ta2_4",
+            "id": "SingleTask_Process_4",
             "internal": false,
             "lookahead": 2,
             "manual": false,
@@ -381,8 +299,8 @@
         "data_objects": {},
         "correlation_keys": {},
         "io_specification": null,
-        "description": "Process_diu8ta2",
-        "file": "tests/data/process-models/test-cases/manual-tasks/manual_tasks.bpmn"
+        "description": "SingleTask_Process",
+        "file": "tests/data/process-models/test-cases/single-task/single_task.bpmn"
       }
     }
   ]

@@ -5,12 +5,12 @@
       "type": "FullWorkflow"
     },
     {
-      "sha2": "f0a4737b0029184ef1d661079890c4fc23d7939e36e08cc42984c8e3b1a88906",
-      "type": "LazyCallActivities"
+      "sha2": "05b9f7283c736eb5c0261c6a32c9a469cc8e23a274e6ada04a587ba70a8b2270",
+      "type": "LazySubprocesses"
     },
     {
-      "sha2": "3ae7922869118c8e74e815b9d95465f1ae8a2e0abc4a28479fe691a025422b4b",
-      "type": "ResumableCallActivity"
+      "sha2": "1393cd33fa89675ad1e2765aa84ee5a0381be4d3b37ef9504b1f9b8acb81547c",
+      "type": "ResumableSubprocess"
     }
   ],
   "index_map": {

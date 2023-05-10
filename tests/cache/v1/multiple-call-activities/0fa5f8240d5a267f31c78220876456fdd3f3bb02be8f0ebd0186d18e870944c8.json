@@ -1,5 +1,5 @@
 {
-  "PromotedCallActivity": [
+  "PromotedSubprocess": [
     {
       "name": "SingleTask_Process",
       "typename": "BpmnProcessSpec",

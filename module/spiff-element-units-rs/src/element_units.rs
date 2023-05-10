@@ -10,17 +10,17 @@ use crate::specs::{ProcessSpec, RestMap, SubprocessSpecs, WorkflowSpec};
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub enum ElementUnit {
     FullWorkflow(WorkflowSpec),
-    LazyCallActivities(ProcessSpec, SubprocessSpecs),
-    PromotedCallActivity(ProcessSpec, SubprocessSpecs),
-    ResumableCallActivity(String, ProcessSpec, SubprocessSpecs),
+    LazySubprocesses(ProcessSpec, SubprocessSpecs),
+    PromotedSubprocess(ProcessSpec, SubprocessSpecs),
+    ResumableSubprocess(String, ProcessSpec, SubprocessSpecs),
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub enum ElementUnitType {
     FullWorkflow,
-    LazyCallActivities,
-    PromotedCallActivity,
-    ResumableCallActivity,
+    LazySubprocesses,
+    PromotedSubprocess,
+    ResumableSubprocess,
 }
 
 pub type ElementUnits = IndexedVec<ElementUnit>;
@@ -106,7 +106,7 @@ fn lazy_call_activity_element_units(
     let mut element_units = Vec::<ElementUnitForProcessID>::new();
     let subprocess_specs = Map::<ProcessSpec>::new();
 
-    let element_unit = ElementUnit::LazyCallActivities(process_spec.clone(), subprocess_specs);
+    let element_unit = ElementUnit::LazySubprocesses(process_spec.clone(), subprocess_specs);
     element_units.push((process_spec.name.to_string(), element_unit));
 
     // 2 - each call activity subprocess elevated to a top level process to facilitate
@@ -121,7 +121,7 @@ fn lazy_call_activity_element_units(
 
         let mut subprocess_specs = Map::<ProcessSpec>::new();
         let element_unit =
-            ElementUnit::PromotedCallActivity(subprocess_spec.clone(), subprocess_specs.clone());
+            ElementUnit::PromotedSubprocess(subprocess_spec.clone(), subprocess_specs.clone());
         element_units.push((spec_ref.clone(), element_unit));
 
         // 3 - a workflow per call activity with its subprocess specs loaded to facilitate
@@ -130,7 +130,7 @@ fn lazy_call_activity_element_units(
         subprocess_specs.insert(subprocess_spec.name.to_string(), subprocess_spec.clone());
 
         let element_unit =
-            ElementUnit::ResumableCallActivity(spec_ref, process_spec.clone(), subprocess_specs);
+            ElementUnit::ResumableSubprocess(spec_ref, process_spec.clone(), subprocess_specs);
         element_units.push((process_spec.name.to_string(), element_unit));
     }
 
@@ -143,11 +143,11 @@ impl ElementIntrospection for ElementUnit {
 
         match self {
             FullWorkflow(workflow_spec) => workflow_spec.push_element_ids(ids),
-            LazyCallActivities(process_spec, subprocess_specs)
-            | PromotedCallActivity(process_spec, subprocess_specs) => {
+            LazySubprocesses(process_spec, subprocess_specs)
+            | PromotedSubprocess(process_spec, subprocess_specs) => {
                 self.push_all_process_element_ids(ids, &process_spec, &subprocess_specs)
             }
-            ResumableCallActivity(spec_ref, process_spec, subprocess_specs) => self
+            ResumableSubprocess(spec_ref, process_spec, subprocess_specs) => self
                 .push_resumable_process_element_ids(
                     ids,
                     &spec_ref,
@@ -179,9 +179,9 @@ impl ElementUnit {
 
         match self {
             FullWorkflow(_) => ElementUnitType::FullWorkflow,
-            LazyCallActivities(_, _) => ElementUnitType::LazyCallActivities,
-            PromotedCallActivity(_, _) => ElementUnitType::PromotedCallActivity,
-            ResumableCallActivity(_, _, _) => ElementUnitType::ResumableCallActivity,
+            LazySubprocesses(_, _) => ElementUnitType::LazySubprocesses,
+            PromotedSubprocess(_, _) => ElementUnitType::PromotedSubprocess,
+            ResumableSubprocess(_, _, _) => ElementUnitType::ResumableSubprocess,
         }
     }
 
@@ -190,9 +190,9 @@ impl ElementUnit {
 
         match self {
             FullWorkflow(workflow_spec) => workflow_spec,
-            LazyCallActivities(spec, subprocess_specs)
-            | PromotedCallActivity(spec, subprocess_specs)
-            | ResumableCallActivity(_, spec, subprocess_specs) => WorkflowSpec {
+            LazySubprocesses(spec, subprocess_specs)
+            | PromotedSubprocess(spec, subprocess_specs)
+            | ResumableSubprocess(_, spec, subprocess_specs) => WorkflowSpec {
                 spec,
                 subprocess_specs,
                 rest: RestMap::default(),
