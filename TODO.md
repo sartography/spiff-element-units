@@ -25,6 +25,8 @@
    1. not sure if it affects callers that own the cache dir
    1. ^ wtf was i thinking about here?
 1. there is some issue where it takes two integration test runs for multiple-call-activities to catch up
+   1. no its on run of the integration tests hashes for the ResumableSubprocess and index order change
+   1. stable order in the manifest problem?
 1. can dmn `decision_table`s be lazy loaded for `BusinessRuleTasks`?
    1. for "free" if we make a subprocess out of them and swap the node for a `CallActivity`?
    1. or (in some situations?) "compiled"?
