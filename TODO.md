@@ -8,6 +8,7 @@
    1. lazy load with subprocess id x2
    1. restore main process id/something related to call activity
 1. in the integration tests, do some save/restore (maybe on human task?)
+   1. or after each task and requery for that element id? perf?
 
 ## mostly unordered queue
 
@@ -41,6 +42,7 @@
    1. when we don't use the serde objects, unit tests become easier?
 1. port/use/something the env macros from typeahead
 1. more macro leverage?
+1. push to crates.io
 
 ## good first issues
 
@@ -56,3 +58,5 @@
 1. fill out the rest of the specs.rs is_empty function
 1. run integration tests as part of CI
 1. run cargo tests as part of CI
+   1. https://github.com/actions-rs/cargo
+   1. also maybe just build the dev image and use make to also get integration tests?

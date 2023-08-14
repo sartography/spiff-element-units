@@ -68,6 +68,7 @@ class CacheTest(unittest.TestCase):
             assert element_unit_dict["serializer_version"].startswith("spiff-element-units-")
 
         # TODO: need to test passing in element ids
+        # TODO: ^ test case data needs element ids
 
     def test_reading_from_empty_cache_throws_expected_exception(self):
         with tempfile.TemporaryDirectory() as empty_cache_dir:
@@ -101,6 +102,5 @@ class CacheTest(unittest.TestCase):
                 specs = json.loads(specs_str)
                 return specs
             
-            # TODO: need to test invalid process ids and other elements ids
             specs = specs_loader(test.process_id, test.process_id)
             test_workflow_from_specs(test, specs, specs_loader)
