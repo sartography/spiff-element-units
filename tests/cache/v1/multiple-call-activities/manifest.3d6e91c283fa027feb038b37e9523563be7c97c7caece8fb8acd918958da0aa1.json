@@ -1,17 +1,11 @@
 {
   "items": [
     {
-      "sha2": "2d0e9a8cd9c5f76456ecb1f171a31ac6c31e3eaf0b7172e689f5dbe2bcfcf0d3",
+      "sha2": "0b73057812e199b05226645c10d2c1836a0acb1ba6ab883685249054c7ff1c18",
       "type": "PromotedSubprocess"
     }
   ],
   "index_map": {
-    "Activity_1h7gm30": [
-      0
-    ],
-    "Activity_1n7p3m4": [
-      0
-    ],
     "Process_diu8ta2": [
       0
     ]

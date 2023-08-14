@@ -1,17 +1,11 @@
 {
   "items": [
     {
-      "sha2": "f2af347e29b2baa70693c44dce40348620154513f3223c6177b10965a44953d9",
+      "sha2": "f4540ea236ec081b983194f991796d0f7ba2f9491691fa5f30c8fe9cb155e9d3",
       "type": "FullWorkflow"
     }
   ],
   "index_map": {
-    "Activity_1h7gm30": [
-      0
-    ],
-    "Activity_1n7p3m4": [
-      0
-    ],
     "Process_diu8ta2": [
       0
     ]

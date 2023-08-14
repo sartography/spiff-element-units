@@ -5,6 +5,7 @@ from SpiffWorkflow.bpmn.serializer.workflow import BpmnWorkflowSerializer
 from SpiffWorkflow.bpmn.workflow import BpmnWorkflow
 from SpiffWorkflow.spiff.parser.process import SpiffBpmnParser
 from SpiffWorkflow.spiff.serializer.config import SPIFF_SPEC_CONFIG
+from SpiffWorkflow.spiff.specs.defaults import CallActivity
 from SpiffWorkflow.task import TaskState
 
 SPEC_CONVERTER = BpmnWorkflowSerializer.configure_workflow_spec_converter(SPIFF_SPEC_CONFIG)
@@ -16,7 +17,7 @@ def _lazy_load_specs(workflow, specs_loader):
     tasks = workflow.get_tasks(TaskState.DEFINITE_MASK)
     loaded_specs = set(workflow.subprocess_specs.keys())
     for task in tasks:
-        if not task.task_spec.spec_type == "Call Activity":
+        if not isinstance(task.task_spec, CallActivity):
             continue
         spec_to_check = task.task_spec.spec
         

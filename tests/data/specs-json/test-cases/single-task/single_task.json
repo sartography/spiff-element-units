@@ -9,16 +9,16 @@
         "name": "SingleTask_Process",
         "task_specs": {
             "Activity_1mwbqi4": {
+                "bpmn_id": "Activity_1mwbqi4",
+                "bpmn_name": "x=1",
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": "x=1",
+                "description": "Script Task",
                 "documentation": null,
                 "extensions": {},
-                "id": "SingleTask_Process_5",
                 "inputs": [
                     "StartEvent_1"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
@@ -27,44 +27,45 @@
                 "outputs": [
                     "Event_1gsb2u0"
                 ],
-                "position": {
-                    "x": 270.0,
-                    "y": 137.0
-                },
                 "postscript": null,
                 "prescript": null,
                 "script": "x=1",
                 "typename": "ScriptTask"
             },
             "End": {
-                "description": "",
-                "id": "SingleTask_Process_3",
+                "bpmn_id": null,
+                "bpmn_name": null,
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": "BPMN Task",
+                "documentation": null,
                 "inputs": [
                     "SingleTask_Process.EndJoin"
                 ],
-                "internal": false,
+                "io_specification": null,
+                "lane": null,
                 "lookahead": 2,
                 "manual": false,
                 "name": "End",
                 "outputs": [],
-                "typename": "Simple"
+                "typename": "SimpleBpmnTask"
             },
             "Event_1gsb2u0": {
+                "bpmn_id": "Event_1gsb2u0",
+                "bpmn_name": null,
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": null,
+                "description": "Default End Event",
                 "documentation": null,
                 "event_definition": {
-                    "external": false,
-                    "internal": false,
+                    "description": "Default",
+                    "name": null,
                     "typename": "NoneEventDefinition"
                 },
                 "extensions": {},
-                "id": "SingleTask_Process_6",
                 "inputs": [
                     "Activity_1mwbqi4"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
@@ -73,19 +74,36 @@
                 "outputs": [
                     "SingleTask_Process.EndJoin"
                 ],
-                "position": {
-                    "x": 432.0,
-                    "y": 159.0
-                },
                 "typename": "EndEvent"
             },
+            "Root": {
+                "bpmn_id": null,
+                "bpmn_name": null,
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": "BPMN Task",
+                "documentation": null,
+                "inputs": [],
+                "io_specification": null,
+                "lane": null,
+                "lookahead": 2,
+                "manual": false,
+                "name": "Root",
+                "outputs": [],
+                "typename": "SimpleBpmnTask"
+            },
             "SingleTask_Process.EndJoin": {
-                "description": "",
-                "id": "SingleTask_Process_2",
+                "bpmn_id": null,
+                "bpmn_name": null,
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": "BPMN Task",
+                "documentation": null,
                 "inputs": [
                     "Event_1gsb2u0"
                 ],
-                "internal": false,
+                "io_specification": null,
+                "lane": null,
                 "lookahead": 2,
                 "manual": false,
                 "name": "SingleTask_Process.EndJoin",
@@ -95,34 +113,39 @@
                 "typename": "_EndJoin"
             },
             "Start": {
-                "description": "",
-                "id": "SingleTask_Process_1",
+                "bpmn_id": null,
+                "bpmn_name": null,
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": "BPMN Task",
+                "documentation": null,
                 "inputs": [],
-                "internal": false,
+                "io_specification": null,
+                "lane": null,
                 "lookahead": 2,
                 "manual": false,
                 "name": "Start",
                 "outputs": [
                     "StartEvent_1"
                 ],
-                "typename": "StartTask"
+                "typename": "BpmnStartTask"
             },
             "StartEvent_1": {
+                "bpmn_id": "StartEvent_1",
+                "bpmn_name": null,
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": null,
+                "description": "Default Start Event",
                 "documentation": null,
                 "event_definition": {
-                    "external": false,
-                    "internal": false,
+                    "description": "Default",
+                    "name": null,
                     "typename": "NoneEventDefinition"
                 },
                 "extensions": {},
-                "id": "SingleTask_Process_4",
                 "inputs": [
                     "Start"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
@@ -131,10 +154,6 @@
                 "outputs": [
                     "Activity_1mwbqi4"
                 ],
-                "position": {
-                    "x": 179.0,
-                    "y": 159.0
-                },
                 "typename": "StartEvent"
             }
         },

@@ -2,73 +2,17 @@
   "ResumableSubprocess": [
     "SingleTask_Process",
     {
-      "name": "Process_90mmqlw",
+      "name": "Process_p4pfxhq",
       "typename": "BpmnProcessSpec",
       "task_specs": {
-        "Activity_0d5dido": {
-          "name": "Activity_0d5dido",
-          "typename": "CallActivity",
-          "inputs": [
-            "Activity_0rsppq2"
-          ],
-          "outputs": [
-            "Event_0yflyfj"
-          ],
-          "data_input_associations": [],
-          "data_output_associations": [],
-          "io_specification": null,
-          "lane": null,
-          "prescript": null,
-          "postscript": null,
-          "spec": "no_tasks",
-          "description": null,
-          "documentation": null,
-          "extensions": {},
-          "id": "Process_90mmqlw_7",
-          "internal": false,
-          "lookahead": 2,
-          "manual": false,
-          "position": {
-            "x": 590.0,
-            "y": 137.0
-          }
-        },
-        "Activity_0rsppq2": {
-          "name": "Activity_0rsppq2",
-          "typename": "CallActivity",
-          "inputs": [
-            "Activity_185dcnc"
-          ],
-          "outputs": [
-            "Activity_0d5dido"
-          ],
-          "data_input_associations": [],
-          "data_output_associations": [],
-          "io_specification": null,
-          "lane": null,
-          "prescript": null,
-          "postscript": null,
-          "spec": "Process_diu8ta2",
-          "description": null,
-          "documentation": null,
-          "extensions": {},
-          "id": "Process_90mmqlw_6",
-          "internal": false,
-          "lookahead": 2,
-          "manual": false,
-          "position": {
-            "x": 430.0,
-            "y": 137.0
-          }
-        },
-        "Activity_185dcnc": {
-          "name": "Activity_185dcnc",
+        "Activity_0q1z4d4": {
+          "name": "Activity_0q1z4d4",
           "typename": "CallActivity",
           "inputs": [
             "StartEvent_1"
           ],
           "outputs": [
-            "Activity_0rsppq2"
+            "Event_05ktmeu"
           ],
           "data_input_associations": [],
           "data_output_associations": [],
@@ -77,41 +21,42 @@
           "prescript": null,
           "postscript": null,
           "spec": "SingleTask_Process",
-          "description": null,
+          "bpmn_id": "Activity_0q1z4d4",
+          "bpmn_name": null,
+          "description": "Call Activity",
           "documentation": null,
           "extensions": {},
-          "id": "Process_90mmqlw_5",
-          "internal": false,
-          "lookahead": 2,
-          "manual": false,
-          "position": {
-            "x": 270.0,
-            "y": 137.0
-          }
-        },
-        "End": {
-          "name": "End",
-          "typename": "Simple",
-          "inputs": [
-            "Process_90mmqlw.EndJoin"
-          ],
-          "outputs": [],
-          "prescript": null,
-          "postscript": null,
-          "description": "",
-          "id": "Process_90mmqlw_3",
-          "internal": false,
           "lookahead": 2,
           "manual": false
         },
-        "Event_0yflyfj": {
-          "name": "Event_0yflyfj",
+        "End": {
+          "name": "End",
+          "typename": "SimpleBpmnTask",
+          "inputs": [
+            "Process_p4pfxhq.EndJoin"
+          ],
+          "outputs": [],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
+          "prescript": null,
+          "postscript": null,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
+          "lookahead": 2,
+          "manual": false
+        },
+        "Event_05ktmeu": {
+          "name": "Event_05ktmeu",
           "typename": "EndEvent",
           "inputs": [
-            "Activity_0d5dido"
+            "Activity_0q1z4d4"
           ],
           "outputs": [
-            "Process_90mmqlw.EndJoin"
+            "Process_p4pfxhq.EndJoin"
           ],
           "data_input_associations": [],
           "data_output_associations": [],
@@ -119,52 +64,76 @@
           "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": null,
+          "bpmn_id": "Event_05ktmeu",
+          "bpmn_name": null,
+          "description": "Default End Event",
           "documentation": null,
           "event_definition": {
-            "external": false,
-            "internal": false,
+            "description": "Default",
+            "name": null,
             "typename": "NoneEventDefinition"
           },
           "extensions": {},
-          "id": "Process_90mmqlw_8",
-          "internal": false,
           "lookahead": 2,
-          "manual": false,
-          "position": {
-            "x": 752.0,
-            "y": 159.0
-          }
+          "manual": false
         },
-        "Process_90mmqlw.EndJoin": {
-          "name": "Process_90mmqlw.EndJoin",
+        "Process_p4pfxhq.EndJoin": {
+          "name": "Process_p4pfxhq.EndJoin",
           "typename": "_EndJoin",
           "inputs": [
-            "Event_0yflyfj"
+            "Event_05ktmeu"
           ],
           "outputs": [
             "End"
           ],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": "",
-          "id": "Process_90mmqlw_2",
-          "internal": false,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
+          "lookahead": 2,
+          "manual": false
+        },
+        "Root": {
+          "name": "Root",
+          "typename": "SimpleBpmnTask",
+          "inputs": [],
+          "outputs": [],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
+          "prescript": null,
+          "postscript": null,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
           "lookahead": 2,
           "manual": false
         },
         "Start": {
           "name": "Start",
-          "typename": "StartTask",
+          "typename": "BpmnStartTask",
           "inputs": [],
           "outputs": [
             "StartEvent_1"
           ],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": "",
-          "id": "Process_90mmqlw_1",
-          "internal": false,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
           "lookahead": 2,
           "manual": false
         },
@@ -175,7 +144,7 @@
             "Start"
           ],
           "outputs": [
-            "Activity_185dcnc"
+            "Activity_0q1z4d4"
           ],
           "data_input_associations": [],
           "data_output_associations": [],
@@ -183,29 +152,25 @@
           "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": null,
+          "bpmn_id": "StartEvent_1",
+          "bpmn_name": null,
+          "description": "Default Start Event",
           "documentation": null,
           "event_definition": {
-            "external": false,
-            "internal": false,
+            "description": "Default",
+            "name": null,
             "typename": "NoneEventDefinition"
           },
           "extensions": {},
-          "id": "Process_90mmqlw_4",
-          "internal": false,
           "lookahead": 2,
-          "manual": false,
-          "position": {
-            "x": 179.0,
-            "y": 159.0
-          }
+          "manual": false
         }
       },
       "data_objects": {},
       "correlation_keys": {},
       "io_specification": null,
-      "description": "Process_90mmqlw",
-      "file": "tests/data/process-models/test-cases/mutliple-call-activities/multiple_call_activities.bpmn"
+      "description": "Process_p4pfxhq",
+      "file": "tests/data/process-models/test-cases/simple-call-activity/simple_call_activity.bpmn"
     },
     {
       "SingleTask_Process": {
@@ -228,30 +193,31 @@
             "prescript": null,
             "postscript": null,
             "script": "x=1",
-            "description": "x=1",
+            "bpmn_id": "Activity_1mwbqi4",
+            "bpmn_name": "x=1",
+            "description": "Script Task",
             "documentation": null,
             "extensions": {},
-            "id": "SingleTask_Process_5",
-            "internal": false,
             "lookahead": 2,
-            "manual": false,
-            "position": {
-              "x": 270.0,
-              "y": 137.0
-            }
+            "manual": false
           },
           "End": {
             "name": "End",
-            "typename": "Simple",
+            "typename": "SimpleBpmnTask",
             "inputs": [
               "SingleTask_Process.EndJoin"
             ],
             "outputs": [],
+            "data_input_associations": [],
+            "data_output_associations": [],
+            "io_specification": null,
+            "lane": null,
             "prescript": null,
             "postscript": null,
-            "description": "",
-            "id": "SingleTask_Process_3",
-            "internal": false,
+            "bpmn_id": null,
+            "bpmn_name": null,
+            "description": "BPMN Task",
+            "documentation": null,
             "lookahead": 2,
             "manual": false
           },
@@ -270,22 +236,36 @@
             "lane": null,
             "prescript": null,
             "postscript": null,
-            "description": null,
+            "bpmn_id": "Event_1gsb2u0",
+            "bpmn_name": null,
+            "description": "Default End Event",
             "documentation": null,
             "event_definition": {
-              "external": false,
-              "internal": false,
+              "description": "Default",
+              "name": null,
               "typename": "NoneEventDefinition"
             },
             "extensions": {},
-            "id": "SingleTask_Process_6",
-            "internal": false,
             "lookahead": 2,
-            "manual": false,
-            "position": {
-              "x": 432.0,
-              "y": 159.0
-            }
+            "manual": false
+          },
+          "Root": {
+            "name": "Root",
+            "typename": "SimpleBpmnTask",
+            "inputs": [],
+            "outputs": [],
+            "data_input_associations": [],
+            "data_output_associations": [],
+            "io_specification": null,
+            "lane": null,
+            "prescript": null,
+            "postscript": null,
+            "bpmn_id": null,
+            "bpmn_name": null,
+            "description": "BPMN Task",
+            "documentation": null,
+            "lookahead": 2,
+            "manual": false
           },
           "SingleTask_Process.EndJoin": {
             "name": "SingleTask_Process.EndJoin",
@@ -296,26 +276,36 @@
             "outputs": [
               "End"
             ],
+            "data_input_associations": [],
+            "data_output_associations": [],
+            "io_specification": null,
+            "lane": null,
             "prescript": null,
             "postscript": null,
-            "description": "",
-            "id": "SingleTask_Process_2",
-            "internal": false,
+            "bpmn_id": null,
+            "bpmn_name": null,
+            "description": "BPMN Task",
+            "documentation": null,
             "lookahead": 2,
             "manual": false
           },
           "Start": {
             "name": "Start",
-            "typename": "StartTask",
+            "typename": "BpmnStartTask",
             "inputs": [],
             "outputs": [
               "StartEvent_1"
             ],
+            "data_input_associations": [],
+            "data_output_associations": [],
+            "io_specification": null,
+            "lane": null,
             "prescript": null,
             "postscript": null,
-            "description": "",
-            "id": "SingleTask_Process_1",
-            "internal": false,
+            "bpmn_id": null,
+            "bpmn_name": null,
+            "description": "BPMN Task",
+            "documentation": null,
             "lookahead": 2,
             "manual": false
           },
@@ -334,22 +324,18 @@
             "lane": null,
             "prescript": null,
             "postscript": null,
-            "description": null,
+            "bpmn_id": "StartEvent_1",
+            "bpmn_name": null,
+            "description": "Default Start Event",
             "documentation": null,
             "event_definition": {
-              "external": false,
-              "internal": false,
+              "description": "Default",
+              "name": null,
               "typename": "NoneEventDefinition"
             },
             "extensions": {},
-            "id": "SingleTask_Process_4",
-            "internal": false,
             "lookahead": 2,
-            "manual": false,
-            "position": {
-              "x": 179.0,
-              "y": 159.0
-            }
+            "manual": false
           }
         },
         "data_objects": {},

@@ -19,17 +19,13 @@
           "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": null,
+          "bpmn_id": "Activity_1h7gm30",
+          "bpmn_name": null,
+          "description": "Manual Task",
           "documentation": null,
           "extensions": {},
-          "id": "Process_diu8ta2_5",
-          "internal": false,
           "lookahead": 2,
-          "manual": false,
-          "position": {
-            "x": 270.0,
-            "y": 137.0
-          }
+          "manual": true
         },
         "Activity_1n7p3m4": {
           "name": "Activity_1n7p3m4",
@@ -46,30 +42,31 @@
           "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": null,
+          "bpmn_id": "Activity_1n7p3m4",
+          "bpmn_name": null,
+          "description": "Manual Task",
           "documentation": null,
           "extensions": {},
-          "id": "Process_diu8ta2_6",
-          "internal": false,
           "lookahead": 2,
-          "manual": false,
-          "position": {
-            "x": 430.0,
-            "y": 137.0
-          }
+          "manual": true
         },
         "End": {
           "name": "End",
-          "typename": "Simple",
+          "typename": "SimpleBpmnTask",
           "inputs": [
             "Process_diu8ta2.EndJoin"
           ],
           "outputs": [],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": "",
-          "id": "Process_diu8ta2_3",
-          "internal": false,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
           "lookahead": 2,
           "manual": false
         },
@@ -88,22 +85,18 @@
           "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": null,
+          "bpmn_id": "Event_0iozjmo",
+          "bpmn_name": null,
+          "description": "Default End Event",
           "documentation": null,
           "event_definition": {
-            "external": false,
-            "internal": false,
+            "description": "Default",
+            "name": null,
             "typename": "NoneEventDefinition"
           },
           "extensions": {},
-          "id": "Process_diu8ta2_7",
-          "internal": false,
           "lookahead": 2,
-          "manual": false,
-          "position": {
-            "x": 592.0,
-            "y": 159.0
-          }
+          "manual": false
         },
         "Process_diu8ta2.EndJoin": {
           "name": "Process_diu8ta2.EndJoin",
@@ -114,26 +107,54 @@
           "outputs": [
             "End"
           ],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": "",
-          "id": "Process_diu8ta2_2",
-          "internal": false,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
+          "lookahead": 2,
+          "manual": false
+        },
+        "Root": {
+          "name": "Root",
+          "typename": "SimpleBpmnTask",
+          "inputs": [],
+          "outputs": [],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
+          "prescript": null,
+          "postscript": null,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
           "lookahead": 2,
           "manual": false
         },
         "Start": {
           "name": "Start",
-          "typename": "StartTask",
+          "typename": "BpmnStartTask",
           "inputs": [],
           "outputs": [
             "StartEvent_1"
           ],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": "",
-          "id": "Process_diu8ta2_1",
-          "internal": false,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
           "lookahead": 2,
           "manual": false
         },
@@ -152,22 +173,18 @@
           "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": null,
+          "bpmn_id": "StartEvent_1",
+          "bpmn_name": null,
+          "description": "Default Start Event",
           "documentation": null,
           "event_definition": {
-            "external": false,
-            "internal": false,
+            "description": "Default",
+            "name": null,
             "typename": "NoneEventDefinition"
           },
           "extensions": {},
-          "id": "Process_diu8ta2_4",
-          "internal": false,
           "lookahead": 2,
-          "manual": false,
-          "position": {
-            "x": 179.0,
-            "y": 159.0
-          }
+          "manual": false
         }
       },
       "data_objects": {},

@@ -20,30 +20,31 @@
           "prescript": null,
           "postscript": null,
           "spec": "SingleTask_Process",
-          "description": null,
+          "bpmn_id": "Activity_0q1z4d4",
+          "bpmn_name": null,
+          "description": "Call Activity",
           "documentation": null,
           "extensions": {},
-          "id": "Process_p4pfxhq_5",
-          "internal": false,
           "lookahead": 2,
-          "manual": false,
-          "position": {
-            "x": 270.0,
-            "y": 137.0
-          }
+          "manual": false
         },
         "End": {
           "name": "End",
-          "typename": "Simple",
+          "typename": "SimpleBpmnTask",
           "inputs": [
             "Process_p4pfxhq.EndJoin"
           ],
           "outputs": [],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": "",
-          "id": "Process_p4pfxhq_3",
-          "internal": false,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
           "lookahead": 2,
           "manual": false
         },
@@ -62,22 +63,18 @@
           "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": null,
+          "bpmn_id": "Event_05ktmeu",
+          "bpmn_name": null,
+          "description": "Default End Event",
           "documentation": null,
           "event_definition": {
-            "external": false,
-            "internal": false,
+            "description": "Default",
+            "name": null,
             "typename": "NoneEventDefinition"
           },
           "extensions": {},
-          "id": "Process_p4pfxhq_6",
-          "internal": false,
           "lookahead": 2,
-          "manual": false,
-          "position": {
-            "x": 432.0,
-            "y": 159.0
-          }
+          "manual": false
         },
         "Process_p4pfxhq.EndJoin": {
           "name": "Process_p4pfxhq.EndJoin",
@@ -88,26 +85,54 @@
           "outputs": [
             "End"
           ],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": "",
-          "id": "Process_p4pfxhq_2",
-          "internal": false,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
+          "lookahead": 2,
+          "manual": false
+        },
+        "Root": {
+          "name": "Root",
+          "typename": "SimpleBpmnTask",
+          "inputs": [],
+          "outputs": [],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
+          "prescript": null,
+          "postscript": null,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
           "lookahead": 2,
           "manual": false
         },
         "Start": {
           "name": "Start",
-          "typename": "StartTask",
+          "typename": "BpmnStartTask",
           "inputs": [],
           "outputs": [
             "StartEvent_1"
           ],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": "",
-          "id": "Process_p4pfxhq_1",
-          "internal": false,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
           "lookahead": 2,
           "manual": false
         },
@@ -126,22 +151,18 @@
           "lane": null,
           "prescript": null,
           "postscript": null,
-          "description": null,
+          "bpmn_id": "StartEvent_1",
+          "bpmn_name": null,
+          "description": "Default Start Event",
           "documentation": null,
           "event_definition": {
-            "external": false,
-            "internal": false,
+            "description": "Default",
+            "name": null,
             "typename": "NoneEventDefinition"
           },
           "extensions": {},
-          "id": "Process_p4pfxhq_4",
-          "internal": false,
           "lookahead": 2,
-          "manual": false,
-          "position": {
-            "x": 179.0,
-            "y": 159.0
-          }
+          "manual": false
         }
       },
       "data_objects": {},

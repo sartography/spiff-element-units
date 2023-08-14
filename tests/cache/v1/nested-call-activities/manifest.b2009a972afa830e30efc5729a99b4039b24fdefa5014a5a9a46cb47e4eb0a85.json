@@ -1,20 +1,11 @@
 {
   "items": [
     {
-      "sha2": "5ac9b8363abd0f5cf0743f4bb6e6f876f0faf6c0a972ab06c279db511d8211dc",
+      "sha2": "3ccf7117c2ec30a4c6b5539a0447522149c5a81aa6cceab010c5ff785787f679",
       "type": "FullWorkflow"
     }
   ],
   "index_map": {
-    "Activity_0ecs1u1": [
-      0
-    ],
-    "Activity_0q1z4d4": [
-      0
-    ],
-    "Activity_1mwbqi4": [
-      0
-    ],
     "Process_cqu23d1": [
       0
     ],

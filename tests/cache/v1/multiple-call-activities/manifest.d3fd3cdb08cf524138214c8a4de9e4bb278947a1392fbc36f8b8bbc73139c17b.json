@@ -1,14 +1,11 @@
 {
   "items": [
     {
-      "sha2": "0fa5f8240d5a267f31c78220876456fdd3f3bb02be8f0ebd0186d18e870944c8",
+      "sha2": "65c7daaa024cd0c482640adcdd091372d1863d75d2f4d2e532a296a1ee7fca7d",
       "type": "PromotedSubprocess"
     }
   ],
   "index_map": {
-    "Activity_1mwbqi4": [
-      0
-    ],
     "SingleTask_Process": [
       0
     ]
