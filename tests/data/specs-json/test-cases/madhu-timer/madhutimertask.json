@@ -9,154 +9,165 @@
         "name": "Process_w13g1wd",
         "task_specs": {
             "Activity_0ocbxin": {
+                "bpmn_id": "Activity_0ocbxin",
+                "bpmn_name": "Show name",
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": "Show name",
+                "description": "Manual Task",
                 "documentation": null,
                 "extensions": {
                     "instructionsForEndUser": "{{name}}"
                 },
-                "id": "Process_w13g1wd_9",
                 "inputs": [
                     "Activity_1742krl"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
-                "manual": false,
+                "manual": true,
                 "name": "Activity_0ocbxin",
                 "outputs": [
                     "Event_1hm16rp"
                 ],
-                "position": {
-                    "x": 440.0,
-                    "y": 137.0
-                },
                 "postscript": null,
                 "prescript": null,
                 "typename": "ManualTask"
             },
             "Activity_1742krl": {
+                "bpmn_id": "Activity_1742krl",
+                "bpmn_name": "Get name",
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": "Get name",
+                "description": "User Task",
                 "documentation": null,
                 "extensions": {
                     "properties": {
                         "formJsonSchemaFilename": "getname.json"
                     }
                 },
-                "id": "Process_w13g1wd_5",
                 "inputs": [
-                    "Activity_1742krl.BoundaryEventParent"
+                    "Activity_1742krl.BoundaryEventSplit"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
-                "manual": false,
+                "manual": true,
                 "name": "Activity_1742krl",
                 "outputs": [
+                    "Activity_1742krl.BoundaryEventJoin",
                     "Activity_0ocbxin"
                 ],
-                "position": {
-                    "x": 270.0,
-                    "y": 137.0
-                },
                 "postscript": null,
                 "prescript": null,
                 "typename": "UserTask"
             },
-            "Activity_1742krl.BoundaryEventParent": {
+            "Activity_1742krl.BoundaryEventJoin": {
+                "bpmn_id": null,
+                "bpmn_name": null,
+                "cancel": true,
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": "",
+                "description": "BPMN Task",
                 "documentation": null,
-                "id": "Process_w13g1wd_6",
                 "inputs": [
-                    "StartEvent_1"
+                    "Activity_1742krl",
+                    "Event_12o0kkm"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
-                "main_child_task_spec": "Activity_1742krl",
                 "manual": false,
-                "name": "Activity_1742krl.BoundaryEventParent",
+                "name": "Activity_1742krl.BoundaryEventJoin",
+                "outputs": [],
+                "split_task": "Activity_1742krl.BoundaryEventSplit",
+                "threshold": null,
+                "typename": "BoundaryEventJoin"
+            },
+            "Activity_1742krl.BoundaryEventSplit": {
+                "bpmn_id": null,
+                "bpmn_name": null,
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": "BPMN Task",
+                "documentation": null,
+                "inputs": [
+                    "StartEvent_1"
+                ],
+                "io_specification": null,
+                "lane": null,
+                "lookahead": 2,
+                "manual": false,
+                "name": "Activity_1742krl.BoundaryEventSplit",
                 "outputs": [
                     "Activity_1742krl",
                     "Event_12o0kkm"
                 ],
-                "position": {
-                    "x": 0,
-                    "y": 0
-                },
-                "typename": "_BoundaryEventParent"
+                "typename": "BoundaryEventSplit"
             },
             "End": {
-                "description": "",
-                "id": "Process_w13g1wd_3",
+                "bpmn_id": null,
+                "bpmn_name": null,
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": "BPMN Task",
+                "documentation": null,
                 "inputs": [
                     "Process_w13g1wd.EndJoin"
                 ],
-                "internal": false,
+                "io_specification": null,
+                "lane": null,
                 "lookahead": 2,
                 "manual": false,
                 "name": "End",
                 "outputs": [],
-                "typename": "Simple"
+                "typename": "SimpleBpmnTask"
             },
             "Event_12o0kkm": {
+                "bpmn_id": "Event_12o0kkm",
+                "bpmn_name": null,
                 "cancel_activity": true,
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": null,
+                "description": "Interrupting Timer Boundary Event",
                 "documentation": null,
                 "event_definition": {
+                    "description": "Timer",
                     "expression": "\"PT3000S\"",
-                    "external": true,
-                    "internal": true,
                     "name": "Event_12o0kkm",
                     "typename": "DurationTimerEventDefinition"
                 },
                 "extensions": {},
-                "id": "Process_w13g1wd_7",
                 "inputs": [
-                    "Activity_1742krl.BoundaryEventParent"
+                    "Activity_1742krl.BoundaryEventSplit"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
                 "manual": false,
                 "name": "Event_12o0kkm",
                 "outputs": [
-                    "Event_1hm16rp"
+                    "Event_1hm16rp",
+                    "Activity_1742krl.BoundaryEventJoin"
                 ],
-                "position": {
-                    "x": 322.0,
-                    "y": 199.0
-                },
                 "typename": "BoundaryEvent"
             },
             "Event_1hm16rp": {
+                "bpmn_id": "Event_1hm16rp",
+                "bpmn_name": null,
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": null,
+                "description": "Default End Event",
                 "documentation": null,
                 "event_definition": {
-                    "external": false,
-                    "internal": false,
+                    "description": "Default",
+                    "name": null,
                     "typename": "NoneEventDefinition"
                 },
                 "extensions": {},
-                "id": "Process_w13g1wd_8",
                 "inputs": [
                     "Event_12o0kkm",
                     "Activity_0ocbxin"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
@@ -165,19 +176,20 @@
                 "outputs": [
                     "Process_w13g1wd.EndJoin"
                 ],
-                "position": {
-                    "x": 642.0,
-                    "y": 159.0
-                },
                 "typename": "EndEvent"
             },
             "Process_w13g1wd.EndJoin": {
-                "description": "",
-                "id": "Process_w13g1wd_2",
+                "bpmn_id": null,
+                "bpmn_name": null,
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": "BPMN Task",
+                "documentation": null,
                 "inputs": [
                     "Event_1hm16rp"
                 ],
-                "internal": false,
+                "io_specification": null,
+                "lane": null,
                 "lookahead": 2,
                 "manual": false,
                 "name": "Process_w13g1wd.EndJoin",
@@ -186,47 +198,64 @@
                 ],
                 "typename": "_EndJoin"
             },
-            "Start": {
-                "description": "",
-                "id": "Process_w13g1wd_1",
+            "Root": {
+                "bpmn_id": null,
+                "bpmn_name": null,
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": "BPMN Task",
+                "documentation": null,
                 "inputs": [],
-                "internal": false,
+                "io_specification": null,
+                "lane": null,
+                "lookahead": 2,
+                "manual": false,
+                "name": "Root",
+                "outputs": [],
+                "typename": "SimpleBpmnTask"
+            },
+            "Start": {
+                "bpmn_id": null,
+                "bpmn_name": null,
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": "BPMN Task",
+                "documentation": null,
+                "inputs": [],
+                "io_specification": null,
+                "lane": null,
                 "lookahead": 2,
                 "manual": false,
                 "name": "Start",
                 "outputs": [
                     "StartEvent_1"
                 ],
-                "typename": "StartTask"
+                "typename": "BpmnStartTask"
             },
             "StartEvent_1": {
+                "bpmn_id": "StartEvent_1",
+                "bpmn_name": null,
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": null,
+                "description": "Default Start Event",
                 "documentation": null,
                 "event_definition": {
-                    "external": false,
-                    "internal": false,
+                    "description": "Default",
+                    "name": null,
                     "typename": "NoneEventDefinition"
                 },
                 "extensions": {},
-                "id": "Process_w13g1wd_4",
                 "inputs": [
                     "Start"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
                 "manual": false,
                 "name": "StartEvent_1",
                 "outputs": [
-                    "Activity_1742krl.BoundaryEventParent"
+                    "Activity_1742krl.BoundaryEventSplit"
                 ],
-                "position": {
-                    "x": 179.0,
-                    "y": 159.0
-                },
                 "typename": "StartEvent"
             }
         },

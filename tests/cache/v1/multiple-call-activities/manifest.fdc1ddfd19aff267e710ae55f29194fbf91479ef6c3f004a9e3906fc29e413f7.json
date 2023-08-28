@@ -1,37 +1,45 @@
 {
   "items": [
     {
-      "sha2": "e028e0ba9cbd64227aa3230cd27f42026c3b03c921e915378f9ee5ac504f05b8",
+      "sha2": "a70a8c38781e3bef6fa2d615083323c64e069ae8b5f5035ccd4d8709442b4eb3",
       "type": "FullWorkflow"
+    },
+    {
+      "sha2": "21f305d02aff85ba6452be85322a667dd2d27cb0e74b8ab593b24758b4328dfd",
+      "type": "LazySubprocesses"
+    },
+    {
+      "sha2": "734c18dba5a64604eefe349b513002ec57196d5284593c5efad425c0b9ded82e",
+      "type": "ResumableSubprocess"
+    },
+    {
+      "sha2": "afc0a4c04e8cc3f086d63f7fc4a8fb07039b90cd88995029ed403e56724533d4",
+      "type": "ResumableSubprocess"
+    },
+    {
+      "sha2": "db548508796008379ecdfab499367ed959153c69f66626f1cf5a9647d16439ec",
+      "type": "ResumableSubprocess"
     }
   ],
   "index_map": {
-    "Activity_0d5dido": [
-      0
-    ],
-    "Activity_0rsppq2": [
-      0
-    ],
-    "Activity_185dcnc": [
-      0
-    ],
-    "End": [
-      0
-    ],
-    "Event_0yflyfj": [
-      0
-    ],
     "Process_90mmqlw": [
-      0
+      0,
+      1
     ],
-    "Process_90mmqlw.EndJoin": [
-      0
+    "Process_diu8ta2": [
+      0,
+      2,
+      2
     ],
-    "Start": [
-      0
+    "SingleTask_Process": [
+      0,
+      4,
+      4
     ],
-    "StartEvent_1": [
-      0
+    "no_tasks": [
+      0,
+      3,
+      3
     ]
   }
 }

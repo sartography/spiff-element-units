@@ -32,8 +32,7 @@ pub trait ElementIntrospection {
     fn push_element_ids(&self, ids: &mut Vec<String>);
 
     fn element_ids(&self) -> Vec<String> {
-        // TODO: with_capacity
-        let mut vec: Vec<String> = Vec::new();
+        let mut vec = Vec::<String>::with_capacity(32);
         self.push_element_ids(&mut vec);
         vec
     }

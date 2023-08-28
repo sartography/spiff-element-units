@@ -9,9 +9,11 @@
         "name": "Process_sypm122",
         "task_specs": {
             "Activity_09g2tjz": {
+                "bpmn_id": "Activity_09g2tjz",
+                "bpmn_name": "Just City Names",
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": "Just City Names",
+                "description": "Script Task",
                 "documentation": null,
                 "extensions": {
                     "unitTests": [
@@ -27,11 +29,9 @@
                         }
                     ]
                 },
-                "id": "Process_sypm122_9",
                 "inputs": [
                     "Activity_1tccbut"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
@@ -40,19 +40,17 @@
                 "outputs": [
                     "Event_1vdcski"
                 ],
-                "position": {
-                    "x": 640.0,
-                    "y": 137.0
-                },
                 "postscript": null,
                 "prescript": null,
                 "script": "# if the api returns an error we return an empty list\ncities = sorted(cities_in_a_country.get(\"data\", []))",
                 "typename": "ScriptTask"
             },
             "Activity_0uyx9zu": {
+                "bpmn_id": "Activity_0uyx9zu",
+                "bpmn_name": "Get Countries",
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": "Get Countries",
+                "description": "Service Task",
                 "documentation": null,
                 "extensions": {
                     "serviceTaskOperator": {
@@ -82,11 +80,9 @@
                         "resultVariable": "countries_list"
                     }
                 },
-                "id": "Process_sypm122_6",
                 "inputs": [
                     "Activity_1mtt3dj"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
@@ -118,26 +114,22 @@
                 "outputs": [
                     "Activity_1nlj3tu"
                 ],
-                "position": {
-                    "x": 250.0,
-                    "y": 137.0
-                },
                 "postscript": null,
                 "prescript": null,
                 "result_variable": "countries_list",
                 "typename": "ServiceTask"
             },
             "Activity_1mtt3dj": {
+                "bpmn_id": "Activity_1mtt3dj",
+                "bpmn_name": null,
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": null,
+                "description": "Script Task",
                 "documentation": null,
                 "extensions": {},
-                "id": "Process_sypm122_5",
                 "inputs": [
                     "StartEvent_1"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
@@ -146,19 +138,17 @@
                 "outputs": [
                     "Activity_0uyx9zu"
                 ],
-                "position": {
-                    "x": 120.0,
-                    "y": 137.0
-                },
                 "postscript": null,
                 "prescript": null,
                 "script": "True",
                 "typename": "ScriptTask"
             },
             "Activity_1nlj3tu": {
+                "bpmn_id": "Activity_1nlj3tu",
+                "bpmn_name": "Just Country Names",
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": "Just Country Names",
+                "description": "Script Task",
                 "documentation": null,
                 "extensions": {
                     "unitTests": [
@@ -174,11 +164,9 @@
                         }
                     ]
                 },
-                "id": "Process_sypm122_7",
                 "inputs": [
                     "Activity_0uyx9zu"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
@@ -187,19 +175,17 @@
                 "outputs": [
                     "Activity_1tccbut"
                 ],
-                "position": {
-                    "x": 390.0,
-                    "y": 137.0
-                },
                 "postscript": null,
                 "prescript": null,
                 "script": "# if the api returns an error we return an empty list\ncountries_data = countries_list.get(\"data\", [])\nnumber_of_countries = len(countries_data)\ncountries = sorted([d[\"name\"] for d in countries_data])\ndel countries_data",
                 "typename": "ScriptTask"
             },
             "Activity_1tccbut": {
+                "bpmn_id": "Activity_1tccbut",
+                "bpmn_name": "Cities in a Country",
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": "Cities in a Country",
+                "description": "Service Task",
                 "documentation": null,
                 "extensions": {
                     "serviceTaskOperator": {
@@ -229,11 +215,9 @@
                         "resultVariable": "cities_in_a_country"
                     }
                 },
-                "id": "Process_sypm122_8",
                 "inputs": [
                     "Activity_1nlj3tu"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
@@ -265,44 +249,45 @@
                 "outputs": [
                     "Activity_09g2tjz"
                 ],
-                "position": {
-                    "x": 520.0,
-                    "y": 137.0
-                },
                 "postscript": null,
                 "prescript": null,
                 "result_variable": "cities_in_a_country",
                 "typename": "ServiceTask"
             },
             "End": {
-                "description": "",
-                "id": "Process_sypm122_3",
+                "bpmn_id": null,
+                "bpmn_name": null,
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": "BPMN Task",
+                "documentation": null,
                 "inputs": [
                     "Process_sypm122.EndJoin"
                 ],
-                "internal": false,
+                "io_specification": null,
+                "lane": null,
                 "lookahead": 2,
                 "manual": false,
                 "name": "End",
                 "outputs": [],
-                "typename": "Simple"
+                "typename": "SimpleBpmnTask"
             },
             "Event_1vdcski": {
+                "bpmn_id": "Event_1vdcski",
+                "bpmn_name": null,
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": null,
+                "description": "Default End Event",
                 "documentation": null,
                 "event_definition": {
-                    "external": false,
-                    "internal": false,
+                    "description": "Default",
+                    "name": null,
                     "typename": "NoneEventDefinition"
                 },
                 "extensions": {},
-                "id": "Process_sypm122_10",
                 "inputs": [
                     "Activity_09g2tjz"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
@@ -311,19 +296,20 @@
                 "outputs": [
                     "Process_sypm122.EndJoin"
                 ],
-                "position": {
-                    "x": 882.0,
-                    "y": 159.0
-                },
                 "typename": "EndEvent"
             },
             "Process_sypm122.EndJoin": {
-                "description": "",
-                "id": "Process_sypm122_2",
+                "bpmn_id": null,
+                "bpmn_name": null,
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": "BPMN Task",
+                "documentation": null,
                 "inputs": [
                     "Event_1vdcski"
                 ],
-                "internal": false,
+                "io_specification": null,
+                "lane": null,
                 "lookahead": 2,
                 "manual": false,
                 "name": "Process_sypm122.EndJoin",
@@ -332,35 +318,56 @@
                 ],
                 "typename": "_EndJoin"
             },
-            "Start": {
-                "description": "",
-                "id": "Process_sypm122_1",
+            "Root": {
+                "bpmn_id": null,
+                "bpmn_name": null,
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": "BPMN Task",
+                "documentation": null,
                 "inputs": [],
-                "internal": false,
+                "io_specification": null,
+                "lane": null,
+                "lookahead": 2,
+                "manual": false,
+                "name": "Root",
+                "outputs": [],
+                "typename": "SimpleBpmnTask"
+            },
+            "Start": {
+                "bpmn_id": null,
+                "bpmn_name": null,
+                "data_input_associations": [],
+                "data_output_associations": [],
+                "description": "BPMN Task",
+                "documentation": null,
+                "inputs": [],
+                "io_specification": null,
+                "lane": null,
                 "lookahead": 2,
                 "manual": false,
                 "name": "Start",
                 "outputs": [
                     "StartEvent_1"
                 ],
-                "typename": "StartTask"
+                "typename": "BpmnStartTask"
             },
             "StartEvent_1": {
+                "bpmn_id": "StartEvent_1",
+                "bpmn_name": null,
                 "data_input_associations": [],
                 "data_output_associations": [],
-                "description": null,
+                "description": "Default Start Event",
                 "documentation": null,
                 "event_definition": {
-                    "external": false,
-                    "internal": false,
+                    "description": "Default",
+                    "name": null,
                     "typename": "NoneEventDefinition"
                 },
                 "extensions": {},
-                "id": "Process_sypm122_4",
                 "inputs": [
                     "Start"
                 ],
-                "internal": false,
                 "io_specification": null,
                 "lane": null,
                 "lookahead": 2,
@@ -369,10 +376,6 @@
                 "outputs": [
                     "Activity_1mtt3dj"
                 ],
-                "position": {
-                    "x": 72.0,
-                    "y": 159.0
-                },
                 "typename": "StartEvent"
             }
         },

@@ -1,0 +1,152 @@
+{
+  "PromotedSubprocess": [
+    {
+      "name": "no_tasks",
+      "typename": "BpmnProcessSpec",
+      "task_specs": {
+        "End": {
+          "name": "End",
+          "typename": "SimpleBpmnTask",
+          "inputs": [
+            "no_tasks.EndJoin"
+          ],
+          "outputs": [],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
+          "prescript": null,
+          "postscript": null,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
+          "lookahead": 2,
+          "manual": false
+        },
+        "Event_0qq9il3": {
+          "name": "Event_0qq9il3",
+          "typename": "EndEvent",
+          "inputs": [
+            "StartEvent_1"
+          ],
+          "outputs": [
+            "no_tasks.EndJoin"
+          ],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
+          "prescript": null,
+          "postscript": null,
+          "bpmn_id": "Event_0qq9il3",
+          "bpmn_name": null,
+          "description": "Default End Event",
+          "documentation": null,
+          "event_definition": {
+            "description": "Default",
+            "name": null,
+            "typename": "NoneEventDefinition"
+          },
+          "extensions": {},
+          "lookahead": 2,
+          "manual": false
+        },
+        "Root": {
+          "name": "Root",
+          "typename": "SimpleBpmnTask",
+          "inputs": [],
+          "outputs": [],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
+          "prescript": null,
+          "postscript": null,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
+          "lookahead": 2,
+          "manual": false
+        },
+        "Start": {
+          "name": "Start",
+          "typename": "BpmnStartTask",
+          "inputs": [],
+          "outputs": [
+            "StartEvent_1"
+          ],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
+          "prescript": null,
+          "postscript": null,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
+          "lookahead": 2,
+          "manual": false
+        },
+        "StartEvent_1": {
+          "name": "StartEvent_1",
+          "typename": "StartEvent",
+          "inputs": [
+            "Start"
+          ],
+          "outputs": [
+            "Event_0qq9il3"
+          ],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
+          "prescript": null,
+          "postscript": null,
+          "bpmn_id": "StartEvent_1",
+          "bpmn_name": null,
+          "description": "Default Start Event",
+          "documentation": null,
+          "event_definition": {
+            "description": "Default",
+            "name": null,
+            "typename": "NoneEventDefinition"
+          },
+          "extensions": {},
+          "lookahead": 2,
+          "manual": false
+        },
+        "no_tasks.EndJoin": {
+          "name": "no_tasks.EndJoin",
+          "typename": "_EndJoin",
+          "inputs": [
+            "Event_0qq9il3"
+          ],
+          "outputs": [
+            "End"
+          ],
+          "data_input_associations": [],
+          "data_output_associations": [],
+          "io_specification": null,
+          "lane": null,
+          "prescript": null,
+          "postscript": null,
+          "bpmn_id": null,
+          "bpmn_name": null,
+          "description": "BPMN Task",
+          "documentation": null,
+          "lookahead": 2,
+          "manual": false
+        }
+      },
+      "data_objects": {},
+      "correlation_keys": {},
+      "io_specification": null,
+      "description": "No Tasks",
+      "file": "tests/data/process-models/test-cases/no-tasks/no-tasks.bpmn"
+    },
+    {}
+  ]
+}

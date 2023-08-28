@@ -8,6 +8,7 @@ from SpiffWorkflow.spiff.serializer.config import SPIFF_SPEC_CONFIG
 from SpiffWorkflow.task import TaskState
 
 SPEC_CONVERTER = BpmnWorkflowSerializer.configure_workflow_spec_converter(SPIFF_SPEC_CONFIG)
+SERIALIZER = BpmnWorkflowSerializer(SPEC_CONVERTER)
 
 TEST_CACHE_DIR = "tests/cache"
 
@@ -15,7 +16,7 @@ def _lazy_load_specs(workflow, specs_loader):
     tasks = workflow.get_tasks(TaskState.DEFINITE_MASK)
     loaded_specs = set(workflow.subprocess_specs.keys())
     for task in tasks:
-        if not task.task_spec.spec_type == "Call Activity":
+        if task.task_spec.description != "Call Activity":
             continue
         spec_to_check = task.task_spec.spec
         
@@ -29,14 +30,22 @@ def _lazy_load_specs(workflow, specs_loader):
                     loaded_specs.add(name)
 
 def _run_tasks(workflow, specs_loader):
+    def next_task(wf):
+        tasks = workflow.get_tasks(TaskState.READY)
+        return tasks[0] if len(tasks) > 0 else None
+        
     while not workflow.is_completed():
-        ready_tasks = workflow.get_tasks(TaskState.READY)
-        if len(ready_tasks) == 0:
+        task = next_task(workflow)
+        if task is None:
             break
         _lazy_load_specs(workflow, specs_loader)
-        task = ready_tasks[0]
         task.run()
         workflow.refresh_waiting_tasks()
+
+        wf_dict = SERIALIZER.workflow_to_dict(workflow)
+        workflow = SERIALIZER.workflow_from_dict(wf_dict)
+        
+    return workflow
 
 @dataclass
 class TestCaseData:
@@ -80,7 +89,7 @@ def workflow_from_specs(specs):
 
 def test_workflow_from_specs(test, specs, specs_loader):
     workflow = workflow_from_specs(specs)
-    test.executor(workflow, specs_loader)
+    workflow = test.executor(workflow, specs_loader)
     assert workflow.is_completed()
     assert workflow.data == test.expected_result
 

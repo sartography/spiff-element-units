@@ -1,30 +1,18 @@
 {
   "items": [
     {
-      "sha2": "1ba4d4d9b0bdbba440379934920479c840e8b410466b4cbf92b933f28bc0f834",
+      "sha2": "3ccf7117c2ec30a4c6b5539a0447522149c5a81aa6cceab010c5ff785787f679",
       "type": "FullWorkflow"
     }
   ],
   "index_map": {
-    "Activity_0ecs1u1": [
-      0
-    ],
-    "End": [
-      0
-    ],
-    "Event_16rmzi1": [
-      0
-    ],
     "Process_cqu23d1": [
       0
     ],
-    "Process_cqu23d1.EndJoin": [
+    "Process_p4pfxhq": [
       0
     ],
-    "Start": [
-      0
-    ],
-    "StartEvent_1": [
+    "SingleTask_Process": [
       0
     ]
   }
