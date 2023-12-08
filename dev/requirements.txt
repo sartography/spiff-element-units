@@ -1,2 +1,2 @@
-https://github.com/sartography/SpiffWorkflow/archive/085bd0d8fb04dcaffcf4ae4ef4e917283f81280e.tar.gz
+https://github.com/sartography/SpiffWorkflow/archive/1f8cffb4777b6087bd56736270e32bddb20a466f.tar.gz
 maturin

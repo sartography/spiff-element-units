@@ -8,7 +8,7 @@ RUN \
        python3 python3-pip python3-venv python-is-python3
 
 RUN rustup component add rustfmt
-RUN python -m pip install --upgrade pip
+RUN python -m pip install --break-system-packages --upgrade pip
 
 WORKDIR /module
 
@@ -16,7 +16,7 @@ COPY dev/requirements.txt .
 
 RUN \
     --mount=type=cache,target=/var/cache/pip \
-    pip install -r requirements.txt
+    pip install --break-system-packages -r requirements.txt
 
 COPY module/ ./
 
